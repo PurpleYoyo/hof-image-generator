@@ -49,6 +49,9 @@ function drawGen3Preview() {
     const data = imageData.data;
         
     for (let i = 0; i < data.length; i += 4) {
+        console.log(data[i]);
+        console.log(data[i+1]);
+        console.log(data[i+2]);
         if (
             data[i] === default_color1[0]
             && data[i + 1] === default_color1[1]
