@@ -42,8 +42,8 @@ function drawGen3Preview() {
 
     const color1 = hexToRGB(document.getElementById('color1').value);
     const color2 = hexToRGB(document.getElementById('color2').value);
-    const color3 = hsbTpRgb(darkenColor(RGBtoHSV(color1), true));
-    const color4 = hsbTpRgb(darkenColor(RGBtoHSV(color2), false));
+    const color3 = HSVtoRGB(darkenColor(RGBtoHSV(color1), true));
+    const color4 = HSVtoRGB(darkenColor(RGBtoHSV(color2), false));
 
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
