@@ -111,14 +111,9 @@ function darkenColor(hsb, light) {
 // https://github.com/Chalarangelo/30-seconds-of-code/blob/master/content/snippets/js/s/rgb-hex-hsl-hsb-color-format-conversion.md
 
 function hexToRgb(hex) {
-    let h = hex.slice(0);
+    let h = hex.slice(1);
     
-    if (h.length === 3) {
-        h = [...h].map(x => x + x).join('');
-    }
-    else if (h.length === 8) {
-        alpha = true;
-    }
+    h = [...h].map(x => x + x).join('');
 
     h = parseInt(h, 16);
 
