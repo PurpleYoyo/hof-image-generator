@@ -4,8 +4,12 @@ const default_color2 = [115, 222, 181];
 const default_color3 = [57, 104, 86];
 const default_color4 = [50, 97, 79];
 
-document.getElementById('color1').addEventListener("input", (event) => renderPreview(getGeneration()));
-document.getElementById('color2').addEventListener("input", (event) => renderPreview(getGeneration()));
+window.addEventListener("load", (event) => {
+    renderPreview(getGeneration());
+});
+
+document.getElementById('color1').addEventListener('input', (event) => renderPreview(getGeneration()));
+document.getElementById('color2').addEventListener('input', (event) => renderPreview(getGeneration()));
 
 function getGeneration() {
     const radios = document.querySelectorAll('.generation');
@@ -20,7 +24,7 @@ function getGeneration() {
 }
 
 const canvas = document.getElementById('preview');
-const ctx = canvas.getContext('2d');
+const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
 function renderPreview(generation) {
     img.src = `g${generation}-template.png`;
