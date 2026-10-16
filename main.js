@@ -30,16 +30,14 @@ function renderPreview(generation) {
     img.src = `g${generation}-template.png`;
     img.onload = () => {
         ctx.drawImage(img, 0, 0);
-    }
 
-    if (generation === '3') {
-        drawGen3Preview();
+        if (generation === '3') {
+            drawGen3Preview();
+        }
     }
 }
 
 function drawGen3Preview() {
-    ctx.drawImage(img, 0, 0);
-
     const color1 = hexToRGB(document.getElementById('color1').value);
     const color2 = hexToRGB(document.getElementById('color2').value);
     const color3 = HSVtoRGB(darkenColor(RGBtoHSV(color1), true));
