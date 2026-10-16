@@ -45,7 +45,8 @@ function drawGen3Preview() {
     const color3 = hsbTpRgb(darkenColor(rgbToHsb(color1), true));
     const color4 = hsbTpRgb(darkenColor(rgbToHsb(color2), false));
 
-    const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
         
     for (let i = 0; i < data.length; i += 4) {
         if (
@@ -89,7 +90,7 @@ function drawGen3Preview() {
         }
     }
 
-    ctx.putImageData(data, 0, 0);
+    ctx.putImageData(imageData, 0, 0);
 }
 
 function darkenColor(hsb, light) {
