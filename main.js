@@ -3,7 +3,8 @@
 const default_color1 = [132, 239, 198];
 const default_color2 = [115, 222, 181];
 
-addEventListener("input", (event) => renderPreview(3));
+document.getElementById('color1').addEventListener("input", (event) => renderPreview(3));
+document.getElementById('color2').addEventListener("input", (event) => renderPreview(3));
 
 function renderPreview(generation) {
     const color1 = hexToRgb(document.getElementById('color1').value);
