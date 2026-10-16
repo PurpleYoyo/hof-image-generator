@@ -27,8 +27,14 @@ const canvas = document.getElementById('preview');
 const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
 function renderPreview(generation) {
+    const scale = parseInt(document.getElementById('scale').value);
+
     img.src = `g${generation}-template.png`;
     img.onload = () => {
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        
+        ctx.setTransform(scale, 0, 0, scale, 0, 0);
         ctx.drawImage(img, 0, 0);
 
         if (generation === '3') {
@@ -42,8 +48,6 @@ function drawGen3Preview() {
     const color2 = hexToRGB(document.getElementById('color2').value);
     const color3 = HSVtoRGB(darkenColor(RGBtoHSV(color1), true));
     const color4 = HSVtoRGB(darkenColor(RGBtoHSV(color2), false));
-    console.log(color1);
-    console.log(color3);
 
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
