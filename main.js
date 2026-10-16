@@ -10,6 +10,7 @@ window.addEventListener("load", (event) => {
 
 document.getElementById('color1').addEventListener('input', (event) => renderPreview(getGeneration()));
 document.getElementById('color2').addEventListener('input', (event) => renderPreview(getGeneration()));
+document.getElementById('scale').addEventListener('input', (event) => renderPreview(getGeneration()));
 
 function getGeneration() {
     const radios = document.querySelectorAll('.generation');
@@ -33,7 +34,7 @@ function renderPreview(generation) {
     img.onload = () => {
         canvas.width = img.width * scale;
         canvas.height = img.height * scale;
-        
+
         ctx.setTransform(scale, 0, 0, scale, 0, 0);
         ctx.drawImage(img, 0, 0);
 
