@@ -113,7 +113,11 @@ function darkenColor(hsb, light) {
 function hexToRgb(hex) {
     let h = hex.slice(1);
     
+    console.log(h);
+    
     h = [...h].map(x => x + x).join('');
+
+    console.log(h);
 
     h = parseInt(h, 16);
 
