@@ -97,10 +97,10 @@ function darkenColor(hsb, light) {
     let [h, s, b] = hsb;
 
     if (light) {
-        b -= 0.53;
+        b *= 0.53;
     }
     else {
-        b -= 0.49;        
+        b *= 0.49;        
     }
 
     return [h, s, b];
