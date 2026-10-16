@@ -1,3 +1,4 @@
+const img = new Image();
 const default_color1 = [132, 239, 198];
 const default_color2 = [115, 222, 181];
 const default_color3 = [57, 104, 86];
@@ -21,13 +22,12 @@ function getGeneration() {
 const canvas = document.getElementById('preview');
 const ctx = canvas.getContext('2d');
 
-const img = new Image();
-img.src = `g${generation}-template.png`;
-img.onload = () => {
-    ctx.drawImage(img, 0, 0);
-}
-
 function renderPreview(generation) {
+    img.src = `g${generation}-template.png`;
+    img.onload = () => {
+        ctx.drawImage(img, 0, 0);
+    }
+
     if (generation === '3') {
         drawGen3Preview();
     }
