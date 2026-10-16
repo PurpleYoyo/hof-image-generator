@@ -6,6 +6,10 @@ const default_color4 = [50, 97, 79];
 document.getElementById('color1').addEventListener("input", (event) => renderPreview(3));
 document.getElementById('color2').addEventListener("input", (event) => renderPreview(3));
 
+window.addEventListener("load", (event) => {
+  renderPreview(3);
+});
+
 function renderPreview(generation) {
     const color1 = hexToRgb(document.getElementById('color1').value);
     const color2 = hexToRgb(document.getElementById('color2').value);
