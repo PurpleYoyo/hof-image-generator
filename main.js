@@ -3,81 +3,89 @@ const default_color2 = [115, 222, 181];
 const default_color3 = [57, 104, 86];
 const default_color4 = [50, 97, 79];
 
-document.getElementById('color1').addEventListener("input", (event) => renderPreview(3));
-document.getElementById('color2').addEventListener("input", (event) => renderPreview(3));
+document.getElementById('color1').addEventListener("input", (event) => renderPreview(getGeneration()));
+document.getElementById('color2').addEventListener("input", (event) => renderPreview(getGeneration()));
 
-window.addEventListener("load", (event) => {
-  renderPreview(3);
-});
+function getGeneration() {
+    const radios = document.querySelectorAll('.generation');
+
+    radios.forEach(radio => {
+        if (radio.checked) {
+            return radio.value;
+        }
+    });
+
+    return '3';
+}
+
+const canvas = document.getElementById('preview');
+const ctx = canvas.getContext('2d');
+
+const img = new Image();
+img.src = `g${generation}-template.png`;
+img.onload = () => {
+    ctx.drawImage(img, 0, 0);
+}
 
 function renderPreview(generation) {
+    if (generation === '3') {
+        drawGen3Preview();
+    }
+}
+
+function drawGen3Preview() {
+    ctx.drawImage(img, 0, 0);
+
     const color1 = hexToRgb(document.getElementById('color1').value);
     const color2 = hexToRgb(document.getElementById('color2').value);
     const color3 = hsbTpRgb(darkenColor(rgbToHsb(color1), true));
     const color4 = hsbTpRgb(darkenColor(rgbToHsb(color2), false));
 
-    const container = document.getElementById('preview');
-    container.innerHTML = '';
-
-    const canvas = document.createElement('canvas');
-    container.appendChild(canvas);
-
-    const ctx = canvas.getContext('2d');
-
-    if (!canvas) return;
-
-    const img = new Image();
-    img.src = `g${generation}-template.png`;
-
-    img.onload = () => {
-        ctx.drawImage(img, 0, 0);
-
-        const data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = ctx.getImageData(0, 0, canvas.width, canvas.height);
         
-        for (let i = 0; i < data.length; i += 4) {
-            if (
-                data[i] === default_color1[0]
-                && data[i + 1] === default_color1[1]
-                && data[i + 2] === default_color1[2]
-            ) {
-                data[i] = color1[0];
-                data[i + 1] = color1[1];
-                data[i + 2] = color1[2];
-            }
-            
-            if (
-                data[i] === default_color2[0]
-                && data[i + 1] === default_color2[1]
-                && data[i + 2] === default_color2[2]
-            ) {
-                data[i] = color2[0];
-                data[i + 1] = color2[1];
-                data[i + 2] = color2[2];
-            }
-
-            if (
-                data[i] === default_color3[0]
-                && data[i + 1] === default_color3[1]
-                && data[i + 2] === default_color3[2]
-            ) {
-                data[i] = color3[0];
-                data[i + 1] = color3[1];
-                data[i + 2] = color3[2];
-            }
-            
-            if (
-                data[i] === default_color4[0]
-                && data[i + 1] === default_color4[1]
-                && data[i + 2] === default_color4[2]
-            ) {
-                data[i] = color4[0];
-                data[i + 1] = color4[1];
-                data[i + 2] = color4[2];
-            }
+    for (let i = 0; i < data.length; i += 4) {
+        if (
+            data[i] === default_color1[0]
+            && data[i + 1] === default_color1[1]
+            && data[i + 2] === default_color1[2]
+        ) {
+            data[i] = color1[0];
+            data[i + 1] = color1[1];
+            data[i + 2] = color1[2];
+        }
+        
+        if (
+            data[i] === default_color2[0]
+            && data[i + 1] === default_color2[1]
+            && data[i + 2] === default_color2[2]
+        ) {
+            data[i] = color2[0];
+            data[i + 1] = color2[1];
+            data[i + 2] = color2[2];
         }
 
-        ctx.putImageData(data, 0, 0);
+        if (
+            data[i] === default_color3[0]
+            && data[i + 1] === default_color3[1]
+            && data[i + 2] === default_color3[2]
+        ) {
+            data[i] = color3[0];
+            data[i + 1] = color3[1];
+            data[i + 2] = color3[2];
+        }
+        
+        if (
+            data[i] === default_color4[0]
+            && data[i + 1] === default_color4[1]
+            && data[i + 2] === default_color4[2]
+        ) {
+            data[i] = color4[0];
+            data[i + 1] = color4[1];
+            data[i + 2] = color4[2];
+        }
     }
+
+    ctx.putImageData(data, 0, 0);
 }
 
 function darkenColor(hsb, light) {
