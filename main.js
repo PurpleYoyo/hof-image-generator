@@ -24,10 +24,8 @@ function renderPreview(generation) {
     img.src = `g${generation}-template.png`;
 
     img.onload = () => {
-        canvas.width = img.width * scale;
-        canvas.height = img.height * scale;
-
-        ctx.setTransform(scale, 0, 0, scale, 0, 0);
+        canvas.width = img.width;
+        canvas.height = img.height;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         const data = ctx.getImageData(0, 0, canvas.width, canvas.height);
