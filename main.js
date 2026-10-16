@@ -40,12 +40,10 @@ function renderPreview(generation) {
 function drawGen3Preview() {
     ctx.drawImage(img, 0, 0);
 
-    const color1 = hexToRgb(document.getElementById('color1').value);
-    console.log(document.getElementById('color1').value);
-    console.log(color1);
-    const color2 = hexToRgb(document.getElementById('color2').value);
-    const color3 = hsbTpRgb(darkenColor(rgbToHsb(color1), true));
-    const color4 = hsbTpRgb(darkenColor(rgbToHsb(color2), false));
+    const color1 = hexToRGB(document.getElementById('color1').value);
+    const color2 = hexToRGB(document.getElementById('color2').value);
+    const color3 = hsbTpRgb(darkenColor(RGBtoHSV(color1), true));
+    const color4 = hsbTpRgb(darkenColor(RGBtoHSV(color2), false));
 
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
@@ -99,57 +97,71 @@ function darkenColor(hsb, light) {
     let [h, s, b] = hsb;
 
     if (light) {
-        b -= 53;
+        b -= 0.53;
     }
     else {
-        b -= 49;        
+        b -= 0.49;        
     }
 
     return [h, s, b];
 }
 
-// https://github.com/Chalarangelo/30-seconds-of-code/blob/master/content/snippets/js/s/rgb-hex-hsl-hsb-color-format-conversion.md
+function hexToRGB(hex) {
+    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    result = [
+        parseInt(result[1], 16),
+        parseInt(result[2], 16),
+        parseInt(result[3], 16)
+    ];
 
-function hexToRgb(hex) {
-    let h = hex.slice(1);
-    
-    console.log(h);
-    
-    h = [...h].map(x => x + x).join('');
-
-    console.log(h);
-
-    h = parseInt(h, 16);
-
-    let r = h >>> (16);
-    let g = (h & 0x00ff00) >>> 8;
-    let b = (h & 0x0000ff) >>> 0;
-
-    return [r, g, b];
+    return result;
 }
 
-function rgbToHsb(rgb) {
+function RGBtoHSV(rgb) {
     let [r, g, b] = rgb;
 
-    r /= 255;
-    g /= 255;
-    b /= 255;
+    let max = Math.max(r, g, b), min = Math.min(r, g, b),
+        d = max - min,
+        h,
+        s = (max === 0 ? 0 : d / max),
+        v = max / 255;
 
-    const v = Math.max(r, g, b)
-    const n = v - Math.min(r, g, b);
-    const h = n === 0 ? 0 : n && v === r ? (g - b) / n : v === g ? 2 + (b - r) / n : 4 + (r - g) / n;
+    switch (max) {
+        case min: h = 0; break;
+        case r: h = (g - b) + d * (g < b ? 6: 0); h /= 6 * d; break;
+        case g: h = (b - r) + d * 2; h /= 6 * d; break;
+        case b: h = (r - g) + d * 4; h /= 6 * d; break;
+    }
 
-    return [60 * (h < 0 ? h + 6 : h), v && (n / v) * 100, v * 100]
+    return [
+        h,
+        s,
+        v
+    ];
 }
 
-function hsbTpRgb(hsb) {
-    let [h, s, b] = hsb;
+function HSVtoRGB(hsv) {
+    let [h, s, v] = hsv;
 
-    s /= 100;
-    b /= 100;
+    let r, g, b, i, f, p, q, t;
+    i = Math.floor(h * 6);
+    f = h * 6 - i;
+    p = v * (1 - s);
+    q = v * (1 - f * s);
+    t = v * (1 - (1 - f) * s);
 
-    const k = (n) => (n + h / 60) % 6;
-    const f = (n) => b * (1 - s * Math.max(0, Math.sin(k(n), 4 - k(n), 1)))
+    switch (i % 6) {
+        case 0: r = v, g = t, b = p; break;
+        case 1: r = q, g = v, b = p; break;
+        case 2: r = p, g = v, b = t; break;
+        case 3: r = p, g = q, b = v; break;
+        case 4: r = t, g = p, b = v; break;
+        case 5: r = v, g = p, b = q; break;
+    }
 
-    return [255 * f(5), 255 * f(3), 255 * f(1)];
+    return [
+        Math.round(r * 255),
+        Math.round(g * 255),
+        Math.round(b * 255)
+    ];
 }
