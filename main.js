@@ -52,9 +52,29 @@ function renderPreview(generation) {
                 data[i + 1] = color2[1];
                 data[i + 2] = color2[2];
             }
+
+            if (
+                data[i] === default_color3[0]
+                && data[i + 1] === default_color3[1]
+                && data[i + 2] === default_color3[2]
+            ) {
+                data[i] = color3[0];
+                data[i + 1] = color3[1];
+                data[i + 2] = color3[2];
+            }
+            
+            if (
+                data[i] === default_color4[0]
+                && data[i + 1] === default_color4[1]
+                && data[i + 2] === default_color4[2]
+            ) {
+                data[i] = color4[0];
+                data[i + 1] = color4[1];
+                data[i + 2] = color4[2];
+            }
         }
 
-        ctx.putImageData(imageData, 0, 0);
+        ctx.putImageData(data, 0, 0);
     }
 }
 
