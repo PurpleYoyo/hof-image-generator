@@ -71,7 +71,7 @@ function hexToRgb(hex) {
 
     h = parseInt(h, 16);
 
-    let r = h >>> (alpha ? 24 : 16);
+    let r = h >>> (16);
     let g = (h & 0x00ff00) >>> 8;
     let b = (h & 0x0000ff) >>> 0;
 
