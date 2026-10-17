@@ -4,11 +4,6 @@ const default_color2 = [115, 222, 181];
 const default_color3 = [57, 104, 86];
 const default_color4 = [50, 97, 79];
 
-window.addEventListener("load", (event) => {
-    createDropdowns();
-    renderPreview(getGeneration());
-});
-
 function createDropdowns() {
     for (let i = 1; i < 7; i++) {
         const dropdown = document.getElementById(`sprites${i}`);
@@ -21,27 +16,52 @@ function createDropdowns() {
     }
 }
 
-document.getElementById('color1').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('color2').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('scale').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('sprites1').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('sprites2').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('sprites3').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('sprites4').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('sprites5').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('sprites6').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('pokemon1').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('pokemon2').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('pokemon3').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('pokemon4').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('pokemon5').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('pokemon6').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('image1').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('image2').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('image3').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('image4').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('image5').addEventListener('input', (event) => renderPreview(getGeneration()));
-document.getElementById('image6').addEventListener('input', (event) => renderPreview(getGeneration()));
+window.addEventListener("load", (event) => {
+    createDropdowns();
+    start();
+});
+
+document.getElementById('color1').addEventListener('input', (event) => start());
+document.getElementById('color2').addEventListener('input', (event) => start());
+document.getElementById('scale').addEventListener('input', (event) => start());
+['sprites', 'shiny', 'pokemon', 'image'].forEach((id) => {
+    for (let i = 1; i < 7; i++) {
+        document.getElementById(`${id}${i}`).addEventListener('input', (event) => start());
+    }
+});
+
+const canvas = document.getElementById('preview');
+const ctx = canvas.getContext('2d', { willReadFrequently: true });
+
+let color1;
+let color2;
+let color3;
+let color4;
+function getColors(generation) {
+    if (generation === '3') {
+        color1 = hexToRGB(document.getElementById('color1').value);
+        color2 = hexToRGB(document.getElementById('color2').value);
+        color3 = HSVtoRGB(darkenColor(RGBtoHSV(color1), true));
+        color4 = HSVtoRGB(darkenColor(RGBtoHSV(color2), false));
+    }
+}
+
+function getGeneration() {
+    const radios = document.querySelectorAll('.generation');
+
+    radios.forEach(radio => {
+        if (radio.checked) {
+            return radio.value;
+        }
+    });
+
+    return '3';
+}
+
+function start() {
+    hideInputs();
+    renderPreview(getGeneration())
+}
 
 function hideInputs() {
     for (let i = 1; i < 7; i++) {
@@ -65,25 +85,7 @@ function hideInputs() {
     }
 }
 
-function getGeneration() {
-    const radios = document.querySelectorAll('.generation');
-
-    radios.forEach(radio => {
-        if (radio.checked) {
-            return radio.value;
-        }
-    });
-
-    return '3';
-}
-
-const canvas = document.getElementById('preview');
-const ctx = canvas.getContext('2d', { willReadFrequently: true });
-
 function renderPreview(generation) {
-    console.log(generation);
-    hideInputs();
-
     const scale = parseInt(document.getElementById('scale').value);
 
     img.src = `g${generation}-template.png`;
@@ -95,19 +97,6 @@ function renderPreview(generation) {
         ctx.setTransform(scale, 0, 0, scale, 0, 0);
 
         drawPreview(generation);
-    }
-}
-
-let color1;
-let color2;
-let color3;
-let color4;
-function getColors(generation) {
-    if (generation === '3') {
-        color1 = hexToRGB(document.getElementById('color1').value);
-        color2 = hexToRGB(document.getElementById('color2').value);
-        color3 = HSVtoRGB(darkenColor(RGBtoHSV(color1), true));
-        color4 = HSVtoRGB(darkenColor(RGBtoHSV(color2), false));
     }
 }
 
