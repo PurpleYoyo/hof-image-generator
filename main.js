@@ -103,10 +103,10 @@ function renderPreview(generation) {
     img.onload = () => {
         ctx.drawImage(img, 0, 0);
 
-        ctx.scale(scale, scale);
-
         drawPreview(generation);
     }
+
+    ctx.scale(scale, scale);
 }
 
 function drawPreview(generation) {
