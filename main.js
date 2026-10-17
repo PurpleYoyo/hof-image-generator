@@ -11,7 +11,7 @@ window.addEventListener("load", (event) => {
 
 function createDropdowns() {
     for (let i = 1; i < 7; i++) {
-        const dropdown = document.getElementById(`sprites1${i}`);
+        const dropdown = document.getElementById(`sprites${i}`);
         ['Yellow', 'Red/Blue', 'Crystal', 'Gold', 'Silver', 'Emerald', 'FireRed/LeafGreen', 'Ruby/Sapphire', 'HeartGold/SoulSilver', 'Platinum', 'Diamond/Pearl', 'Black/White'].forEach((game) => {
             let option = document.createElement('option');
             option.value = game.toLowerCase().replace('/', '-');
@@ -55,10 +55,12 @@ function hideInputs() {
         if (document.getElementById(`image${i}`).value === '') {
             document.getElementById(`pokemon${i}`).classList.remove('hidden');
             document.getElementById(`sprites${i}`).classList.remove('hidden');
+            document.getElementById(`shiny${i}`).classList.remove('hidden');
         }
         else {
             document.getElementById(`pokemon${i}`).classList.add('hidden');
-            document.getElementById(`sprites${i}`).classList.remove('hidden');
+            document.getElementById(`sprites${i}`).classList.add('hidden');
+            document.getElementById(`shiny${i}`).classList.add('hidden');
         }
     }
 }
@@ -79,6 +81,7 @@ const canvas = document.getElementById('preview');
 const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
 function renderPreview(generation) {
+    console.log(generation);
     hideInputs();
 
     const scale = parseInt(document.getElementById('scale').value);
@@ -91,9 +94,7 @@ function renderPreview(generation) {
         canvas.height = img.height * scale;
         ctx.setTransform(scale, 0, 0, scale, 0, 0);
 
-        if (generation === '3') {
-            drawPreview(generation);
-        }
+        drawPreview(generation);
     }
 }
 
