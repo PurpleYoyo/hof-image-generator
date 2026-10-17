@@ -43,27 +43,48 @@ function renderPreview(generation) {
 
     img.src = `g${generation}-template.png`;
     img.onload = () => {
-        canvas.width = img.width * scale;
-        canvas.height = img.height * scale;
-
-        ctx.setTransform(scale, 0, 0, scale, 0, 0);
         ctx.drawImage(img, 0, 0);
 
         if (generation === '3') {
-            drawGen3Preview();
+            drawPreview(generation);
         }
     }
 }
 
-function drawGen3Preview() {
-    const color1 = hexToRGB(document.getElementById('color1').value);
-    const color2 = hexToRGB(document.getElementById('color2').value);
-    const color3 = HSVtoRGB(darkenColor(RGBtoHSV(color1), true));
-    const color4 = HSVtoRGB(darkenColor(RGBtoHSV(color2), false));
+let color1;
+let color2;
+let color3;
+let color4;
+function getColors(generation) {
+    if (generation === '3') {
+        color1 = hexToRGB(document.getElementById('color1').value);
+        color2 = hexToRGB(document.getElementById('color2').value);
+        color3 = HSVtoRGB(darkenColor(RGBtoHSV(color1), true));
+        color4 = HSVtoRGB(darkenColor(RGBtoHSV(color2), false));
+    }
+}
 
+function drawPreview() {
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
         
+    switch (generation) {
+        default:
+        case '3':
+            recolorGen3HOF()
+            break;
+    }
+
+    ctx.putImageData(imageData, 0, 0);
+
+    canvas.width = img.width * scale;
+    canvas.height = img.height * scale;
+    ctx.setTransform(scale, 0, 0, scale, 0, 0);
+}
+
+function recolorGen3HOF(data) {
+    getColors('3')
+
     for (let i = 0; i < data.length; i += 4) {
         if (
             data[i] === default_color1[0]
@@ -105,8 +126,6 @@ function drawGen3Preview() {
             data[i + 2] = color4[2];
         }
     }
-
-    ctx.putImageData(imageData, 0, 0);
 }
 
 function darkenColor(hsb, light) {
