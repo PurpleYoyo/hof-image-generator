@@ -11,12 +11,12 @@ window.addEventListener("load", (event) => {
 
 function createDropdowns() {
     for (let i = 1; i < 7; i++) {
-        const select = document.getElementById(`sprites1${i}`);
+        const dropdown = document.getElementById(`sprites1${i}`);
         ['Yellow', 'Red/Blue', 'Crystal', 'Gold', 'Silver', 'Emerald', 'FireRed/LeafGreen', 'Ruby/Sapphire', 'HeartGold/SoulSilver', 'Platinum', 'Diamond/Pearl', 'Black/White'].forEach((game) => {
             let option = document.createElement('option');
             option.value = game.toLowerCase().replace('/', '-');
             option.text = game;
-            select.appendChild(option);
+            dropdown.appendChild(option);
         });
     }
 }
