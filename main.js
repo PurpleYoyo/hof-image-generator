@@ -80,7 +80,7 @@ const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
 function renderPreview(generation) {
     hideInputs();
-    
+
     const scale = parseInt(document.getElementById('scale').value);
 
     img.src = `g${generation}-template.png`;
@@ -110,7 +110,7 @@ function getColors(generation) {
     }
 }
 
-function drawPreview() {
+function drawPreview(generation) {
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
         
