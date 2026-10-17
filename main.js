@@ -100,7 +100,6 @@ function renderPreview(generation) {
     const scale = parseInt(document.getElementById('scale').value);
     canvas.width = img.width * scale;
     canvas.height = img.height * scale;
-    ctx.setTransform(scale, 0, 0, scale, 0, 0);
 
     img.src = `g${generation}-template.png`;
     img.onload = () => {
