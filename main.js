@@ -98,18 +98,19 @@ function hideInputs() {
 
 function renderPreview(generation) {
     const scale = parseInt(document.getElementById('scale').value);
-    let sw = canvas.width * parseInt(scale);
-    let sh = canvas.height * parseInt(scale);
 
     img.src = `g${generation}-template.png`;
     img.onload = () => {
-        ctx.drawImage(img, -sw / 2 + canvas.width / 2, -sh / 2 + canvas.height / 2, sw, sh);
+        ctx.drawImage(img, 0, 0);
 
         drawPreview(generation);
     }
 }
 
 function drawPreview(generation) {
+    canvas.width *= scale;
+    canvas.height *= scale;
+    
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
         
