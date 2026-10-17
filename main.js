@@ -70,6 +70,7 @@ function hideInputs() {
         }
         else {
             document.getElementById(`image${i}`).classList.add('hidden');
+            document.getElementById(`or${i}`).classList.add('hidden');
         }
 
         if (document.getElementById(`image${i}`).value === '') {
@@ -81,7 +82,13 @@ function hideInputs() {
             document.getElementById(`pokemon${i}`).classList.add('hidden');
             document.getElementById(`sprites${i}`).classList.add('hidden');
             document.getElementById(`shiny${i}`).classList.add('hidden');
+            document.getElementById(`or${i}`).classList.add('hidden');
         }
+
+        if (document.getElementById(`pokemon${i}`).value === ''
+            && document.getElementById(`image${i}`).value === '') {
+                document.getElementById(`or${i}`).classList.remove('hidden');
+            }
     }
 }
 
