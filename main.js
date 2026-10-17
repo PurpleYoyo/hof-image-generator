@@ -108,9 +108,6 @@ function renderPreview(generation) {
 }
 
 function drawPreview(generation) {
-    canvas.width *= scale;
-    canvas.height *= scale;
-    
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
         
@@ -122,6 +119,9 @@ function drawPreview(generation) {
     }
 
     ctx.putImageData(imageData, 0, 0);
+
+    canvas.width *= scale;
+    canvas.height *= scale;
 }
 
 function recolorGen3HOF(data) {
