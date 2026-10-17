@@ -176,12 +176,34 @@ function recolorGen3HOF(data) {
     }
 }
 
-function makeSpriteLink(index) {
+const showdownLinks = {
+    'yellow':       'gen1',
+    'red-blue':     'gen1rb',
+    'gold':         'gen2g',
+    'silver':       'gen2s',
+    'crystal':      'gen2',
+};
+
+function makeSpriteLink(index, generation) {
     const pokemon = document.getElementById(`pokemon${index}`).value
     const sprite = document.getElementById(`sprites${index}`).value
     const shiny = document.getElementById(`shiny${index}`).value
 
-    return `https://img.pokemondb.net/sprites/${sprite}/${shiny.checked ? 'shiny' : 'normal'}/${pokemon}.png`;
+    if (generation == '1') {
+        shiny.checked = false;
+    }
+
+    if (['gold', 'silver'].includes(sprite)
+        && shiny.checked) {
+        sprite = 'crystal';
+    }
+
+    if (parseInt(generation) > 2) {
+        return `https://img.pokemondb.net/sprites/${sprite}/${shiny.checked ? 'shiny' : 'normal'}/${pokemon}.png`;
+    }
+    else {
+        return `https://play.pokemonshowdown.com/sprites/${showdownLinks}${shiny.checked ? '-shiny' : ''}/${pokemon}.png`;
+    }
 }
 
 const gen3SpritePositions = {
@@ -191,7 +213,7 @@ const gen3SpritePositions = {
     4: { x: 8, y: 56 },
     5: { x: 88, y: 56 },
     6: { x: 168, y: 56 },
-}
+};
 
 function placePokemon(generation) {
     switch (generation) {
@@ -199,7 +221,7 @@ function placePokemon(generation) {
         case '3':
             for (let i = 1; i < 7; i++) {
                 let pokemon = new Image();
-                pokemon.src = makeSpriteLink(i);
+                pokemon.src = makeSpriteLink(i, generation);
                 const x = gen3SpritePositions[i].x;
                 const y = gen3SpritePositions[i].y;
                 ctx.drawImage(pokemon, x, y);
