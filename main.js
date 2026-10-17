@@ -77,11 +77,15 @@ function hideInputs() {
             document.getElementById(`pokemon${i}`).classList.remove('hidden');
             document.getElementById(`sprites${i}`).classList.remove('hidden');
             document.getElementById(`shiny${i}`).classList.remove('hidden');
+            document.getElementById(`shiny${i}-label`).classList.remove('hidden');
+            document.getElementById(`sprites${i}-label`).classList.remove('hidden');
         }
         else {
             document.getElementById(`pokemon${i}`).classList.add('hidden');
             document.getElementById(`sprites${i}`).classList.add('hidden');
             document.getElementById(`shiny${i}`).classList.add('hidden');
+            document.getElementById(`shiny${i}-label`).classList.add('hidden');
+            document.getElementById(`sprites${i}-label`).classList.add('hidden');
             document.getElementById(`or${i}`).classList.add('hidden');
         }
 
