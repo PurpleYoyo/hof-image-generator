@@ -98,8 +98,10 @@ function hideInputs() {
 
 function renderPreview(generation) {
     const scale = parseInt(document.getElementById('scale').value);
-    canvas.width = img.width * scale;
-    canvas.height = img.height * scale;
+    img.width *= scale;
+    img.height *= scale;
+    canvas.width = img.width;
+    canvas.height = img.height;
 
     img.src = `g${generation}-template.png`;
     img.onload = () => {
