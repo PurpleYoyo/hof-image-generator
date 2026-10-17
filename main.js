@@ -26,9 +26,11 @@ document.getElementById('color2').addEventListener('input', (event) => start());
 document.getElementById('scale').addEventListener('input', (event) => start());
 ['sprites', 'shiny', 'pokemon', 'image'].forEach((id) => {
     for (let i = 1; i < 7; i++) {
+        console.log(`${id}${i}`);
         document.getElementById(`${id}${i}`).addEventListener('input', (event) => start());
     }
 });
+document.getElementById('pokemon1').addEventListener('input', (event) => start());
 
 const canvas = document.getElementById('preview');
 const ctx = canvas.getContext('2d', { willReadFrequently: true });
