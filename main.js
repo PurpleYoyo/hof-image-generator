@@ -15,6 +15,7 @@ function createDropdowns() {
             let option = document.createElement('option');
             option.value = game.toLowerCase().replace('/', '-');
             option.text = game;
+            select.appendChild(option);
         });
     }
 }
@@ -71,7 +72,7 @@ function drawPreview() {
     switch (generation) {
         default:
         case '3':
-            recolorGen3HOF()
+            recolorGen3HOF(data)
             break;
     }
 
