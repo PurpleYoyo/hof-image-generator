@@ -187,8 +187,8 @@ function placePokemon(generation) {
         default:
         case '3':
             for (let i = 1; i < 7; i++) {
-                pokemon = new Image();
-                pkemon.src = makeSpriteLink(i);
+                let pokemon = new Image();
+                pokemon.src = makeSpriteLink(i);
                 ctx.drawImage(pokemon, i * 55, i * 35);
             }
             break;
