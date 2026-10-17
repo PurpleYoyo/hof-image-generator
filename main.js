@@ -124,6 +124,8 @@ function drawPreview(generation) {
     }
 
     ctx.putImageData(imageData, 0, 0);
+
+    placePokemon(generation);
 }
 
 function recolorGen3HOF(data) {
@@ -169,6 +171,27 @@ function recolorGen3HOF(data) {
             data[i + 1] = color4[1];
             data[i + 2] = color4[2];
         }
+    }
+}
+
+function makeSpriteLink(index) {
+    const pokemon = document.getElementById(`pokemon${index}`).value
+    const sprite = document.getElementById(`sprites${index}`).value
+    const shiny = document.getElementById(`shiny${index}`).value
+
+    return `https://img.pokemondb.net/sprites/${sprite}/${shiny ? 'shiny' : 'normal'}/${pokemon}.png`;
+}
+
+function placePokemon(generation) {
+    switch (generation) {
+        default:
+        case '3':
+            for (let i = 1; i < 7; i++) {
+                pokemon = new Image();
+                pkemon.src = makeSpriteLink(i);
+                ctx.drawImage(pokemon, i * 55, i * 35);
+            }
+            break;
     }
 }
 
