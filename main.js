@@ -189,6 +189,7 @@ function placePokemon(generation) {
             for (let i = 1; i < 7; i++) {
                 let pokemon = new Image();
                 pokemon.src = makeSpriteLink(i);
+                console.log(pokemon.src);
                 ctx.drawImage(pokemon, i * 55, i * 35);
             }
             break;
