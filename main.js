@@ -103,9 +103,7 @@ function renderPreview(generation) {
     img.onload = () => {
         ctx.drawImage(img, 0, 0);
 
-        canvas.width = img.width * scale;
-        canvas.height = img.height * scale;
-        ctx.setTransform(scale, 0, 0, scale, 0, 0);
+        ctx.scale(scale, scale);
 
         drawPreview(generation);
     }
