@@ -179,7 +179,16 @@ function makeSpriteLink(index) {
     const sprite = document.getElementById(`sprites${index}`).value
     const shiny = document.getElementById(`shiny${index}`).value
 
-    return `https://img.pokemondb.net/sprites/${sprite}/${shiny ? 'shiny' : 'normal'}/${pokemon}.png`;
+    return `https://img.pokemondb.net/sprites/${sprite}/${shiny.checked ? 'shiny' : 'normal'}/${pokemon}.png`;
+}
+
+const gen3SpritePositions = {
+    1: { x: 24, y: 8 },
+    2: { x: 88, y: 8 },
+    3: { x: 152, y: 8 },
+    4: { x: 8, y: 56 },
+    5: { x: 88, y: 56 },
+    6: { x: 168, y: 56 },
 }
 
 function placePokemon(generation) {
@@ -189,8 +198,9 @@ function placePokemon(generation) {
             for (let i = 1; i < 7; i++) {
                 let pokemon = new Image();
                 pokemon.src = makeSpriteLink(i);
-                console.log(pokemon.src);
-                ctx.drawImage(pokemon, i * 55, i * 35);
+                const x = gen3SpritePositions[i].x;
+                const y = gen3SpritePositions[i].y;
+                ctx.drawImage(pokemon, x, y);
             }
             break;
     }
