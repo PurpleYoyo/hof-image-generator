@@ -46,6 +46,10 @@ function renderPreview(generation) {
     img.onload = () => {
         ctx.drawImage(img, 0, 0);
 
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
         if (generation === '3') {
             drawPreview(generation);
         }
@@ -77,10 +81,6 @@ function drawPreview() {
     }
 
     ctx.putImageData(imageData, 0, 0);
-
-    canvas.width = img.width * scale;
-    canvas.height = img.height * scale;
-    ctx.setTransform(scale, 0, 0, scale, 0, 0);
 }
 
 function recolorGen3HOF(data) {
