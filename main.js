@@ -254,16 +254,27 @@ function makeSpriteLink(index, image) {
         image.crossOrigin = 'Anonymous';
         // TODO: get number from name and use this link instead:
         // return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${shiny.checked ? 'shiny/' : ''}${nameToNumber(pokemon)}.png`;
-        return `https://raw.githubusercontent.com/PurpleYoyo/LittleEmerald-SaveReader/refs/heads/main/sprites/${pokemon}.png`;
+        const link = `https://raw.githubusercontent.com/PurpleYoyo/LittleEmerald-SaveReader/refs/heads/main/sprites/${pokemon}.png`;
+        if (urlExists(link) === 200) {
+            return link;
+        }
     }
 
     if (['red-blue', 'yellow', 'gold', 'silver', 'crystal'].includes(sprite)) {
-        return `https://play.pokemonshowdown.com/sprites/${showdownLinks[sprite]}${shiny.checked ? '-shiny' : ''}/${pokemon}.png`;
+        const link = `https://play.pokemonshowdown.com/sprites/${showdownLinks[sprite]}${shiny.checked ? '-shiny' : ''}/${pokemon}.png`;
+        if (urlExists(link) === 200) {
+            return link;
+        }
     }
     else {
         image.crossOrigin = 'Anonymous';
-        return `https://img.pokemondb.net/sprites/${sprite}/${shiny.checked ? 'shiny' : 'normal'}/${pokemon}.png`;
+        const link = `https://img.pokemondb.net/sprites/${sprite}/${shiny.checked ? 'shiny' : 'normal'}/${pokemon}.png`;
+        if (urlExists(link) === 200) {
+            return link;
+        }
     }
+    
+    return null;
 }
 
 const gen3SpritePositions = {
@@ -285,37 +296,41 @@ const gen4SpritePositions = {
 };
 
 function placePokemon(generation) {
+    let positions;
+
     switch (generation) {
         default:
-        case '3':
-            for (let i = 1; i < 7; i++) {
-                let pokemon = new Image();
-                pokemon.src = makeSpriteLink(i, pokemon);
-                const x = gen3SpritePositions[i].x;
-                const y = gen3SpritePositions[i].y;
-                pokemon.onload = () => {
-                    try {
-                        ctx.drawImage(pokemon, x, y);
-                    }
-                    catch {}
-                }
-            }
+        case '3':    
+            positions = gen3SpritePositions;
             break;
         case '4':
-            for (let i = 1; i < 7; i++) {
-                let pokemon = new Image();
-                pokemon.src = makeSpriteLink(i, pokemon);
-                const x = gen3SpritePositions[i].x;
-                const y = gen3SpritePositions[i].y;
-                pokemon.onload = () => {
-                    try {
-                        ctx.drawImage(pokemon, x, y);
-                    }
-                    catch {}
-                }
-            }
+            positions = gen4SpritePositions;
             break;
     }
+
+    for (let i = 1; i < 7; i++) {
+        let pokemon = new Image();
+        const src = makeSpriteLink(i, pokemon);
+        if (src === null) {
+            continue;
+        }
+        const x = positions[i].x;
+        const y = positions[i].y;
+        pokemon.src = src;
+        pokemon.onload = () => {
+            ctx.drawImage(pokemon, x, y);
+        }
+    }
+}
+
+function urlExists(testUrl) {
+    var http = $.ajax({
+        type: 'HEAD',
+        url: testUrl,
+        async: false
+    });
+
+    return http.status;
 }
 
 function darkenColor(hsb, light) {
