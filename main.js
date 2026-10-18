@@ -34,7 +34,7 @@ document.getElementById('color2').addEventListener('input', start);
     }
 });
 
-['emerald', 'firered-leafgreen', 'ruby-sapphire'].forEach((game) => {
+['emerald', 'firered-leafgreen', 'ruby-sapphire', 'heart-and-soul', 'unbound'].forEach((game) => {
     document.getElementById(`preset-${game}`).addEventListener('click', () => applyPreset(game));
 });
 
@@ -95,11 +95,30 @@ function getGeneration() {
 }
 
 function start() {
-    hideInputs();
-    renderPreview(getGeneration());
+    const generation = getGeneration();
+
+    hideInputs(generation);
+    renderPreview(generation);
 }
 
-function hideInputs() {
+function hideInputs(generation) {
+    if (generation != '3') {
+        document.getElementById('color1').classList.add('hidden');
+        document.getElementById('color2').classList.add('hidden');
+
+        ['emerald', 'firered-leafgreen', 'ruby-sapphire', 'heart-and-soul', 'unbound'].forEach((game) => {
+            document.getElementById(`preset-${game}`).classList.add('hidden');
+        });
+    }
+    else {
+        document.getElementById('color1').classList.remove('hidden');
+        document.getElementById('color2').classList.remove('hidden');
+
+        ['emerald', 'firered-leafgreen', 'ruby-sapphire', 'heart-and-soul', 'unbound'].forEach((game) => {
+            document.getElementById(`preset-${game}`).classList.remove('hidden');
+        });
+    }
+
     for (let i = 1; i < 7; i++) {
         if (document.getElementById(`pokemon${i}`).value === '') {
             document.getElementById(`image${i}`).classList.remove('hidden');
@@ -153,6 +172,8 @@ function drawPreview(generation) {
         default:
         case '3':
             recolorGen3HOF(data)
+            break;
+        case '4':
             break;
     }
 
@@ -254,10 +275,33 @@ const gen3SpritePositions = {
     6: { x: 168, y: 56 },
 };
 
+const gen4SpritePositions = {
+    1: { x: -8, y: 40 },
+    2: { x: 24, y: 48 },
+    3: { x: 56, y: 56 },
+    4: { x: 120 , y: 56 },
+    5: { x: 152, y: 48 },
+    6: { x: 184, y: 40 },
+};
+
 function placePokemon(generation) {
     switch (generation) {
         default:
         case '3':
+            for (let i = 1; i < 7; i++) {
+                let pokemon = new Image();
+                pokemon.src = makeSpriteLink(i, pokemon);
+                const x = gen3SpritePositions[i].x;
+                const y = gen3SpritePositions[i].y;
+                pokemon.onload = () => {
+                    try {
+                        ctx.drawImage(pokemon, x, y);
+                    }
+                    catch {}
+                }
+            }
+            break;
+        case '4':
             for (let i = 1; i < 7; i++) {
                 let pokemon = new Image();
                 pokemon.src = makeSpriteLink(i, pokemon);
