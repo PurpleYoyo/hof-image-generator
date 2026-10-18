@@ -3,7 +3,6 @@ const default_color1 = [132, 239, 198];
 const default_color2 = [115, 222, 181];
 const default_color3 = [57, 104, 86];
 const default_color4 = [50, 97, 79];
-let drawing = false;
 
 function createDropdowns() {
     for (let i = 1; i < 7; i++) {
@@ -124,13 +123,8 @@ function hideInputs() {
 function renderPreview(generation) {
     //const scale = parseInt(document.getElementById('scale').value);
 
-    if (drawing) {
-        return;
-    }
-
-    drawing = true;
-
     img.src = `g${generation}-template.png`;
+    img.crossOrigin = "Anonymous";
     img.onload = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
@@ -253,14 +247,15 @@ function placePokemon(generation) {
             for (let i = 1; i < 7; i++) {
                 let pokemon = new Image();
                 pokemon.src = makeSpriteLink(i, generation);
+                pokemon.crossOrigin = "Anonymous";
                 const x = gen3SpritePositions[i].x;
                 const y = gen3SpritePositions[i].y;
-                ctx.drawImage(pokemon, x, y);
+                pokemon.onload = () => {
+                    ctx.drawImage(pokemon, x, y);
+                }
             }
             break;
     }
-
-    drawing = false;
 }
 
 function darkenColor(hsb, light) {
