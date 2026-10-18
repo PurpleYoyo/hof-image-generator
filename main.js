@@ -101,10 +101,10 @@ function renderPreview(generation) {
 
     img.src = `g${generation}-template.png`;
     img.onload = () => {
-        canvas.width = img.width * scale;
-        canvas.height = img.height * scale;
+        //canvas.width = img.width * scale;
+        //canvas.height = img.height * scale;
 
-        ctx.setTransform(scale, 0, 0, scale, 0, 0);
+        //ctx.setTransform(scale, 0, 0, scale, 0, 0);
         //ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
 
