@@ -84,7 +84,7 @@ function getGeneration() {
 
 function start() {
     hideInputs();
-    renderPreview(getGeneration())
+    renderPreview(getGeneration());
 }
 
 function hideInputs() {
@@ -125,6 +125,7 @@ function renderPreview(generation) {
 
     img.src = `g${generation}-template.png`;
     img.onload = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
 
         drawPreview(generation);
