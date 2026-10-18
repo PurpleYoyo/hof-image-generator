@@ -30,6 +30,30 @@ document.getElementById('scale').addEventListener('input', (event) => start());
     }
 });
 
+['emerald', 'firered-leafgreen', 'ruby-sapphire'].forEach((game) => {
+    document.getElementById(`preset-${game}`).addEventListener('click', () => applyPreset(game));
+});
+
+function applyPreset(game) {
+    switch (game) {
+        default:
+        case 'emerald':
+            document.getElementById('color1').value = '#84EFC6';
+            document.getElementById('color2').value = '#73DEB5';
+            break;
+        case 'ruby-sapphire':
+            document.getElementById('color1').value = '#FFD6E7';
+            document.getElementById('color2').value = '#FFB5E7';
+            break;
+        case 'firered-leafgreen':
+            document.getElementById('color1').value = '#B5C6EF';
+            document.getElementById('color2').value = '#A5B5EF';
+            break;
+    }
+
+    start();
+}
+
 const canvas = document.getElementById('preview');
 const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
