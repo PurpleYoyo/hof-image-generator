@@ -3,6 +3,7 @@ const default_color1 = [132, 239, 198];
 const default_color2 = [115, 222, 181];
 const default_color3 = [57, 104, 86];
 const default_color4 = [50, 97, 79];
+let drawing = false;
 
 function createDropdowns() {
     for (let i = 1; i < 7; i++) {
@@ -122,6 +123,12 @@ function hideInputs() {
 
 function renderPreview(generation) {
     //const scale = parseInt(document.getElementById('scale').value);
+
+    if (drawing) {
+        return;
+    }
+
+    drawing = true;
 
     img.src = `g${generation}-template.png`;
     img.onload = () => {
@@ -252,6 +259,8 @@ function placePokemon(generation) {
             }
             break;
     }
+
+    drawing = false;
 }
 
 function darkenColor(hsb, light) {
