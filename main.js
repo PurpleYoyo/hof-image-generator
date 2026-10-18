@@ -124,7 +124,7 @@ function renderPreview(generation) {
     //const scale = parseInt(document.getElementById('scale').value);
 
     img.src = `g${generation}-template.png`;
-    img.crossOrigin = "Anonymous";
+    img.crossOrigin = 'Anonymous';
     img.onload = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
@@ -203,7 +203,7 @@ const showdownLinks = {
     'crystal':      'gen2',
 };
 
-function makeSpriteLink(index, generation) {
+function makeSpriteLink(index, image) {
     const pokemon = document.getElementById(`pokemon${index}`).value
     const sprite = document.getElementById(`sprites${index}`).value
     const shiny = document.getElementById(`shiny${index}`).value
@@ -218,6 +218,7 @@ function makeSpriteLink(index, generation) {
     }
 
     if (sprite === 'default') {
+        image.crossOrigin = 'Anonymous';
         // TODO: get number from name and use this link instead:
         // return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${shiny.checked ? 'shiny/' : ''}${nameToNumber(pokemon)}.png`;
         return `https://raw.githubusercontent.com/PurpleYoyo/LittleEmerald-SaveReader/refs/heads/main/sprites/${pokemon}.png`;
@@ -227,6 +228,7 @@ function makeSpriteLink(index, generation) {
         return `https://play.pokemonshowdown.com/sprites/${showdownLinks[sprite]}${shiny.checked ? '-shiny' : ''}/${pokemon}.png`;
     }
     else {
+        image.crossOrigin = 'Anonymous';
         return `https://img.pokemondb.net/sprites/${sprite}/${shiny.checked ? 'shiny' : 'normal'}/${pokemon}.png`;
     }
 }
@@ -246,12 +248,14 @@ function placePokemon(generation) {
         case '3':
             for (let i = 1; i < 7; i++) {
                 let pokemon = new Image();
-                pokemon.src = makeSpriteLink(i, generation);
-                pokemon.crossOrigin = "Anonymous";
+                pokemon.src = makeSpriteLink(i, pokemon);
                 const x = gen3SpritePositions[i].x;
                 const y = gen3SpritePositions[i].y;
                 pokemon.onload = () => {
-                    ctx.drawImage(pokemon, x, y);
+                    try {
+                        ctx.drawImage(pokemon, x, y);
+                    }
+                    catch {}
                 }
             }
             break;
