@@ -12,21 +12,27 @@ html {
     text-align: center;
 }
 
+.presets,
 .generation {
     display: inline-block;
 }
-
-#pokemon {
+.pokemon {
     width: 33%;
-    height: 50px;
     display: inline-block;
 }
 
 select,
-input {
+input[type="text"],
+input[type="checkbox"],
+input[type="file"],
+input[type="button"],
+input[type="radio"] {
     margin: 5px;
 }
 
+input[type="color"] {
+    margin: 10px;
+}
 .hidden {
     display: none;
 }
