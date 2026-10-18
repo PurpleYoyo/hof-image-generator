@@ -13,9 +13,10 @@ html {
 }
 
 .presets,
-.generation {
+.background {
     display: inline-block;
 }
+
 .pokemon {
     width: 25%;
     display: inline-block;
