@@ -241,6 +241,10 @@ function makeSpriteLink(index, image) {
     const sprite = document.getElementById(`sprites${index}`).value
     const shiny = document.getElementById(`shiny${index}`).value
 
+    if (!allPokemon.includes(pokemon)) {
+        return null;
+    }
+
     if (['red-blue', 'yellow'].includes(sprite)) {
         shiny.checked = false;
     }
@@ -252,27 +256,16 @@ function makeSpriteLink(index, image) {
 
     if (sprite === 'default') {
         image.crossOrigin = 'Anonymous';
-        const link = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${shiny.checked ? 'shiny/' : ''}${nameToNumber(pokemon)}.png`;
-        if (urlExists(link) === 200) {
-            return link;
-        }
+        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${shiny.checked ? 'shiny/' : ''}${nameToNumber(pokemon)}.png`;
     }
 
     if (['red-blue', 'yellow', 'gold', 'silver', 'crystal'].includes(sprite)) {
-        const link = `https://play.pokemonshowdown.com/sprites/${showdownLinks[sprite]}${shiny.checked ? '-shiny' : ''}/${pokemon}.png`;
-        if (urlExists(link) === 200) {
-            return link;
-        }
+        return `https://play.pokemonshowdown.com/sprites/${showdownLinks[sprite]}${shiny.checked ? '-shiny' : ''}/${pokemon}.png`;
     }
     else {
         image.crossOrigin = 'Anonymous';
-        const link = `https://img.pokemondb.net/sprites/${sprite}/${shiny.checked ? 'shiny' : 'normal'}/${pokemon}.png`;
-        if (urlExists(link) === 200) {
-            return link;
-        }
+        return `https://img.pokemondb.net/sprites/${sprite}/${shiny.checked ? 'shiny' : 'normal'}/${pokemon}.png`;
     }
-    
-    return null;
 }
 
 const gen3SpritePositions = {
@@ -319,16 +312,6 @@ function placePokemon(generation) {
             ctx.drawImage(pokemon, x, y);
         }
     }
-}
-
-function urlExists(testUrl) {
-    var http = $.ajax({
-        type: 'HEAD',
-        url: testUrl,
-        async: false
-    });
-
-    return http.status;
 }
 
 function darkenColor(hsb, light) {
