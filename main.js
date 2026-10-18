@@ -7,7 +7,7 @@ const default_color4 = [50, 97, 79];
 function createDropdowns() {
     for (let i = 1; i < 7; i++) {
         const dropdown = document.getElementById(`sprites${i}`);
-        ['Yellow', 'Red/Blue', 'Crystal', 'Gold', 'Silver', 'Emerald', 'FireRed/LeafGreen', 'Ruby/Sapphire', 'HeartGold/SoulSilver', 'Platinum', 'Diamond/Pearl', 'Black/White'].forEach((game) => {
+        ['Default', 'Yellow', 'Red/Blue', 'Crystal', 'Gold', 'Silver', 'Emerald', 'FireRed/LeafGreen', 'Ruby/Sapphire', 'HeartGold/SoulSilver', 'Platinum', 'Diamond/Pearl', 'Black/White'].forEach((game) => {
             let option = document.createElement('option');
             option.value = game.toLowerCase().replace('/', '-');
             option.text = game;
@@ -187,7 +187,7 @@ function makeSpriteLink(index, generation) {
     const sprite = document.getElementById(`sprites${index}`).value
     const shiny = document.getElementById(`shiny${index}`).value
 
-    if (generation == '1') {
+    if (['red-blue', 'yellow'].includes(sprite)) {
         shiny.checked = false;
     }
 
@@ -196,12 +196,17 @@ function makeSpriteLink(index, generation) {
         sprite = 'crystal';
     }
 
-    console.log(parseInt(generation));
-    if (parseInt(generation) > 2) {
-        return `https://img.pokemondb.net/sprites/${sprite}/${shiny.checked ? 'shiny' : 'normal'}/${pokemon}.png`;
+    if (sprite === 'default') {
+        // TODO: get number from name and use this link instead:
+        // return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${shiny.checked ? 'shiny/' : ''}${nameToNumber(pokemon)}.png`;
+        return `https://raw.githubusercontent.com/PurpleYoyo/LittleEmerald-SaveReader/refs/heads/main/sprites/${pokemon}.png`;
+    }
+
+    if (['red-blue', 'yellow', 'gold', 'silver', 'crystal'].includes(sprite)) {
+        return `https://play.pokemonshowdown.com/sprites/${showdownLinks[sprite]}${shiny.checked ? '-shiny' : ''}/${pokemon}.png`;
     }
     else {
-        return `https://play.pokemonshowdown.com/sprites/${showdownLinks}${shiny.checked ? '-shiny' : ''}/${pokemon}.png`;
+        return `https://img.pokemondb.net/sprites/${sprite}/${shiny.checked ? 'shiny' : 'normal'}/${pokemon}.png`;
     }
 }
 
