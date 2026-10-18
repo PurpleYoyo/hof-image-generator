@@ -26,11 +26,9 @@ document.getElementById('color2').addEventListener('input', (event) => start());
 document.getElementById('scale').addEventListener('input', (event) => start());
 ['sprites', 'shiny', 'pokemon', 'image'].forEach((id) => {
     for (let i = 1; i < 7; i++) {
-        console.log(`${id}${i}`);
         document.getElementById(`${id}${i}`).addEventListener('input', (event) => start());
     }
 });
-document.getElementById('pokemon1').addEventListener('input', (event) => start());
 
 const canvas = document.getElementById('preview');
 const ctx = canvas.getContext('2d', { willReadFrequently: true });
@@ -107,7 +105,7 @@ function renderPreview(generation) {
         canvas.height = img.height * scale;
 
         ctx.setTransform(scale, 0, 0, scale, 0, 0);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        //ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
 
         drawPreview(generation);
@@ -198,6 +196,7 @@ function makeSpriteLink(index, generation) {
         sprite = 'crystal';
     }
 
+    console.log(parseInt(generation));
     if (parseInt(generation) > 2) {
         return `https://img.pokemondb.net/sprites/${sprite}/${shiny.checked ? 'shiny' : 'normal'}/${pokemon}.png`;
     }
