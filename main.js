@@ -1,8 +1,12 @@
 const img = new Image();
-const default_color1 = [132, 239, 198];
-const default_color2 = [115, 222, 181];
-const default_color3 = [57, 104, 86];
-const default_color4 = [50, 97, 79];
+const default_color1 = [getRandomInt(255), getRandomInt(255), getRandomInt(255)];
+const default_color2 = [getRandomInt(255), getRandomInt(255), getRandomInt(255)];
+const default_color3 = darkenColor(RGBtoHSV(default_color1));
+const default_color4 = darkenColor(RGBtoHSV(default_color2));
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
 
 function createDropdowns() {
     for (let i = 1; i < 7; i++) {
@@ -48,6 +52,14 @@ function applyPreset(game) {
         case 'firered-leafgreen':
             document.getElementById('color1').value = '#B5C6EF';
             document.getElementById('color2').value = '#A5B5EF';
+            break;
+        case 'unbound':
+            document.getElementById('color1').value = '#BC84E9';
+            document.getElementById('color2').value = '#BC84E9';
+            break;
+        case 'heart-and-soul':
+            document.getElementById('color1').value = '#731810';
+            document.getElementById('color2').value = '#631010';
             break;
     }
 
