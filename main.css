@@ -23,3 +23,7 @@ input {
 .hidden {
     display: none;
 }
+
+canvas {
+    margin: 10px;
+}
