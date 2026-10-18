@@ -16,8 +16,15 @@ html {
     display: inline-block;
 }
 
+#pokemon {
+    width: 33%;
+    height: 50px;
+    display: inline-block;
+}
+
+select,
 input {
-    margin: 10px;
+    margin: 5px;
 }
 
 .hidden {
