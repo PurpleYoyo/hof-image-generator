@@ -44,6 +44,7 @@ window.addEventListener("load", (event) => {
     randomizeStartColors();
 	buildSuggestions();
 	initializeEventListeners();
+	randomizePlaceholders();
     start();
 });
 
@@ -91,6 +92,16 @@ function initializeEventListeners() {
 	});
 }
 
+function randomizePlaceholders() {
+	for (let i = 1; i < 7; i++) {
+		document.getElementById(`pokemon${i}`).placeholder = randomPokemon();
+	}
+}
+
+function randomPokemon() {
+	let keys = Object.keys(allPokemon);
+	return allPokemon[keys[keys.length * Math.random() << 0]];
+};
 
 function applyPreset(game) {
     switch (game) {
