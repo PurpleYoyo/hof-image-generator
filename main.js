@@ -28,6 +28,7 @@ function createDropdowns() {
 window.addEventListener("load", (event) => {
     createDropdowns();
     randomizeStartColors();
+	buildSuggestions();
     start();
 });
 
