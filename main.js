@@ -53,7 +53,7 @@ function buildDropdowns() {
         const dropdown = document.getElementById(`sprites${i}`);
         ['Default', 'Yellow', 'Red/Blue', 'Crystal', 'Gold', 'Silver', 'Emerald', 'FireRed/LeafGreen', 'Ruby/Sapphire', 'HeartGold/SoulSilver', 'Platinum', 'Diamond/Pearl', 'Black/White'].forEach((game) => {
             let option = document.createElement('option');
-            option.value = game.toLowerCase().replace('/', '-');
+            option.value = `${game.toLowerCase().replace('/', '-')}-option`;
             option.text = game;
             dropdown.appendChild(option);
         });
