@@ -79,6 +79,7 @@ function applyPreset(game) {
 }
 
 const canvas = document.getElementById('preview');
+const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
 let color1;
 let color2;
@@ -169,11 +170,11 @@ function renderPreview(generation) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
 
-        drawPreview(generation, ctx);
+        drawPreview(generation);
     }
 }
 
-function drawPreview(generation, ctx) {
+function drawPreview(generation) {
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
         
@@ -188,7 +189,7 @@ function drawPreview(generation, ctx) {
 
     ctx.putImageData(imageData, 0, 0);
 
-    placePokemon(generation, ctx);
+    placePokemon(generation);
 }
 
 function recolorGen3HOF(data) {
@@ -295,7 +296,7 @@ const gen4SpritePositions = {
     6: { x: 184, y: 40 },
 };
 
-function placePokemon(generation, ctx) {
+function placePokemon(generation) {
     let positions;
 
     switch (generation) {
