@@ -306,17 +306,12 @@ function placePokemon(generation) {
         }
 		pokemon.src = src;
 
-        const x = positions[i].x;
-        const y = positions[i].y;
+        const x = positions[i].x * 2;
+        const y = positions[i].y * 2;
         
         pokemon.onload = () => {
-			let dWidth = pokemon.width;
-			let dHeight = pokemon.height;
-
-			if (pokemon.width > 64) {
-				dWidth = 64;
-				dHeight = 64;
-			}
+			let dWidth = 128;
+			let dHeight = 128;
 
             ctx.drawImage(pokemon, x, y, dWidth, dHeight);
         }
