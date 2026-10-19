@@ -313,15 +313,22 @@ function placePokemon(generation) {
 
     for (let i = 1; i < 7; i++) {
         let pokemon = new Image();
+
         const src = makeSpriteLink(i, pokemon);
         if (src === null) {
             continue;
         }
+		pokemon.src = src;
+
         const x = positions[i].x;
         const y = positions[i].y;
-        pokemon.src = src;
+        
         pokemon.onload = () => {
-			console.log(pokemon.width, pokemon.height);
+			if (pokemon.width > 64) {
+				pokemon.width = 64;
+				pokemon.height = 64;
+			}
+
             ctx.drawImage(pokemon, x, y);
         }
     }
