@@ -1,19 +1,53 @@
 const img = new Image();
-let default_color1 = [132, 239, 198];
-let default_color2 = [115, 222, 181];
-let default_color3 = [57, 104, 86];
-let default_color4 = [50, 97, 79];
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-}
+const default_color1 = [132, 239, 198];
+const default_color2 = [115, 222, 181];
+const default_color3 = [57, 104, 86];
+const default_color4 = [50, 97, 79];
 
-function randomizeStartColors() {
-    document.getElementById('color1').value = RGBToHex(getRandomInt(255), getRandomInt(255), getRandomInt(255));
-    document.getElementById('color2').value = RGBToHex(getRandomInt(255), getRandomInt(255), getRandomInt(255));
-}
+const canvas = document.getElementById('preview');
+const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
-function createDropdowns() {
+let color1;
+let color2;
+let color3;
+let color4;
+
+const showdownLinks = {
+    'yellow':       'gen1',
+    'red-blue':     'gen1rb',
+    'gold':         'gen2g',
+    'silver':       'gen2s',
+    'crystal':      'gen2',
+};
+
+const gen3SpritePositions = {
+    1: { x: 24, y: 8 },
+    2: { x: 88, y: 8 },
+    3: { x: 152, y: 8 },
+    4: { x: 8, y: 56 },
+    5: { x: 88, y: 56 },
+    6: { x: 168, y: 56 },
+};
+
+const gen4SpritePositions = {
+    1: { x: -8, y: 40 },
+    2: { x: 24, y: 48 },
+    3: { x: 56, y: 56 },
+    4: { x: 120 , y: 56 },
+    5: { x: 152, y: 48 },
+    6: { x: 184, y: 40 },
+};
+
+window.addEventListener("load", (event) => {
+    buildDropdowns();
+    randomizeStartColors();
+	buildSuggestions();
+	initializeEventListeners();
+    start();
+});
+
+function buildDropdowns() {
     for (let i = 1; i < 7; i++) {
         const dropdown = document.getElementById(`sprites${i}`);
         ['Default', 'Yellow', 'Red/Blue', 'Crystal', 'Gold', 'Silver', 'Emerald', 'FireRed/LeafGreen', 'Ruby/Sapphire', 'HeartGold/SoulSilver', 'Platinum', 'Diamond/Pearl', 'Black/White'].forEach((game) => {
@@ -25,34 +59,38 @@ function createDropdowns() {
     }
 }
 
-window.addEventListener("load", (event) => {
-    createDropdowns();
-    randomizeStartColors();
-	buildSuggestions();
-    start();
-});
-
-function scalePreview() {
-    const scale = parseInt(document.getElementById('scale').value);
-
-    canvas.style.width *= scale;
-    canvas.style.height *= scale;
-
-    start();
+function randomizeStartColors() {
+    document.getElementById('color1').value = RGBToHex(getRandomInt(255), getRandomInt(255), getRandomInt(255));
+    document.getElementById('color2').value = RGBToHex(getRandomInt(255), getRandomInt(255), getRandomInt(255));
 }
 
-document.getElementById('color1').addEventListener('input', start);
-document.getElementById('color2').addEventListener('input', start);
-//document.getElementById('scale').addEventListener('input', scalePreview);
-['sprites', 'shiny', 'pokemon', 'image'].forEach((id) => {
-    for (let i = 1; i < 7; i++) {
-        document.getElementById(`${id}${i}`).addEventListener('input', start);
-    }
-});
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
 
-['emerald', 'firered-leafgreen', 'ruby-sapphire', 'heart-and-soul', 'unbound'].forEach((game) => {
-    document.getElementById(`preset-${game}`).addEventListener('click', () => applyPreset(game));
-});
+function buildSuggestions() {
+    const datalist = document.getElementById('pokemon-suggestions');
+    Object.entries(allPokemon).forEach(([name, _]) => {
+        const option = document.createElement('option');
+        option.value = name;
+        datalist.appendChild(option);
+    });
+}
+
+function initializeEventListeners() {
+	document.getElementById('color1').addEventListener('input', start);
+	document.getElementById('color2').addEventListener('input', start);
+	['sprites', 'shiny', 'pokemon', 'image'].forEach((id) => {
+	    for (let i = 1; i < 7; i++) {
+	        document.getElementById(`${id}${i}`).addEventListener('input', start);
+	    }
+	});
+
+	['emerald', 'firered-leafgreen', 'ruby-sapphire', 'heart-and-soul', 'unbound'].forEach((game) => {
+	    document.getElementById(`preset-${game}`).addEventListener('click', () => applyPreset(game));
+	});
+}
+
 
 function applyPreset(game) {
     switch (game) {
@@ -82,20 +120,11 @@ function applyPreset(game) {
     start();
 }
 
-const canvas = document.getElementById('preview');
-const ctx = canvas.getContext('2d', { willReadFrequently: true });
+function start() {
+    const generation = getGeneration();
 
-let color1;
-let color2;
-let color3;
-let color4;
-function getColors(generation) {
-    if (generation === '3') {
-        color1 = hexToRGB(document.getElementById('color1').value);
-        color2 = hexToRGB(document.getElementById('color2').value);
-        color3 = HSVtoRGB(darkenColor(RGBtoHSV(color1), true));
-        color4 = HSVtoRGB(darkenColor(RGBtoHSV(color2), false));
-    }
+    hideInputs(generation);
+    renderPreview(generation);
 }
 
 function getGeneration() {
@@ -108,13 +137,6 @@ function getGeneration() {
     });
 
     return '3';
-}
-
-function start() {
-    const generation = getGeneration();
-
-    hideInputs(generation);
-    renderPreview(generation);
 }
 
 function hideInputs(generation) {
@@ -242,15 +264,55 @@ function recolorGen3HOF(data) {
     }
 }
 
-const showdownLinks = {
-    'yellow':       'gen1',
-    'red-blue':     'gen1rb',
-    'gold':         'gen2g',
-    'silver':       'gen2s',
-    'crystal':      'gen2',
-};
+function getColors(generation) {
+    if (generation === '3') {
+        color1 = hexToRGB(document.getElementById('color1').value);
+        color2 = hexToRGB(document.getElementById('color2').value);
+        color3 = HSVtoRGB(darkenColor(RGBtoHSV(color1), true));
+        color4 = HSVtoRGB(darkenColor(RGBtoHSV(color2), false));
+    }
+}
 
-function makeSpriteLink(index, image) {
+function placePokemon(generation) {
+    let positions;
+
+    switch (generation) {
+        default:
+        case '3':    
+            positions = gen3SpritePositions;
+            break;
+        case '4':
+            positions = gen4SpritePositions;
+            break;
+    }
+
+    for (let i = 1; i < 7; i++) {
+        let pokemon = new Image();
+
+        const src = buildSpriteLink(i, pokemon);
+        if (src === null) {
+            continue;
+        }
+		pokemon.src = src;
+
+        const x = positions[i].x;
+        const y = positions[i].y;
+        
+        pokemon.onload = () => {
+			let dWidth = pokemon.width;
+			let dHeight = pokemon.height;
+
+			if (pokemon.width > 64) {
+				dWidth = 64;
+				dHeight = 64;
+			}
+
+            ctx.drawImage(pokemon, x, y, dWidth, dHeight);
+        }
+    }
+}
+
+function buildSpriteLink(index, image) {
     const pokemon = document.getElementById(`pokemon${index}`).value
     const sprite = document.getElementById(`sprites${index}`).value
     const shiny = document.getElementById(`shiny${index}`).value
@@ -278,63 +340,6 @@ function makeSpriteLink(index, image) {
     }
     else {
         return `https://img.pokemondb.net/sprites/${sprite}/${shiny.checked ? 'shiny' : 'normal'}/${pokemon}.png`;
-    }
-}
-
-const gen3SpritePositions = {
-    1: { x: 24, y: 8 },
-    2: { x: 88, y: 8 },
-    3: { x: 152, y: 8 },
-    4: { x: 8, y: 56 },
-    5: { x: 88, y: 56 },
-    6: { x: 168, y: 56 },
-};
-
-const gen4SpritePositions = {
-    1: { x: -8, y: 40 },
-    2: { x: 24, y: 48 },
-    3: { x: 56, y: 56 },
-    4: { x: 120 , y: 56 },
-    5: { x: 152, y: 48 },
-    6: { x: 184, y: 40 },
-};
-
-function placePokemon(generation) {
-    let positions;
-
-    switch (generation) {
-        default:
-        case '3':    
-            positions = gen3SpritePositions;
-            break;
-        case '4':
-            positions = gen4SpritePositions;
-            break;
-    }
-
-    for (let i = 1; i < 7; i++) {
-        let pokemon = new Image();
-
-        const src = makeSpriteLink(i, pokemon);
-        if (src === null) {
-            continue;
-        }
-		pokemon.src = src;
-
-        const x = positions[i].x;
-        const y = positions[i].y;
-        
-        pokemon.onload = () => {
-			let dWidth = pokemon.width;
-			let dHeight = pokemon.height;
-
-			if (pokemon.width > 64) {
-				dWidth = 64;
-				dHeight = 64;
-			}
-
-            ctx.drawImage(pokemon, x, y, dWidth, dHeight);
-        }
     }
 }
 
@@ -418,15 +423,6 @@ function componentToHex(c) {
 
 function RGBToHex(r, g, b) {
     return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
-}
-
-function buildSuggestions() {
-    const datalist = document.getElementById('pokemon-suggestions');
-    Object.entries(allPokemon).forEach(([name, _]) => {
-        const option = document.createElement('option');
-        option.value = name;
-        datalist.appendChild(option);
-    });
 }
 
 const allPokemon = {
