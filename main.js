@@ -319,9 +319,9 @@ function placePokemon(generation) {
 }
 
 function buildSpriteLink(index, image) {
-    const pokemon = document.getElementById(`pokemon${index}`).value
-    const sprite = document.getElementById(`sprites${index}`).value
-    const shiny = document.getElementById(`shiny${index}`).value
+    const pokemon = document.getElementById(`pokemon${index}`).value;
+    const sprite = document.getElementById(`sprites${index}`).value.replace('-option', '');
+    const shiny = document.getElementById(`shiny${index}`).value;
 
     if (!(pokemon in allPokemon)) {
         return null;
