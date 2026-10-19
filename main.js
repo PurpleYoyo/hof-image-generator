@@ -352,7 +352,7 @@ function buildSpriteLink(index) {
 	if (['red-blue', 'yellow', 'gold', 'silver', 'crystal'].includes(sprite)) {
 		let is_gray = 'gray/'; // gray.checked ? 'gray/' : '';
 
-        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/version/generation-${romanNumeral}/${sprite}/transparent/${is_gray}${number}.png`;
+        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-${romanNumeral}/${sprite}/transparent/${is_gray}${number}.png`;
     }
 
 	let is_shiny = shiny.checked ? 'shiny/' : '';
@@ -363,7 +363,7 @@ function buildSpriteLink(index) {
 	
 	let romanNumeral = generationRomanNumerals[gameGeneration[sprite]];
 
-	return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/version/generation-${romanNumeral}/${sprite}/${is_shiny}${number}.png`;
+	return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-${romanNumeral}/${sprite}/${is_shiny}${number}.png`;
 }
 
 function darkenColor(hsb, light) {
