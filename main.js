@@ -320,6 +320,7 @@ function placePokemon(generation) {
         const x = positions[i].x;
         const y = positions[i].y;
         pokemon.src = src;
+		console.log(pokemon.width, pokemon.height);
         pokemon.onload = () => {
             ctx.drawImage(pokemon, x, y);
         }
