@@ -1,8 +1,4 @@
 const img = new Image();
-//const default_color1 = [getRandomInt(255), getRandomInt(255), getRandomInt(255)];
-//const default_color2 = [getRandomInt(255), getRandomInt(255), getRandomInt(255)];
-//const default_color3 = darkenColor(RGBtoHSV(default_color1));
-//const default_color4 = darkenColor(RGBtoHSV(default_color2));
 const default_color1 = [132, 239, 198];
 const default_color2 = [115, 222, 181];
 const default_color3 = [57, 104, 86];
@@ -10,6 +6,13 @@ const default_color4 = [50, 97, 79];
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
+}
+
+function randomizeDefaultColors() {
+    default_color1 = [getRandomInt(255), getRandomInt(255), getRandomInt(255)];
+    default_color2 = [getRandomInt(255), getRandomInt(255), getRandomInt(255)];
+    default_color3 = darkenColor(RGBtoHSV(default_color1));
+    default_color4 = darkenColor(RGBtoHSV(default_color2));
 }
 
 function createDropdowns() {
@@ -26,6 +29,7 @@ function createDropdowns() {
 
 window.addEventListener("load", (event) => {
     createDropdowns();
+    randomizeDefaultColors();
     start();
 });
 
