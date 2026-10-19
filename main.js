@@ -42,7 +42,7 @@ function scalePreview() {
 
 document.getElementById('color1').addEventListener('input', start);
 document.getElementById('color2').addEventListener('input', start);
-document.getElementById('scale').addEventListener('input', scalePreview);
+//document.getElementById('scale').addEventListener('input', scalePreview);
 ['sprites', 'shiny', 'pokemon', 'image'].forEach((id) => {
     for (let i = 1; i < 7; i++) {
         document.getElementById(`${id}${i}`).addEventListener('input', start);
