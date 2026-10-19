@@ -35,6 +35,9 @@ function scalePreview() {
     const scale = parseInt(document.getElementById('scale').value);
 
     canvas.style.width *= scale;
+    canvas.style.height *= scale;
+
+    start();
 }
 
 document.getElementById('color1').addEventListener('input', start);
