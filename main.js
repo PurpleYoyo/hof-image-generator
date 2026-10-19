@@ -110,7 +110,7 @@ function start() {
 }
 
 function hideInputs(generation) {
-    if (generation != '3') {
+    if (generation !== '3') {
         document.getElementById('color1').classList.add('hidden');
         document.getElementById('color2').classList.add('hidden');
 
