@@ -100,7 +100,7 @@ function randomizePlaceholders() {
 
 function randomPokemon() {
 	let keys = Object.keys(allPokemon);
-	return allPokemon[keys[keys.length * Math.random() << 0]];
+	return keys[keys.length * Math.random() << 0];
 };
 
 function applyPreset(game) {
