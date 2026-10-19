@@ -1,8 +1,8 @@
 const img = new Image();
-const default_color1 = [132, 239, 198];
-const default_color2 = [115, 222, 181];
-const default_color3 = [57, 104, 86];
-const default_color4 = [50, 97, 79];
+let default_color1 = [132, 239, 198];
+let default_color2 = [115, 222, 181];
+let default_color3 = [57, 104, 86];
+let default_color4 = [50, 97, 79];
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
