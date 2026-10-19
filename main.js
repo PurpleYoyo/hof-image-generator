@@ -419,6 +419,15 @@ function RGBToHex(r, g, b) {
     return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
+function buildSuggestions() {
+    const datalist = document.getElementById('pokemon-suggestions');
+    Object.entries(allPokemon).forEach(([name, _]) => {
+        const option = document.createElement('option');
+        option.value = name;
+        datalist.appendChild(option);
+    });
+}
+
 const allPokemon = {
     "bulbasaur": 1,
     "ivysaur": 2,

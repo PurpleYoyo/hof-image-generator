@@ -41,10 +41,12 @@
             <br>
 
             <div id="pokemon">
+                <datalist id="pokemon-suggestions"></datalist>
+                
                 <fieldset class="pokemon">
                     <legend>Pokémon 1</legend>
                     
-                    <input type="text" id="pokemon1" name="pokemon1" />
+                    <input type="text" id="pokemon1" list="pokemon-suggestions" name="pokemon1" />
                     
                     <label for="sprites1" id="sprites1-label">Sprite</label>
                     <select name="sprites1" id="sprites1"></select>
@@ -60,7 +62,7 @@
                 <fieldset class="pokemon">
                     <legend>Pokémon 2</legend>
                     
-                    <input type="text" id="pokemon2" name="pokemon2" />
+                    <input type="text" id="pokemon2" list="pokemon-suggestions" name="pokemon2" />
                     
                     <label for="sprites2" id="sprites2-label">Sprite</label>
                     <select name="sprites2" id="sprites2"></select>
@@ -75,7 +77,8 @@
                 
                 <fieldset class="pokemon">
                     <legend>Pokémon 3</legend>
-                    <input type="text" id="pokemon3" name="pokemon3" />
+
+                    <input type="text" id="pokemon3" list="pokemon-suggestions" name="pokemon3" />
                     
                     <label for="sprites3" id="sprites3-label">Sprite</label>
                     <select name="sprites3" id="sprites3"></select>
@@ -90,7 +93,8 @@
 
                 <fieldset class="pokemon">
                     <legend>Pokémon 4</legend>
-                    <input type="text" id="pokemon4" name="pokemon4" />
+
+                    <input type="text" id="pokemon4" list="pokemon-suggestions" name="pokemon4" />
                     
                     <label for="sprites4" id="sprites4-label">Sprite</label>
                     <select name="sprites4" id="sprites4"></select>
@@ -105,7 +109,8 @@
 
                 <fieldset class="pokemon">
                     <legend>Pokémon 5</legend>
-                    <input type="text" id="pokemon5" name="pokemon5" />
+
+                    <input type="text" id="pokemon5" list="pokemon-suggestions" name="pokemon5" />
                     
                     <label for="sprites5" id="sprites5-label">Sprite</label>
                     <select name="sprites5" id="sprites5"></select>
@@ -120,7 +125,8 @@
 
                 <fieldset class="pokemon">
                     <legend>Pokémon 6</legend>
-                    <input type="text" id="pokemon6" name="pokemon6" />
+
+                    <input type="text" id="pokemon6"  list="pokemon-suggestions"name="pokemon6" />
                     
                     <label for="sprites6" id="sprites6-label">Sprite</label>
                     <select name="sprites6" id="sprites6"></select>
@@ -154,11 +160,6 @@
                     <input type="button" id="preset-unbound" value="Unbound" />
                 </div>
             </fieldset>
-
-            <br>
-
-            <!-- <input type="range" id="scale" name="scale" min="1" max="5" value="1" />
-            <label for="scale">Scale</label> -->
 
             <br>
 
