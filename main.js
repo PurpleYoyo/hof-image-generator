@@ -4,6 +4,15 @@ let default_color2 = [115, 222, 181];
 let default_color3 = [57, 104, 86];
 let default_color4 = [50, 97, 79];
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+function randomizeStartColors() {
+    document.getElementById('color1').value = RGBToHex(getRandomInt(255), getRandomInt(255), getRandomInt(255));
+    document.getElementById('color2').value = RGBToHex(getRandomInt(255), getRandomInt(255), getRandomInt(255));
+}
+
 function createDropdowns() {
     for (let i = 1; i < 7; i++) {
         const dropdown = document.getElementById(`sprites${i}`);
@@ -18,12 +27,13 @@ function createDropdowns() {
 
 window.addEventListener("load", (event) => {
     createDropdowns();
+    randomizeStartColors();
     start();
 });
 
 document.getElementById('color1').addEventListener('input', start);
 document.getElementById('color2').addEventListener('input', start);
-//document.getElementById('scale').addEventListener('input', start);
+document.getElementById('scale').addEventListener('input', start);
 ['sprites', 'shiny', 'pokemon', 'image'].forEach((id) => {
     for (let i = 1; i < 7; i++) {
         document.getElementById(`${id}${i}`).addEventListener('input', start);
@@ -386,6 +396,15 @@ function HSVtoRGB(hsv) {
         Math.round(g * 255),
         Math.round(b * 255)
     ];
+}
+
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? '0' + hex : hex;
+}
+
+function RGBToHex(r, g, b) {
+    return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
 function nameToNumber(name) {
