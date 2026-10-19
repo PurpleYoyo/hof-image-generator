@@ -276,7 +276,6 @@ function makeSpriteLink(index, image) {
         return `https://play.pokemonshowdown.com/sprites/${showdownLinks[sprite]}${shiny.checked ? '-shiny' : ''}/${pokemon}.png`;
     }
     else {
-        image.crossOrigin = 'Anonymous';
         return `https://img.pokemondb.net/sprites/${sprite}/${shiny.checked ? 'shiny' : 'normal'}/${pokemon}.png`;
     }
 }
