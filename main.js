@@ -13,12 +13,31 @@ let color2;
 let color3;
 let color4;
 
-const showdownLinks = {
-    'yellow':       'gen1',
-    'red-blue':     'gen1rb',
-    'gold':         'gen2g',
-    'silver':       'gen2s',
-    'crystal':      'gen2',
+const gameGeneration = {
+	'yellow':				1,
+	'red-blue':				1,
+	'gold':					2,
+	'silver':				2,
+	'crystal':				2,
+	'ruby-sapphire':		3,
+	'emerald':				3,
+	'firered-leafgreen':	3,
+	'diamond-pearl':		4,
+	'platinum':				4,
+	'heartgold-soulsiver':	4,
+	'black-white':			5,
+};
+
+const generationRomanNumerals = {
+	1: 'i',
+	2: 'ii',
+	3: 'iii',
+	4: 'iv',
+	5: 'v',
+	6: 'vi',
+	7: 'vii',
+	8: 'viii',
+	9: 'ix',
 };
 
 const gen3SpritePositions = {
@@ -299,8 +318,9 @@ function placePokemon(generation) {
 
     for (let i = 1; i < 7; i++) {
         let pokemon = new Image();
+		pokemon.crossOrigin = 'Anonymous';
 
-        const src = buildSpriteLink(i, pokemon);
+        const src = buildSpriteLink(i);
         if (src === null) {
             continue;
         }
@@ -318,7 +338,7 @@ function placePokemon(generation) {
     }
 }
 
-function buildSpriteLink(index, image) {
+function buildSpriteLink(index) {
     const pokemon = document.getElementById(`pokemon${index}`).value;
     const sprite = document.getElementById(`sprites${index}`).value.replace('-option', '');
     const shiny = document.getElementById(`shiny${index}`).value;
@@ -327,26 +347,23 @@ function buildSpriteLink(index, image) {
         return null;
     }
 
-    if (['red-blue', 'yellow'].includes(sprite)) {
-        shiny.checked = false;
+	let number = allPokemon[pokemon];
+
+	if (['red-blue', 'yellow', 'gold', 'silver', 'crystal'].includes(sprite)) {
+		let is_gray = 'gray/'; // gray.checked ? 'gray/' : '';
+
+        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/version/generation-${romanNumeral}/${sprite}/transparent/${is_gray}${number}.png`;
     }
 
-    if (['gold', 'silver'].includes(sprite)
-        && shiny.checked) {
-        sprite = 'crystal';
-    }
+	let is_shiny = shiny.checked ? 'shiny/' : '';
 
     if (sprite === 'default') {
-        image.crossOrigin = 'Anonymous';
-        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${shiny.checked ? 'shiny/' : ''}${allPokemon[pokemon]}.png`;
+        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${is_shiny}${number}.png`;
     }
+	
+	let romanNumeral = generationRomanNumerals[gameGeneration[sprite]];
 
-    if (['red-blue', 'yellow', 'gold', 'silver', 'crystal'].includes(sprite)) {
-        return `https://play.pokemonshowdown.com/sprites/${showdownLinks[sprite]}${shiny.checked ? '-shiny' : ''}/${pokemon}.png`;
-    }
-    else {
-        return `https://img.pokemondb.net/sprites/${sprite}/${shiny.checked ? 'shiny' : 'normal'}/${pokemon}.png`;
-    }
+	return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/version/generation-${romanNumeral}/${sprite}/${is_shiny}${number}.png`;
 }
 
 function darkenColor(hsb, light) {
