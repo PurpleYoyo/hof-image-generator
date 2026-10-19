@@ -160,15 +160,16 @@ function hideInputs(generation) {
 
 function renderPreview(generation) {
     const scale = parseInt(document.getElementById('scale').value);
-    canvas.width = img.width * scale;
-    canvas.height = img.height * scale;
-
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
-    ctx.setTransform(scale, 0, 0, scale, 0, 0);
 
     img.src = `g${generation}-template.png`;
     img.crossOrigin = 'Anonymous';
     img.onload = () => {
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
 
