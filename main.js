@@ -31,9 +31,15 @@ window.addEventListener("load", (event) => {
     start();
 });
 
+function scalePreview() {
+    const scale = parseInt(document.getElementById('scale').value);
+
+    canvas.style.width *= scale;
+}
+
 document.getElementById('color1').addEventListener('input', start);
 document.getElementById('color2').addEventListener('input', start);
-document.getElementById('scale').addEventListener('input', start);
+document.getElementById('scale').addEventListener('input', scalePreview);
 ['sprites', 'shiny', 'pokemon', 'image'].forEach((id) => {
     for (let i = 1; i < 7; i++) {
         document.getElementById(`${id}${i}`).addEventListener('input', start);
@@ -157,17 +163,9 @@ function hideInputs(generation) {
 }
 
 function renderPreview(generation) {
-    const scale = parseInt(document.getElementById('scale').value);
-
     img.src = `g${generation}-template.png`;
     img.crossOrigin = 'Anonymous';
     img.onload = () => {
-        canvas.width = img.width * scale;
-        canvas.height = img.height * scale;
-        
-        const ctx = canvas.getContext('2d', { willReadFrequently: true });
-        ctx.setTransform(scale, 0, 0, scale, 0, 0);
-
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
 
