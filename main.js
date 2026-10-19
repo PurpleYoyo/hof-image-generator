@@ -269,7 +269,7 @@ function makeSpriteLink(index, image) {
 
     if (sprite === 'default') {
         image.crossOrigin = 'Anonymous';
-        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${shiny.checked ? 'shiny/' : ''}${allPokemon[name]}.png`;
+        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${shiny.checked ? 'shiny/' : ''}${allPokemon[pokemon]}.png`;
     }
 
     if (['red-blue', 'yellow', 'gold', 'silver', 'crystal'].includes(sprite)) {
