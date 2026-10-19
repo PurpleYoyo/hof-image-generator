@@ -324,12 +324,15 @@ function placePokemon(generation) {
         const y = positions[i].y;
         
         pokemon.onload = () => {
+			let dWidth = pokemon.width;
+			let dHeight = pokemon.height;
+
 			if (pokemon.width > 64) {
-				pokemon.width = 64;
-				pokemon.height = 64;
+				dWidth = 64;
+				dHeight = 64;
 			}
 
-            ctx.drawImage(pokemon, x, y);
+            ctx.drawImage(pokemon, x, y, dWidth, dHeight);
         }
     }
 }
