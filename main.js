@@ -349,7 +349,7 @@ function placePokemon(generation) {
 function buildSpriteLink(index) {
     const image = document.getElementById(`image${index}`).value;
 	if (image.value != '') {
-		return image;
+		return URL.createObjectURL(image);
 	}
 
 	const pokemon = document.getElementById(`pokemon${index}`).value;
