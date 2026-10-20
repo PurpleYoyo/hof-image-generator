@@ -347,7 +347,12 @@ function placePokemon(generation) {
 }
 
 function buildSpriteLink(index) {
-    const pokemon = document.getElementById(`pokemon${index}`).value;
+    const image = document.getElementById(`image${index}`).value;
+	if (image.value != '') {
+		return image;
+	}
+
+	const pokemon = document.getElementById(`pokemon${index}`).value;
     const sprite = document.getElementById(`sprites${index}`).value.replace('-option', '');
     const shiny = document.getElementById(`shiny${index}`).value;
 
