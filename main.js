@@ -109,6 +109,14 @@ function initializeEventListeners() {
 	['emerald', 'firered-leafgreen', 'ruby-sapphire', 'heart-and-soul', 'unbound'].forEach((game) => {
 	    document.getElementById(`preset-${game}`).addEventListener('click', () => applyPreset(game));
 	});
+
+	for (let i = 1; i < 7; i++) {
+	    document.getElementById(`clear${i}`).addEventListener('input', () => clearFileInput(i));
+	}
+}
+
+function clearFileInput(index) {
+	document.getElementById(`image${index}`).value = '';
 }
 
 function randomizePlaceholders() {
