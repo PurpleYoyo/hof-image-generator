@@ -348,20 +348,10 @@ function placePokemon(generation) {
 
 function buildSpriteLink(index) {
 	const image = document.getElementById(`image${index}`).files[0];
-	const reader = new FileReader();
-	let src;
 	
-	reader.addEventListener('load', () => {		
-    	src = reader.result;
-  	});
-
-  	if (image) {
-    	reader.readAsDataURL(image);
-
-		return src;
+	if (image) {
+    	return URL.createObjectURL(image);
   	}
-
-	
 
 	const pokemon = document.getElementById(`pokemon${index}`).value;
     const sprite = document.getElementById(`sprites${index}`).value.replace('-option', '');
@@ -372,6 +362,7 @@ function buildSpriteLink(index) {
     }
 
 	let number = allPokemon[pokemon];
+	let romanNumeral = generationRomanNumerals[gameGeneration[sprite]];
 
 	if (['red-blue', 'yellow', 'gold', 'silver', 'crystal'].includes(sprite)) {
 		let is_gray = 'gray/'; // gray.checked ? 'gray/' : '';
@@ -384,8 +375,6 @@ function buildSpriteLink(index) {
     if (sprite === 'default') {
         return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${is_shiny}${number}.png`;
     }
-	
-	let romanNumeral = generationRomanNumerals[gameGeneration[sprite]];
 
 	return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-${romanNumeral}/${sprite}/${is_shiny}${number}.png`;
 }
