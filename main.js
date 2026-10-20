@@ -349,14 +349,19 @@ function placePokemon(generation) {
 function buildSpriteLink(index) {
 	const image = document.getElementById(`image${index}`).files[0];
 	const reader = new FileReader();
-		
+	let src;
+	
 	reader.addEventListener('load', () => {		
-    	return reader.result;
+    	src = reader.result;
   	});
 
   	if (image) {
     	reader.readAsDataURL(image);
+
+		return src;
   	}
+
+	
 
 	const pokemon = document.getElementById(`pokemon${index}`).value;
     const sprite = document.getElementById(`sprites${index}`).value.replace('-option', '');
