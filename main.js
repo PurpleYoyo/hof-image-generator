@@ -347,10 +347,16 @@ function placePokemon(generation) {
 }
 
 function buildSpriteLink(index) {
-    const image = document.getElementById(`image${index}`).value;
-	if (image.value != '') {
-		return URL.createObjectURL(image);
-	}
+	const image = document.getElementById(`image${index}`).files[0];
+	const reader = new FileReader();
+		
+	reader.addEventListener('load', () => {		
+    	return reader.result;
+  	});
+
+  	if (image) {
+    	reader.readAsDataURL(image);
+  	}
 
 	const pokemon = document.getElementById(`pokemon${index}`).value;
     const sprite = document.getElementById(`sprites${index}`).value.replace('-option', '');
