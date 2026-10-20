@@ -58,6 +58,10 @@ const gen4SpritePositions = {
     6: { x: 184, y: 40 },
 };
 
+const presetLinks = [
+    'https://raw.githubusercontent.com/PurpleYoyo/hof-image-generator/refs/heads/main/smallchung.png',
+];
+
 window.addEventListener("load", (event) => {
     buildDropdowns();
     randomizeStartColors();
@@ -109,25 +113,23 @@ function initializeEventListeners() {
 	['emerald', 'firered-leafgreen', 'ruby-sapphire', 'heart-and-soul', 'unbound'].forEach((game) => {
 	    document.getElementById(`preset-${game}`).addEventListener('click', () => applyPreset(game));
 	});
-
-	for (let i = 1; i < 7; i++) {
-	    document.getElementById(`clear${i}`).addEventListener('input', () => clearFileInput(i));
-	}
-}
-
-function clearFileInput(index) {
-	document.getElementById(`image${index}`).value = '';
 }
 
 function randomizePlaceholders() {
 	for (let i = 1; i < 7; i++) {
 		document.getElementById(`pokemon${i}`).placeholder = randomPokemon();
+
+        document.getElementById(`link${i}`).placeholder = randomLink();
 	}
 }
 
 function randomPokemon() {
 	let keys = Object.keys(allPokemon);
 	return keys[keys.length * Math.random() << 0];
+};
+
+function randomLink() {
+	return presetLinks[Math.floor(presetLinks.length * Math.random())];
 };
 
 function applyPreset(game) {
@@ -182,49 +184,55 @@ function hideInputs(generation) {
         document.getElementById('color1').classList.add('hidden');
         document.getElementById('color2').classList.add('hidden');
 
-        ['emerald', 'firered-leafgreen', 'ruby-sapphire', 'heart-and-soul', 'unbound'].forEach((game) => {
-            document.getElementById(`preset-${game}`).classList.add('hidden');
-        });
+        document.getElementById('g3-presets').classList.add('hidden');
     }
     else {
         document.getElementById('color1').classList.remove('hidden');
         document.getElementById('color2').classList.remove('hidden');
 
-        ['emerald', 'firered-leafgreen', 'ruby-sapphire', 'heart-and-soul', 'unbound'].forEach((game) => {
-            document.getElementById(`preset-${game}`).classList.remove('hidden');
-        });
+        document.getElementById('g3-presets').classList.add('hidden');
     }
 
     for (let i = 1; i < 7; i++) {
-        if (document.getElementById(`pokemon${i}`).value === '') {
-            document.getElementById(`image${i}`).classList.remove('hidden');
-        }
-        else {
-            document.getElementById(`image${i}`).classList.add('hidden');
-            document.getElementById(`or${i}`).classList.add('hidden');
-        }
+        const selected = getType(i);
 
-        if (document.getElementById(`image${i}`).value === '') {
-            document.getElementById(`pokemon${i}`).classList.remove('hidden');
-            document.getElementById(`sprites${i}`).classList.remove('hidden');
-            document.getElementById(`shiny${i}`).classList.remove('hidden');
-            document.getElementById(`shiny${i}-label`).classList.remove('hidden');
-            document.getElementById(`sprites${i}-label`).classList.remove('hidden');
-        }
-        else {
-            document.getElementById(`pokemon${i}`).classList.add('hidden');
-            document.getElementById(`sprites${i}`).classList.add('hidden');
-            document.getElementById(`shiny${i}`).classList.add('hidden');
-            document.getElementById(`shiny${i}-label`).classList.add('hidden');
-            document.getElementById(`sprites${i}-label`).classList.add('hidden');
-            document.getElementById(`or${i}`).classList.add('hidden');
-        }
+        switch (selected) {
+            default:
+            case 'name':
+                document.getElementById(`name${i}-input`).classList.remove('hidden');
 
-        if (document.getElementById(`pokemon${i}`).value === ''
-            && document.getElementById(`image${i}`).value === '') {
-                document.getElementById(`or${i}`).classList.remove('hidden');
-            }
+                document.getElementById(`link${i}-input`).classList.add('hidden');
+                document.getElementById(`upload${i}-input`).classList.add('hidden');
+
+                break;
+            case 'link':
+                document.getElementById(`link${i}-input`).classList.remove('hidden');
+
+                document.getElementById(`name${i}-input`).classList.add('hidden');
+                document.getElementById(`upload${i}-input`).classList.add('hidden');
+
+                break;
+            case 'upload':
+                document.getElementById(`upload${i}-input`).classList.remove('hidden');
+
+                document.getElementById(`link${i}-input`).classList.add('hidden');
+                document.getElementById(`name${i}-input`).classList.add('hidden');
+
+                break;
+        }
     }
+}
+
+function getType(index) {
+    const radios = document.querySelectorAll(`.type${index}`);
+
+    radios.forEach(radio => {
+        if (radio.checked) {
+            return radio.value;
+        }
+    });
+
+    return 'name';
 }
 
 function renderPreview(generation) {
@@ -347,36 +355,46 @@ function placePokemon(generation) {
 }
 
 function buildSpriteLink(index) {
-	const image = document.getElementById(`image${index}`).files[0];
+    const selected = getType(index);
+
+    switch (selected) {
+        default:
+        case 'name':
+            const pokemon = document.getElementById(`pokemon${index}`).value;
+            const sprite = document.getElementById(`sprites${index}`).value.replace('-option', '');
+            const shiny = document.getElementById(`shiny${index}`).value;
+
+            if (!(pokemon in allPokemon)) {
+                return null;
+            }
+        
+	        let number = allPokemon[pokemon];
+	        let romanNumeral = generationRomanNumerals[gameGeneration[sprite]];
+        
+	        if (['red-blue', 'yellow', 'gold', 'silver', 'crystal'].includes(sprite)) {
+	        	let is_gray = 'gray/'; // gray.checked ? 'gray/' : '';
+            
+                return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-${romanNumeral}/${sprite}/transparent/${is_gray}${number}.png`;
+            }
+        
+	        let is_shiny = shiny.checked ? 'shiny/' : '';
+        
+            if (sprite === 'default') {
+                return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${is_shiny}${number}.png`;
+            }
+        
+	        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-${romanNumeral}/${sprite}/${is_shiny}${number}.png`;
+        case 'link':
+            return document.getElementById(`link${index}`).value;
+        case 'upload':
+            const image = document.getElementById(`image${index}`).files[0];
 	
-	if (image) {
-    	return URL.createObjectURL(image);
-  	}
+	        if (image) {
+    	        return URL.createObjectURL(image);
+  	        }
 
-	const pokemon = document.getElementById(`pokemon${index}`).value;
-    const sprite = document.getElementById(`sprites${index}`).value.replace('-option', '');
-    const shiny = document.getElementById(`shiny${index}`).value;
-
-    if (!(pokemon in allPokemon)) {
-        return null;
+            return null;
     }
-
-	let number = allPokemon[pokemon];
-	let romanNumeral = generationRomanNumerals[gameGeneration[sprite]];
-
-	if (['red-blue', 'yellow', 'gold', 'silver', 'crystal'].includes(sprite)) {
-		let is_gray = 'gray/'; // gray.checked ? 'gray/' : '';
-
-        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-${romanNumeral}/${sprite}/transparent/${is_gray}${number}.png`;
-    }
-
-	let is_shiny = shiny.checked ? 'shiny/' : '';
-
-    if (sprite === 'default') {
-        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${is_shiny}${number}.png`;
-    }
-
-	return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-${romanNumeral}/${sprite}/${is_shiny}${number}.png`;
 }
 
 function darkenColor(hsb, light) {

@@ -45,104 +45,194 @@
 
                 <fieldset class="pokemon">
                     <legend>Pokémon 1</legend>
+
+                    <input type="radio" id="name1" name="type1" class="type1" value="name" checked />
+                    <label for="name1">Name</label>
+
+                    <input type="radio" id="link1" name="type1" class="type1" value="link" />
+                    <label for="link1">Link</label>
+
+                    <input type="radio" id="upload1" name="type1" class="type1" value="upload" />
+                    <label for="upload1">Upload</label>
                     
-                    <input type="text" id="pokemon1" list="pokemon-suggestions" name="pokemon1" />
+                    <div id="name1-input">
+                        <input type="text" id="pokemon1" list="pokemon-suggestions" name="pokemon1" />
+
+                        <label for="sprites1" id="sprites1-label">Sprite</label>
+                        <select name="sprites1" id="sprites1"></select>
+                        
+                        <input type="checkbox" id="shiny1" name="shiny1" />
+                        <label for="shiny1" id="shiny1-label">Shiny?</label>
+                    </div>
+
+                    <div id="link1-input">
+                        <input type="text" id="link1" name="link1" />
+                        <label for="link1">Link</label>
+                    </div>
                     
-                    <label for="sprites1" id="sprites1-label">Sprite</label>
-                    <select name="sprites1" id="sprites1"></select>
-                    
-                    <input type="checkbox" id="shiny1" name="shiny1" />
-                    <label for="shiny1" id="shiny1-label">Shiny?</label>
-                    
-                    <em id="or1">OR</em>
-                    
-                    <input type="file" id="image1" name="image1" accept="image/png, image/jpeg" />
-                    <input type="button" id="clear1" value="Clear" />
+                    <div id="upload1-input">
+                        <input type="file" id="image1" name="image1" accept="image/png, image/jpeg" />
+                    </div>
                 </fieldset>
 
                 <fieldset class="pokemon">
                     <legend>Pokémon 2</legend>
+
+                    <input type="radio" id="name2" name="type2" class="type2" value="name" checked />
+                    <label for="name2">Name</label>
+
+                    <input type="radio" id="link2" name="type2" class="type2" value="link" />
+                    <label for="link2">Link</label>
+
+                    <input type="radio" id="upload2" name="type2" class="type2" value="upload" />
+                    <label for="upload2">Upload</label>
                     
-                    <input type="text" id="pokemon2" list="pokemon-suggestions" name="pokemon2" />
+                    <div id="name2-input">
+                        <input type="text" id="pokemon2" list="pokemon-suggestions" name="pokemon2" />
+
+                        <label for="sprites2" id="sprites2-label">Sprite</label>
+                        <select name="sprites2" id="sprites2"></select>
+                        
+                        <input type="checkbox" id="shiny2" name="shiny2" />
+                        <label for="shiny2" id="shiny2-label">Shiny?</label>
+                    </div>
                     
-                    <label for="sprites2" id="sprites2-label">Sprite</label>
-                    <select name="sprites2" id="sprites2"></select>
+                    <div id="link2-input">
+                        <input type="text" id="link2" name="link2" />
+                        <label for="link2">Link</label>
+                    </div>
                     
-                    <input type="checkbox" id="shiny2" name="shiny2" />
-                    <label for="shiny2" id="shiny2-label">Shiny?</label>
-                    
-                    <em id="or2">OR</em>
-                    
-                    <input type="file" id="image2" name="image2" accept="image/png, image/jpeg" />
-                    <input type="button" id="clear2" value="Clear" />
+                    <div id="upload2-input">
+                        <input type="file" id="image2" name="image2" accept="image/png, image/jpeg" />
+                    </div>
                 </fieldset>
                 
                 <fieldset class="pokemon">
                     <legend>Pokémon 3</legend>
 
-                    <input type="text" id="pokemon3" list="pokemon-suggestions" name="pokemon3" />
+                    <input type="radio" id="name3" name="type3" class="type3" value="name" checked />
+                    <label for="name3">Name</label>
+
+                    <input type="radio" id="link3" name="type3" class="type3" value="link" />
+                    <label for="link3">Link</label>
+
+                    <input type="radio" id="upload3" name="type3" class="type3" value="upload" />
+                    <label for="upload3">Upload</label>
+
+                    <div id="name2-input">
+                        <input type="text" id="pokemon3" list="pokemon-suggestions" name="pokemon3" />
+
+                        <label for="sprites3" id="sprites3-label">Sprite</label>
+                        <select name="sprites3" id="sprites3"></select>
+                        
+                        <input type="checkbox" id="shiny3" name="shiny3" />
+                        <label for="shiny3" id="shiny3-label">Shiny?</label>
+                    </div>
                     
-                    <label for="sprites3" id="sprites3-label">Sprite</label>
-                    <select name="sprites3" id="sprites3"></select>
+                    <div id="link3-input">
+                        <input type="text" id="link3" name="link3" />
+                        <label for="link3">Link</label>
+                    </div>
                     
-                    <input type="checkbox" id="shiny3" name="shiny3" />
-                    <label for="shiny3" id="shiny3-label">Shiny?</label>
-                    
-                    <em id="or3">OR</em>
-                    
-                    <input type="file" id="image3" name="image3" accept="image/png, image/jpeg" />
-                    <input type="button" id="clear3" value="Clear" />
+                    <div id="upload3-input">
+                        <input type="file" id="image3" name="image3" accept="image/png, image/jpeg" />
+                    </div>
                 </fieldset>
 
                 <fieldset class="pokemon">
                     <legend>Pokémon 4</legend>
 
-                    <input type="text" id="pokemon4" list="pokemon-suggestions" name="pokemon4" />
+                    <input type="radio" id="name4" name="type4" class="type4" value="name" checked />
+                    <label for="name4">Name</label>
+
+                    <input type="radio" id="link4" name="type4" class="type4" value="link" />
+                    <label for="link4">Link</label>
+
+                    <input type="radio" id="upload4" name="type4" class="type4" value="upload" />
+                    <label for="upload4">Upload</label>
+
+                    <div id="name4-input">
+                        <input type="text" id="pokemon4" list="pokemon-suggestions" name="pokemon4" />
                     
-                    <label for="sprites4" id="sprites4-label">Sprite</label>
-                    <select name="sprites4" id="sprites4"></select>
+                        <label for="sprites4" id="sprites4-label">Sprite</label>
+                        <select name="sprites4" id="sprites4"></select>
+                        
+                        <input type="checkbox" id="shiny4" name="shiny4" />
+                        <label for="shiny4" id="shiny4-label">Shiny?</label>
+                    </div>
                     
-                    <input type="checkbox" id="shiny4" name="shiny4" />
-                    <label for="shiny4" id="shiny4-label">Shiny?</label>
-                
-                    <em id="or4">OR</em>
-                    
-                    <input type="file" id="image4" name="image4" accept="image/png, image/jpeg" />
-                    <input type="button" id="clear4" value="Clear" />
+                    <div id="link4-input">
+                        <input type="text" id="link4" name="link4" />
+                        <label for="link4">Link</label>
+                    </div>
+
+                    <div id="upload4-input">
+                        <input type="file" id="image4" name="image4" accept="image/png, image/jpeg" />
+                    </div>
                 </fieldset>
 
                 <fieldset class="pokemon">
                     <legend>Pokémon 5</legend>
 
-                    <input type="text" id="pokemon5" list="pokemon-suggestions" name="pokemon5" />
+                    <input type="radio" id="name5" name="type5" class="type5" value="name" checked />
+                    <label for="name5">Name</label>
+
+                    <input type="radio" id="link5" name="type5" class="type5" value="link" />
+                    <label for="link5">Link</label>
+
+                    <input type="radio" id="upload5" name="type5" class="type5" value="upload" />
+                    <label for="upload5">Upload</label>
+
+                    <div id="name5-input">
+                        <input type="text" id="pokemon5" list="pokemon-suggestions" name="pokemon5" />
                     
-                    <label for="sprites5" id="sprites5-label">Sprite</label>
-                    <select name="sprites5" id="sprites5"></select>
+                        <label for="sprites5" id="sprites5-label">Sprite</label>
+                        <select name="sprites5" id="sprites5"></select>
+                        
+                        <input type="checkbox" id="shiny5" name="shiny5" />
+                        <label for="shiny5" id="shiny5-label">Shiny?</label>
+                    </div>
                     
-                    <input type="checkbox" id="shiny5" name="shiny5" />
-                    <label for="shiny5" id="shiny5-label">Shiny?</label>
-                    
-                    <em id="or5">OR</em>
-                    
-                    <input type="file" id="image5" name="image5" accept="image/png, image/jpeg" />
-                    <input type="button" id="clear5" value="Clear" />
+                    <div id="link5-input">
+                        <input type="text" id="link5" name="link5" />
+                        <label for="link5">Link</label>
+                    </div>
+
+                    <div id="upload5-input">
+                        <input type="file" id="image5" name="image5" accept="image/png, image/jpeg" />
+                    </div>
                 </fieldset>
 
                 <fieldset class="pokemon">
                     <legend>Pokémon 6</legend>
 
-                    <input type="text" id="pokemon6"  list="pokemon-suggestions"name="pokemon6" />
+                    <input type="radio" id="name6" name="type6" class="type6" value="name" checked />
+                    <label for="name6">Name</label>
+
+                    <input type="radio" id="link6" name="type6" class="type6" value="link" />
+                    <label for="link6">Link</label>
+
+                    <input type="radio" id="upload6" name="type6" class="type6" value="upload" />
+                    <label for="upload6">Upload</label>
+
+                    <div id="name6-input">
+                        <input type="text" id="pokemon6" list="pokemon-suggestions"name="pokemon6" />
                     
-                    <label for="sprites6" id="sprites6-label">Sprite</label>
-                    <select name="sprites6" id="sprites6"></select>
-                    
-                    <input type="checkbox" id="shiny6" name="shiny6" />
-                    <label for="shiny6" id="shiny6-label">Shiny?</label>
-                    
-                    <em id="or6">OR</em>
+                        <label for="sprites6" id="sprites6-label">Sprite</label>
+                        <select name="sprites6" id="sprites6"></select>
+                        
+                        <input type="checkbox" id="shiny6" name="shiny6" />
+                        <label for="shiny6" id="shiny6-label">Shiny?</label>
+                    </div>
             
-                    <input type="file" id="image6" name="image6" accept="image/png, image/jpeg" />
-                    <input type="button" id="clear6" value="Clear" />
+                    <div id="link6-input">
+                        <input type="text" id="link6" name="link6" />
+                        <label for="link6">Link</label>
+                    </div>
+
+                    <div id="upload6-input">
+                        <input type="file" id="image6" name="image6" accept="image/png, image/jpeg" />
+                    </div>
                 </fieldset>
             </div>
         </div>
@@ -152,7 +242,7 @@
         <div id="image">
             <h3>Preview</h3>
 
-            <fieldset class="presets">
+            <fieldset class="presets" id="g3-presets">
                 <legend>Presets</legend>
 
                 <div>
