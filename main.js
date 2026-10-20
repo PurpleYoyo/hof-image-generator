@@ -102,6 +102,10 @@ function buildSuggestions() {
 }
 
 function initializeEventListeners() {
+    document.getElementById('g3').addEventListener('input', start);
+    document.getElementById('g4').addEventListener('input', start);
+    //document.getElementById('g5').addEventListener('input', start);
+
 	document.getElementById('color1').addEventListener('input', start);
 	document.getElementById('color2').addEventListener('input', start);
 	['sprites', 'shiny', 'pokemon', 'image'].forEach((id) => {
@@ -113,6 +117,12 @@ function initializeEventListeners() {
 	['emerald', 'firered-leafgreen', 'ruby-sapphire', 'heart-and-soul', 'unbound'].forEach((game) => {
 	    document.getElementById(`preset-${game}`).addEventListener('click', () => applyPreset(game));
 	});
+
+    for (let i = 1; i < 7; i++) {
+        document.getElementById(`name${i}`).addEventListener('input', start);
+        document.getElementById(`link${i}`).addEventListener('input', start);
+        document.getElementById(`upload${i}`).addEventListener('input', start);
+	}
 }
 
 function randomizePlaceholders() {
@@ -195,8 +205,6 @@ function hideInputs(generation) {
 
     for (let i = 1; i < 7; i++) {
         const selected = getType(i);
-        console.log(selected);
-        console.log(`name${i}-input`);
 
         switch (selected) {
             default:
