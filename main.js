@@ -195,6 +195,8 @@ function hideInputs(generation) {
 
     for (let i = 1; i < 7; i++) {
         const selected = getType(i);
+        console.log(selected);
+        console.log(`name${i}-input`);
 
         switch (selected) {
             default:
