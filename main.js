@@ -203,7 +203,6 @@ function hideInputs(generation) {
 
     for (let i = 1; i < 7; i++) {
         const selected = getType(i);
-        console.log(selected);
 
         switch (selected) {
             default:
@@ -233,9 +232,10 @@ function hideInputs(generation) {
 }
 
 function getType(index) {
-    ['name', 'link', 'upload'].forEach((input) => {
-        if (document.getElementById(`${input}${index}`).checked) {
-            return input;
+    ['name', 'link', 'upload'].forEach((input_type) => {
+        if (document.getElementById(`${input_type}${index}`).checked) {
+            console.log(`${input_type}${index}`);
+            return input_type;
         }
     });
     
