@@ -232,12 +232,11 @@ function hideInputs(generation) {
 }
 
 function getType(index) {
-    ['name', 'link', 'upload'].forEach((input_type) => {
+    for (const input_type of ['name', 'link', 'upload']) {
         if (document.getElementById(`${input_type}${index}`).checked) {
-            console.log(`${input_type}${index}`);
             return input_type;
         }
-    });
+    }
     
     return 'name';
 }
