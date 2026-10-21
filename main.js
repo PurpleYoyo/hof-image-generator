@@ -347,13 +347,33 @@ function placePokemon(generation) {
             continue;
         }
 		pokemon.src = src;
-
+        
         const x = positions[i].x * 2;
         const y = positions[i].y * 2;
+
+        if (document.getElementById(`sprites${index}`).value === 'default-option') {
+            x -= 16;
+            y += 16;
+        }
         
         pokemon.onload = () => {
-			let dWidth = 128;
-			let dHeight = 128;
+            let dWidth = pokemon.width;
+            let dHeight = pokemon.height;
+
+            // TODO: add an option for resizing
+            if (pokemon.width != pokemon.height) {
+                if (true) { //document.getElementById('resize-input').checked) {
+			        dWidth = 128;
+			        dHeight = 128;
+                }
+                else {
+                    return alert(`Pokemon ${i} sprite has ianvalid dimensions.`);
+                }
+            }
+            else {
+                dWidth = 128;
+		        dHeight = 128;
+            }
 
             ctx.drawImage(pokemon, x, y, dWidth, dHeight);
         }
