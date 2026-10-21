@@ -352,8 +352,8 @@ function placePokemon(generation) {
         let y = positions[i].y * 2;
 
         if (document.getElementById(`sprites${i}`).value === 'default-option') {
-            x -= 32;
-            y -= 32;
+            x -= 16;
+            y -= 16;
         }
         
         pokemon.onload = () => {
