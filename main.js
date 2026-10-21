@@ -180,7 +180,7 @@ function start() {
 function getGeneration() {
     for (let i = 3; i < 5; i++) {
         if (document.getElementById(`g${i}`).checked) {
-            return document.getElementById(`g${i}`).value;
+            return i.toString();
         }
     }
 
@@ -203,6 +203,7 @@ function hideInputs(generation) {
 
     for (let i = 1; i < 7; i++) {
         const selected = getType(i);
+        console.log(selected);
 
         switch (selected) {
             default:
