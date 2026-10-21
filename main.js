@@ -102,9 +102,9 @@ function buildSuggestions() {
 }
 
 function initializeEventListeners() {
-    document.getElementById('g3').addEventListener('input', start);
-    document.getElementById('g4').addEventListener('input', start);
-    //document.getElementById('g5').addEventListener('input', start);
+    document.getElementById('g3').addEventListener('change', start);
+    document.getElementById('g4').addEventListener('change', start);
+    //document.getElementById('g5').addEventListener('change', start);
 
 	document.getElementById('color1').addEventListener('input', start);
 	document.getElementById('color2').addEventListener('input', start);
@@ -119,9 +119,9 @@ function initializeEventListeners() {
 	});
 
     for (let i = 1; i < 7; i++) {
-        document.getElementById(`name${i}`).addEventListener('input', start);
-        document.getElementById(`link${i}`).addEventListener('input', start);
-        document.getElementById(`upload${i}`).addEventListener('input', start);
+        document.getElementById(`name${i}`).addEventListener('change', start);
+        document.getElementById(`link${i}`).addEventListener('change', start);
+        document.getElementById(`upload${i}`).addEventListener('change', start);
 	}
 }
 
@@ -200,7 +200,7 @@ function hideInputs(generation) {
         document.getElementById('color1').classList.remove('hidden');
         document.getElementById('color2').classList.remove('hidden');
 
-        document.getElementById('g3-presets').classList.add('hidden');
+        document.getElementById('g3-presets').classList.remove('hidden');
     }
 
     for (let i = 1; i < 7; i++) {
