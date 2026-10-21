@@ -351,7 +351,7 @@ function placePokemon(generation) {
         const x = positions[i].x * 2;
         const y = positions[i].y * 2;
 
-        if (document.getElementById(`sprites${index}`).value === 'default-option') {
+        if (document.getElementById(`sprites${i}`).value === 'default-option') {
             x -= 16;
             y += 16;
         }
