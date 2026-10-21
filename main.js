@@ -102,9 +102,9 @@ function buildSuggestions() {
 }
 
 function initializeEventListeners() {
-    document.getElementById('g3').addEventListener('click', start);
-    document.getElementById('g4').addEventListener('click', start);
-    //document.getElementById('g5').addEventListener('click', start);
+    document.getElementById('g3').addEventListener('change', start);
+    document.getElementById('g4').addEventListener('change', start);
+    //document.getElementById('g5').addEventListener('change', start);
 
 	document.getElementById('color1').addEventListener('input', start);
 	document.getElementById('color2').addEventListener('input', start);
@@ -119,9 +119,9 @@ function initializeEventListeners() {
 	});
 
     for (let i = 1; i < 7; i++) {
-        document.getElementById(`name${i}`).addEventListener('click', start);
-        document.getElementById(`link${i}`).addEventListener('click', start);
-        document.getElementById(`upload${i}`).addEventListener('click', start);
+        document.getElementById(`name${i}`).addEventListener('change', start);
+        document.getElementById(`link${i}`).addEventListener('change', start);
+        document.getElementById(`upload${i}`).addEventListener('change', start);
 	}
 }
 
@@ -178,13 +178,11 @@ function start() {
 }
 
 function getGeneration() {
-    const radios = document.querySelectorAll('.generation');
-
-    radios.forEach(radio => {
-        if (radio.checked) {
-            return radio.value;
+    for (let i = 3; i < 5; i++) {
+        if (document.getElementById(`g${i}`).checked) {
+            return document.getElementById(`g${i}`).value;
         }
-    });
+    }
 
     return '3';
 }
@@ -234,14 +232,12 @@ function hideInputs(generation) {
 }
 
 function getType(index) {
-    const radios = document.querySelectorAll(`.type${index}`);
-
-    radios.forEach(radio => {
-        if (radio.checked) {
-            return radio.value;
+    ['name', 'link', 'upload'].forEach((input) => {
+        if (document.getElementById(`${input}${index}`).checked) {
+            return input;
         }
     });
-
+    
     return 'name';
 }
 
