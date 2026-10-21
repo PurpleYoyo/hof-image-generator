@@ -353,7 +353,7 @@ function placePokemon(generation) {
 
         if (document.getElementById(`sprites${i}`).value === 'default-option') {
             x -= 32;
-            y += 32;
+            y -= 32;
         }
         
         pokemon.onload = () => {
