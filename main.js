@@ -62,6 +62,9 @@ const presetLinks = [
     'https://raw.githubusercontent.com/PurpleYoyo/hof-image-generator/refs/heads/main/smallchung.png',
 ];
 
+const generation1Games = ['red-blue', 'yellow'];
+const generation2Games = ['gold', 'silver', 'crystal'];
+
 window.addEventListener("load", (event) => {
     buildDropdowns();
     randomizeStartColors();
@@ -132,10 +135,10 @@ function initializeEventListeners() {
 function modifyLabels(index) {
     let value = this.value;
 
-    if (['yellow', 'red-blue'].includes(value)) {
+    if (generation1Games.includes(value)) {
         document.getElementById(`shiny${index}`).textContent = 'Color?';
     }
-    else if (['gold', 'silver', 'crystal'].includes(value)) {
+    else if (generation2Games.includes(value)) {
         document.getElementById(`shiny${index}`).textContent = 'Gray?';
     }
     else {
@@ -416,8 +419,16 @@ function buildSpriteLink(index) {
 	        let number = allPokemon[pokemon];
 	        let romanNumeral = generationRomanNumerals[gameGeneration[sprite]];
         
-	        if (['red-blue', 'yellow', 'gold', 'silver', 'crystal'].includes(sprite)) {
-	        	let is_gray = shiny.checked ? 'gray/' : '';
+	        if ((generation1Games.concat(generation2Games)).includes(sprite)) {
+                let is_gray;
+
+                if (generation1Games.includes(sprite)) {
+                    is_gray = shiny.checked ? '' : 'gray/';
+                }
+
+                if (generation2Games.includes(sprite)) {
+                    is_gray = shiny.checked ? 'gray/' : '';
+                }
             
                 return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-${romanNumeral}/${sprite}/transparent/${is_gray}${number}.png`;
             }
