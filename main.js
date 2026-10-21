@@ -375,6 +375,7 @@ function placePokemon(generation) {
 		        dHeight = 128;
             }
 
+            ctx.imageSmoothingEnabled  = false;
             ctx.drawImage(pokemon, x, y, dWidth, dHeight);
         }
     }
