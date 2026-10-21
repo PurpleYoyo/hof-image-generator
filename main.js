@@ -136,13 +136,13 @@ function modifyLabels(index) {
     let value = this.value;
 
     if (generation1Games.includes(value)) {
-        document.getElementById(`shiny${index}`).textContent = 'Color?';
+        document.getElementById(`shiny${index}-label`).textContent = 'Color?';
     }
     else if (generation2Games.includes(value)) {
-        document.getElementById(`shiny${index}`).textContent = 'Gray?';
+        document.getElementById(`shiny${index}-label`).textContent = 'Gray?';
     }
     else {
-        document.getElementById(`shiny${index}`).textContent = 'Shiny??';
+        document.getElementById(`shiny${index}-label`).textContent = 'Shiny??';
     }
 }
 
