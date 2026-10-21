@@ -133,7 +133,7 @@ function initializeEventListeners() {
 }
 
 function modifyLabels(index) {
-    let value = this.value;
+    let value = this.value.replace('-option', '');
 
     if (generation1Games.includes(value)) {
         document.getElementById(`shiny${index}-label`).textContent = 'Color?';
@@ -142,7 +142,7 @@ function modifyLabels(index) {
         document.getElementById(`shiny${index}-label`).textContent = 'Gray?';
     }
     else {
-        document.getElementById(`shiny${index}-label`).textContent = 'Shiny??';
+        document.getElementById(`shiny${index}-label`).textContent = 'Shiny?';
     }
 }
 
@@ -160,7 +160,7 @@ function randomPokemon() {
 };
 
 function randomLink() {
-	return presetLinks[presetLinks.length * Math.random() << 0];
+	return presetLinks[Math.floor(presetLinks.length * Math.random())];
 };
 
 function applyPreset(game) {
