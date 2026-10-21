@@ -352,13 +352,13 @@ function placePokemon(generation) {
         let y = positions[i].y * 2;
 
         if (document.getElementById(`sprites${i}`).value === 'default-option') {
-            x -= 16;
-            y += 16;
+            x -= 32;
+            y += 32;
         }
         
         pokemon.onload = () => {
-            let dWidth = pokemon.width;
-            let dHeight = pokemon.height;
+            let dWidth = pokemon.width * 2;
+            let dHeight = pokemon.height * 2;
 
             // TODO: add an option for resizing
             if (pokemon.width != pokemon.height) {
