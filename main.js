@@ -108,11 +108,15 @@ function initializeEventListeners() {
 
 	document.getElementById('color1').addEventListener('input', start);
 	document.getElementById('color2').addEventListener('input', start);
-	['sprites', 'shiny', 'pokemon', 'image'].forEach((id) => {
+	['shiny', 'pokemon', 'image'].forEach((id) => {
 	    for (let i = 1; i < 7; i++) {
 	        document.getElementById(`${id}${i}`).addEventListener('input', start);
 	    }
 	});
+
+    for (let i = 1; i < 7; i++) {
+	    document.getElementById(`sprites${i}`).addEventListener('input', () => modifyLabels(i));
+	}
 
 	['emerald', 'firered-leafgreen', 'ruby-sapphire', 'heart-and-soul', 'unbound'].forEach((game) => {
 	    document.getElementById(`preset-${game}`).addEventListener('click', () => applyPreset(game));
@@ -123,6 +127,20 @@ function initializeEventListeners() {
         document.getElementById(`link${i}`).addEventListener('change', start);
         document.getElementById(`upload${i}`).addEventListener('change', start);
 	}
+}
+
+function modifyLabels(index) {
+    let value = this.value;
+
+    if (['yellow', 'red-blue'].includes(value)) {
+        document.getElementById(`shiny${index}`).textContent = 'Color?';
+    }
+    else if (['gold', 'silver', 'crystal'].includes(value)) {
+        document.getElementById(`shiny${index}`).textContent = 'Gray?';
+    }
+    else {
+        document.getElementById(`shiny${index}`).textContent = 'Shiny??';
+    }
 }
 
 function randomizePlaceholders() {
@@ -399,7 +417,7 @@ function buildSpriteLink(index) {
 	        let romanNumeral = generationRomanNumerals[gameGeneration[sprite]];
         
 	        if (['red-blue', 'yellow', 'gold', 'silver', 'crystal'].includes(sprite)) {
-	        	let is_gray = 'gray/'; // gray.checked ? 'gray/' : '';
+	        	let is_gray = shiny.checked ? 'gray/' : '';
             
                 return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-${romanNumeral}/${sprite}/transparent/${is_gray}${number}.png`;
             }
