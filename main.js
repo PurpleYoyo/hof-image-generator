@@ -371,8 +371,8 @@ function placePokemon(generation) {
                 }
             }
             else {
-                dWidth = 128;
-		        dHeight = 128;
+                dWidth = dWidth;
+		        dHeight = dWidth;
             }
 
             ctx.imageSmoothingEnabled  = false;
