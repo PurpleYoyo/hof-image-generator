@@ -160,7 +160,7 @@ function randomPokemon() {
 };
 
 function randomLink() {
-	return presetLinks[Math.floor(presetLinks.length * Math.random())];
+	return presetLinks[presetLinks.length * Math.random() << 0];
 };
 
 function applyPreset(game) {
