@@ -413,7 +413,8 @@ function placePokemon(generation) {
         }
 
         if (pokemon === 'blaziken-mega') {
-            x += 8;
+            x += 16;
+            y -= 8;
         }
         
         pokemon.onload = () => {
