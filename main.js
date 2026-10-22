@@ -404,7 +404,7 @@ function placePokemon(generation) {
 			        dHeight = 128;
                 }
                 else {
-                    return alert(`Pokemon ${i} sprite has ianvalid dimensions.`);
+                    return alert(`Pokemon ${i} sprite has invalid dimensions.`);
                 }
             }
             else {
@@ -457,7 +457,9 @@ function buildSpriteLink(index) {
         
 	        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-${romanNumeral}/${sprite}/${is_shiny}${number}.png`;
         case 'link':
-            return document.getElementById(`link${index}`).value;
+            const value = document.getElementById(`link${index}`).value;
+
+            return value === '' ? null : value;
         case 'upload':
             const image = document.getElementById(`image${index}`).files[0];
 	
