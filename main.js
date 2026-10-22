@@ -504,7 +504,6 @@ function buildSpriteLink(index) {
 	        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-${romanNumeral}/${sprite}/${is_shiny}${number}.png`;
         case 'link':
             const value = document.getElementById(`link${index}-text`).value;
-            console.log(value);
 
             return value === '' ? null : value;
         case 'upload':
