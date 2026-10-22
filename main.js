@@ -478,8 +478,8 @@ function placePokemon(generation) {
                 dWidth = 160;
                 dHeight = 160;
 
-                x += 40;
-                y -= 16;
+                x += 48;
+                y -= 8;
             }
 
             ctx.imageSmoothingEnabled  = false;
