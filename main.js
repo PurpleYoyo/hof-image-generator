@@ -416,13 +416,14 @@ function placePokemon(generation) {
         let x = positions[i].x * 2;
         let y = positions[i].y * 2;
 
-        if (document.getElementById(`sprites${i}`).value === 'default-option') {
+        if (document.getElementById(`sprites${i}`).value === 'default-option'
+            && getType(i) === 'name') {
             x -= 32;
             y -= 32;
         }
 
-        console.log(src);
-        if (src.includes('blaziken-mega')) {
+        if (document.getElementById(`pokemon${i}`).value === 'blaziken-mega'
+            && getType(i) === 'name') {
             x += 32;
             y -= 16;
         }
