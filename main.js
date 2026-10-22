@@ -126,7 +126,7 @@ function initializeEventListeners() {
 	    input.addEventListener('input', () => modifyLabels(input, i));
 	}
 
-	['emerald', 'firered-leafgreen', 'ruby-sapphire', 'heart-and-soul', 'unbound'].forEach((game) => {
+	['emerald', 'firered-leafgreen', 'ruby-sapphire', 'heart-and-soul', 'unbound', 'soulgold'].forEach((game) => {
 	    document.getElementById(`preset-${game}`).addEventListener('click', () => applyPreset(game));
 	});
 
@@ -205,6 +205,10 @@ function applyPreset(game) {
         case 'heart-and-soul':
             document.getElementById('color1').value = '#731810';
             document.getElementById('color2').value = '#631010';
+            break;
+        case 'soulgold':
+            document.getElementById('color1').value = '#191547';
+            document.getElementById('color2').value = '#191547';
             break;
     }
 
