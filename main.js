@@ -154,6 +154,7 @@ function saveConfiguration() {
 }
 
 function readFile() {
+    console.log(1);
     const files = document.getElementById('load-configuration').files;
 
     if (files.length < 1) {
@@ -164,7 +165,7 @@ function readFile() {
 
     fr.onload = function(e) {
         const result = e.target.result;
-        loadConfiguration(JSON.stringify(result))
+        loadConfiguration(JSON.parse(result))
     }
 }
 
