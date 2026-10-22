@@ -118,7 +118,8 @@ function initializeEventListeners() {
 	});
 
     for (let i = 1; i < 7; i++) {
-	    document.getElementById(`sprites${i}`).addEventListener('input', () => modifyLabels(this, i));
+        const input = document.getElementById(`sprites${i}`);
+	    input.addEventListener('input', () => modifyLabels(input, i));
 	}
 
 	['emerald', 'firered-leafgreen', 'ruby-sapphire', 'heart-and-soul', 'unbound'].forEach((game) => {
@@ -146,9 +147,8 @@ function downloadImage() {
     a.click()
 }
 
-function modifyLabels(val, index) {
-    console.log(val);
-    let value = val.replace('-option', '');
+function modifyLabels(input, index) {
+    let value = input.value.replace('-option', '');
 
     if (generation1Games.includes(value)) {
         document.getElementById(`shiny${index}-label`).textContent = 'Color?';
