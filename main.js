@@ -249,6 +249,15 @@ function hideInputs(generation) {
     for (let i = 1; i < 7; i++) {
         const selected = getType(i);
 
+        if (selected === 'name') {
+            document.getElementById(`resize${i}`).classList.add('hidden');
+            document.getElementById(`resize${i}-label`).classList.add('hidden');
+        }
+        else {
+            document.getElementById(`resize${i}`).classList.remove('hidden');
+            document.getElementById(`resize${i}-label`).classList.remove('hidden');
+        }
+
         switch (selected) {
             default:
             case 'name':
@@ -421,9 +430,8 @@ function placePokemon(generation) {
             let dWidth = pokemon.width * 2;
             let dHeight = pokemon.height * 2;
 
-            // TODO: add an option for resizing
             if (pokemon.width != pokemon.height) {
-                if (true) { //document.getElementById('resize-input').checked) {
+                if (document.getElementById(`resize${i}`).checked) {
 			        dWidth = 128;
 			        dHeight = 128;
                 }
