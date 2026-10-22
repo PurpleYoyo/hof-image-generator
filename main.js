@@ -154,12 +154,13 @@ function saveConfiguration() {
 }
 
 function readFile() {
-    console.log(1);
     const files = document.getElementById('load-configuration').files;
 
     if (files.length < 1) {
+        console.log(1);
         return null;
     }
+    console.log(2);
 
     const fr = new FileReader();
 
@@ -170,6 +171,7 @@ function readFile() {
 }
 
 function loadConfiguration(json) {
+    console.log(3);
     console.log(json);
 }
 
