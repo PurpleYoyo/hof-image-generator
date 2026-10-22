@@ -135,6 +135,7 @@ function initializeEventListeners() {
 }
 
 function downloadImage() {
+    const canvas = document.getElementById('preview');
     const url = canvas.toDataURL('image/png');
 
     const a = document.createElement('a');
