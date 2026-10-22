@@ -309,8 +309,6 @@ function drawPreview(generation) {
     ctx.putImageData(imageData, 0, 0);
 
     placePokemon(generation);
-
-    copyCanvasToImage();
 }
 
 function copyCanvasToImage() {
@@ -429,6 +427,8 @@ function placePokemon(generation) {
 
             ctx.imageSmoothingEnabled  = false;
             ctx.drawImage(pokemon, x, y, dWidth, dHeight);
+
+            copyCanvasToImage();
         }
     }
 }
