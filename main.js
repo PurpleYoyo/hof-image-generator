@@ -421,6 +421,7 @@ function placePokemon(generation) {
             y -= 32;
         }
 
+        console.log(src);
         if (src.includes('blaziken-mega')) {
             x += 32;
             y -= 16;
