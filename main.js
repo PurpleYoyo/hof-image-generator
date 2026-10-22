@@ -130,6 +130,19 @@ function initializeEventListeners() {
         document.getElementById(`link${i}`).addEventListener('change', start);
         document.getElementById(`upload${i}`).addEventListener('change', start);
 	}
+
+    document.getElementById('download').addEventListener('click', downloadImage);
+}
+
+function downloadImage() {
+    const url = canvas.toDataURL('image/png');
+
+    const a = document.createElement('a');
+
+    a.href = url;
+    a.download = 'hall-of-fame.png';
+
+    a.click()
 }
 
 function modifyLabels(index) {
