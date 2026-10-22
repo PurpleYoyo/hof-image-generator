@@ -137,6 +137,39 @@ function initializeEventListeners() {
 	}
 
     document.getElementById('download').addEventListener('click', downloadImage);
+
+    document.getElementById('save-configuration').addEventListener('click', saveConfiguration);
+    document.getElementById('load-configuration').addEventListener('input', readFile);
+}
+
+function saveConfiguration() {
+    const data = {
+        'pokemon1': document.getElementById('pokemon1').value
+    };
+
+    const a = document.createElement('a');
+    a.href = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data));
+    a.download = 'hof-config.json';
+    a.click();
+}
+
+function readFile() {
+    const files = document.getElementById('load-configuration').files;
+
+    if (files.length < 1) {
+        return null;
+    }
+
+    const fr = new FileReader();
+
+    fr.onload = function(e) {
+        const result = e.target.result;
+        loadConfiguration(JSON.stringify(result))
+    }
+}
+
+function loadConfiguration(json) {
+    console.log(json);
 }
 
 function downloadImage() {
