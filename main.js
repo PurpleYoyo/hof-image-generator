@@ -111,11 +111,15 @@ function initializeEventListeners() {
 
 	document.getElementById('color1').addEventListener('input', start);
 	document.getElementById('color2').addEventListener('input', start);
-	['shiny', 'pokemon', 'image', 'link'].forEach((id) => {
+	['shiny', 'pokemon', 'image'].forEach((id) => {
 	    for (let i = 1; i < 7; i++) {
 	        document.getElementById(`${id}${i}`).addEventListener('input', start);
 	    }
 	});
+
+    for (let i = 1; i < 7; i++) {
+        document.getElementById(`link${i}-text`).addEventListener('input', start);
+	}
 
     for (let i = 1; i < 7; i++) {
         const input = document.getElementById(`sprites${i}`);
