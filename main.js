@@ -111,7 +111,7 @@ function initializeEventListeners() {
 
 	document.getElementById('color1').addEventListener('input', start);
 	document.getElementById('color2').addEventListener('input', start);
-	['shiny', 'pokemon', 'image'].forEach((id) => {
+	['shiny', 'pokemon', 'image', 'link'].forEach((id) => {
 	    for (let i = 1; i < 7; i++) {
 	        document.getElementById(`${id}${i}`).addEventListener('input', start);
 	    }
