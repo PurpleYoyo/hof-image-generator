@@ -431,9 +431,14 @@ function buildSpriteLink(index) {
             if (!(pokemon in allPokemon)) {
                 return null;
             }
+
+            const generation = gameGeneration[sprite];
+            if (generation < pokemonIntroductionGeneration[pokemon]) {
+                return null;
+            }
         
-	        let number = allPokemon[pokemon];
-	        let romanNumeral = generationRomanNumerals[gameGeneration[sprite]];
+	        const number = allPokemon[pokemon];
+	        const romanNumeral = generationRomanNumerals[gameGeneration[sprite]];
         
 	        if ((generation1Games.concat(generation2Games)).includes(sprite)) {
                 let is_gray;
@@ -458,6 +463,7 @@ function buildSpriteLink(index) {
 	        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-${romanNumeral}/${sprite}/${is_shiny}${number}.png`;
         case 'link':
             const value = document.getElementById(`link${index}`).value;
+            console.log(value);
 
             return value === '' ? null : value;
         case 'upload':
@@ -1906,3 +1912,5 @@ const allPokemon = {
     "baxcalibur-mega": 10325,
     "meowstic-female-mega": 10326
 };
+
+const pokemonIntroductionGeneration = [];
