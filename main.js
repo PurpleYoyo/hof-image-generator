@@ -407,6 +407,10 @@ function placePokemon(generation) {
             x -= 32;
             y -= 32;
         }
+
+        if (pokemon === 'blaziken-mega') {
+            x += 8;
+        }
         
         pokemon.onload = () => {
             let dWidth = pokemon.width * 2;
