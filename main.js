@@ -309,6 +309,8 @@ function drawPreview(generation) {
     ctx.putImageData(imageData, 0, 0);
 
     placePokemon(generation);
+
+    copyCanvasToImage();
 }
 
 function copyCanvasToImage() {
