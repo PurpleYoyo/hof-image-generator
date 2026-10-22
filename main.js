@@ -165,7 +165,7 @@ function randomizePlaceholders() {
 	for (let i = 1; i < 7; i++) {
 		document.getElementById(`pokemon${i}`).placeholder = randomPokemon();
 
-        document.getElementById(`link${i}`).placeholder = randomLink();
+        document.getElementById(`link${i}-text`).placeholder = randomLink();
 	}
 }
 
@@ -434,7 +434,7 @@ function buildSpriteLink(index) {
 
             if (pokemon in pokemonIntroductionGeneration) {
                 const generation = gameGeneration[sprite];
-                
+
                 if (generation < pokemonIntroductionGeneration[pokemon]) {
                     return null;
                 }
@@ -465,7 +465,7 @@ function buildSpriteLink(index) {
         
 	        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-${romanNumeral}/${sprite}/${is_shiny}${number}.png`;
         case 'link':
-            const value = document.getElementById(`link${index}`).value;
+            const value = document.getElementById(`link${index}-text`).value;
             console.log(value);
 
             return value === '' ? null : value;
