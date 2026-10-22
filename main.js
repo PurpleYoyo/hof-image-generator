@@ -133,6 +133,7 @@ function initializeEventListeners() {
 }
 
 function modifyLabels(index) {
+    console.log(this);
     let value = this.value.replace('-option', '');
 
     if (generation1Games.includes(value)) {
@@ -156,7 +157,7 @@ function randomizePlaceholders() {
 
 function randomPokemon() {
 	let keys = Object.keys(allPokemon);
-    
+
 	return keys[Math.floor(keys.length * Math.random())];
 };
 
