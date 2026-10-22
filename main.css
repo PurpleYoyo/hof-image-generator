@@ -45,8 +45,8 @@ canvas {
 [tooltip]:hover::after {
     display: block;
     position: absolute;
-    content: attr(data-tooltip);
+    content: attr(tooltip);
     border: 1px solid black;
-    background: #eee;
+    background: white;
     padding: .25em;
 }
