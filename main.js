@@ -454,12 +454,6 @@ function placePokemon(generation) {
             x -= 32;
             y -= 32;
         }
-
-        if (document.getElementById(`pokemon${i}`).value === 'blaziken-mega'
-            && getType(i) === 'name') {
-            x += 32;
-            y -= 16;
-        }
         
         pokemon.onload = () => {
             let dWidth = pokemon.width * 2;
@@ -477,6 +471,15 @@ function placePokemon(generation) {
             else {
                 dWidth = dWidth;
 		        dHeight = dWidth;
+            }
+
+            if (document.getElementById(`pokemon${i}`).value === 'blaziken-mega'
+                && getType(i) === 'name') {
+                dWidth = 160;
+                dHeight = 160;
+
+                x += 40;
+                y -= 16;
             }
 
             ctx.imageSmoothingEnabled  = false;
