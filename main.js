@@ -439,6 +439,9 @@ function buildSpriteLink(index) {
                     return null;
                 }
             }
+            else {
+                console.log(`${pokemon} not in pokemonIntroductionGeneration.`);
+            }
         
 	        const number = allPokemon[pokemon];
 	        const romanNumeral = generationRomanNumerals[gameGeneration[sprite]];
