@@ -412,9 +412,9 @@ function placePokemon(generation) {
             y -= 32;
         }
 
-        if (pokemon === 'blaziken-mega') {
+        if (src.includes('blaziken-mega')) {
             x += 32;
-            y -= 32;
+            y -= 16;
         }
         
         pokemon.onload = () => {
