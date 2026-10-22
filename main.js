@@ -5,9 +5,7 @@ const default_color2 = [115, 222, 181];
 const default_color3 = [57, 104, 86];
 const default_color4 = [50, 97, 79];
 
-const canvas = document.createElement('canvas');
-canvas.id = 'canvas';
-
+const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
 let color1;
