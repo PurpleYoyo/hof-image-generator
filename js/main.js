@@ -15,7 +15,7 @@ let color2;
 let color3;
 let color4;
 
-const generationSriteSizes = {
+const generationSpriteSizes = {
     '3':    64,
     '4':    80,
     '5':    96,
@@ -509,13 +509,13 @@ function placePokemon(generation) {
         let x = positions[i].x;
         let y = positions[i].y;
 
-        const relativeSpriteSize = generationSriteSizes[getGeneration()] * 2;
+        const relativeSpriteSize = generationSpriteSizes[generation] * 2;
         
         pokemon.onload = () => {
             let dWidth = pokemon.width * 2;
             let dHeight = pokemon.height * 2;
 
-            if (pokemon.width != pokemon.height) {
+            if (pokemon.width !== pokemon.height) {
                 if (document.getElementById(`resize${i}`).checked) {
 			        dWidth = relativeSpriteSize;
 			        dHeight = relativeSpriteSize;
@@ -527,16 +527,17 @@ function placePokemon(generation) {
             else {
                 const sizeDifference = dWidth - relativeSpriteSize;
 
-                x -= sizeDifference;
-                y -= sizeDifference;
-            }
+                x -= sizeDifference / 2;
+                y -= sizeDifference / 2;
 
-            if (document.getElementById(`pokemon${i}`).value === 'blaziken-mega'
-                && getType(i) === 'name') {
-                dWidth = 160;
-                dHeight = 160;
-
-                x += 48;
+                const dimensions = placeSpecialCases(document.getElementById(`pokemon${i}`).value);
+                if (dimensions !== null) {
+                    dWidth = dimensions.width
+                    dHeight = dimensions.height
+                    
+                    x += dimensions.x_offset
+                    y += dimensions.y_offset
+                }
             }
 
             ctx.imageSmoothingEnabled  = false;
@@ -545,6 +546,19 @@ function placePokemon(generation) {
             copyCanvasToImage();
         }
     }
+}
+
+function placeSpecialCases(name) {
+    if (name === 'blaziken-mega') {
+        return {
+            'width': 160,
+            'height': 160,
+            'x_offset': 48,
+            'y_offset': 0,
+        };
+    }
+
+    return null;
 }
 
 function buildSpriteLink(index) {
