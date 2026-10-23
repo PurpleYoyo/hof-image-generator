@@ -208,8 +208,24 @@ function readFile() {
     reader.readAsText(files[0])
 }
 
-function loadConfiguration(json) {
-    console.log(json);
+function loadConfiguration(data) {
+    document.getElementById(`g${data.background}`).checked = true;
+    document.getElementById('color1').value = data.colors.color1;
+    document.getElementById('color2').value = data.colors.color2;
+
+    for (let i = 1; i < 7; i++) {
+        document.getElementById(`${data.pokemon[i].type}${i}`).checked = true;
+
+        document.getElementById(`pokemon${i}`).value = data[i].name.pokemon;
+        document.getElementById(`sprites${i}`).value = data[i].name.sprite;
+        document.getElementById(`shiny${i}`).checked = data[i].name.shiny;
+
+        document.getElementById(`link${i}`).value = data[i].link.link;
+
+        document.getElementById(`resize${i}`).checked = data[i].resize;
+    }
+
+    start();
 }
 
 function downloadImage() {
