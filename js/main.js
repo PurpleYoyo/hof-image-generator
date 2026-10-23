@@ -1,4 +1,4 @@
-import { allPokemon, pokemonIntroductionGeneration } from './pokemon_data.js';
+import { allPokemon, pokemonIntroductionGeneration, hyphenatedBasePokemon } from './pokemon_data.js';
 
 const img = new Image();
 
@@ -32,7 +32,7 @@ const gameGeneration = {
 	'firered-leafgreen':	3,
 	'diamond-pearl':		4,
 	'platinum':				4,
-	'heartgold-soulsiver':	4,
+	'heartgold-soulsilver':	4,
 	'black-white':			5,
 };
 
@@ -218,13 +218,13 @@ function loadConfiguration(data) {
     for (let i = 1; i < 7; i++) {
         document.getElementById(`${data.pokemon[i].type}${i}`).checked = true;
 
-        document.getElementById(`pokemon${i}`).value = data[i].name.pokemon;
-        document.getElementById(`sprites${i}`).value = data[i].name.sprite;
-        document.getElementById(`shiny${i}`).checked = data[i].name.shiny;
+        document.getElementById(`pokemon${i}`).value = data.pokemon[i].name.pokemon;
+        document.getElementById(`sprites${i}`).value = data.pokemon[i].name.sprite;
+        document.getElementById(`shiny${i}`).checked = data.pokemon[i].name.shiny;
 
-        document.getElementById(`link${i}`).value = data[i].link.link;
+        document.getElementById(`link${i}-text`).value = data.pokemon[i].link.link;
 
-        document.getElementById(`resize${i}`).checked = data[i].resize;
+        document.getElementById(`resize${i}`).checked = data.pokemon[i].resize;
     }
 
     start();
@@ -569,7 +569,7 @@ function buildSpriteLink(index) {
         case 'name':
             const pokemon = document.getElementById(`pokemon${index}`).value;
             const sprite = document.getElementById(`sprites${index}`).value.replace('-option', '');
-            const shiny = document.getElementById(`shiny${index}`).value;
+            const shiny = document.getElementById(`shiny${index}`);
 
             if (!(pokemon in allPokemon)) {
                 return null;
@@ -626,7 +626,7 @@ function buildSpriteLink(index) {
 }
 
 function getBasePokemon(name) {
-    if (['mr-mime', 'mr-rime', 'mime-jr', 'porygon-z'].includes(name)) {
+    if (hyphenatedBasePokemon.includes(name)) {
         return name;
     }
 
