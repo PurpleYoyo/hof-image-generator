@@ -535,8 +535,8 @@ function placePokemon(generation) {
             }
             else {
                 if (['default-option', 'black-white-option'].includes(document.getElementById(`sprites${i}`).value)) {
-                    dWidth = 180;
-                    dHeight = 180;
+                    dWidth = 160;
+                    dHeight = 160;
                 }
 
                 const sizeDifference = dWidth - relativeSpriteSize;
