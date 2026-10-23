@@ -1,4 +1,4 @@
-const allPokemon = {
+export const allPokemon = {
     "bulbasaur": 1,
     "ivysaur": 2,
     "venusaur": 3,
@@ -1352,7 +1352,7 @@ const allPokemon = {
     "meowstic-female-mega": 10326
 };
 
-const pokemonIntroductionGeneration = {
+export const pokemonIntroductionGeneration = {
     "bulbasaur": 1,
     "ivysaur": 1,
     "venusaur": 1,
