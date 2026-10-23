@@ -65,7 +65,7 @@ const presetLinks = [
 const generation1Games = ['red-blue', 'yellow'];
 const generation2Games = ['gold', 'silver', 'crystal'];
 
-fetch("sidebar.html")
+fetch('../sidebar.html')
 .then(res => res.text())
 .then(html => {
     document.getElementById('sidebar-container').innerHTML = html;
@@ -180,10 +180,6 @@ function saveConfiguration() {
             'link': {
                 'link': document.getElementById(`link${i}-text`).value,
             },
-            // TODO: serialize file
-            // 'upload': {
-            //     'image': document.getElementById(`image${i}`).value,
-            // },
             'resize': document.getElementById(`resize${i}`).checked,
             // TODO: drawing priority
         };
