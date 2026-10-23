@@ -93,3 +93,7 @@ canvas {
     left: 15px;
     top: 29px;
 }
+
+.tooltip {
+    text-decoration: dotted;
+}
