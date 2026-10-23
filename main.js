@@ -157,21 +157,20 @@ function readFile() {
     const files = document.getElementById('load-configuration').files;
 
     if (files.length < 1) {
-        console.log(1);
         return null;
     }
-    console.log(2);
 
-    const fr = new FileReader();
+    const reader = new FileReader();
 
-    fr.onload = function(e) {
+    reader.onload = function(e) {
         const result = e.target.result;
         loadConfiguration(JSON.parse(result))
     }
+
+    reader.readAsText(files[0])
 }
 
 function loadConfiguration(json) {
-    console.log(3);
     console.log(json);
 }
 
