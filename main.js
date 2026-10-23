@@ -144,8 +144,33 @@ function initializeEventListeners() {
 
 function saveConfiguration() {
     const data = {
-        'pokemon1': document.getElementById('pokemon1').value
+        'background': getGeneration(),
+        'colors': {
+            'color1': document.getElementById('color1').value,
+            'color2': document.getElementById('color2').value,
+        },
+        'pokemon': {},
     };
+
+    for (let i = 1; i < 7; i++) {
+        data.pokemon[i] = {
+            'type': getType(i),
+            'name': {
+                'pokemon': document.getElementById(`pokemon${i}`).value,
+                'sprite': document.getElementById(`sprites${i}`).value,
+                'shiny': document.getElementById(`shiny${i}`).checked,
+            },
+            'link': {
+                'link': document.getElementById(`link${i}-text`).value,
+            },
+            // TODO: serialize file
+            // 'upload': {
+            //     'image': document.getElementById(`image${i}`).value,
+            // },
+            'resize': document.getElementById(`resie${i}`).checked,
+            // TODO: drawing priority
+        };
+    }
 
     const a = document.createElement('a');
     a.href = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data));
