@@ -42,6 +42,10 @@ canvas {
     margin: 10px;
 }
 
+[tooltip] {
+    position: relative;
+}
+
 [tooltip]:hover::after {
     display: block;
     position: absolute;
@@ -49,6 +53,10 @@ canvas {
     border: 1px solid black;
     background: white;
     padding: .25em;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
 }
 
 .sidebar {
@@ -65,9 +73,8 @@ canvas {
     padding-top: 60px;
 }
   
-.sidebar a {
-    text-decoration: none;
-    color: white;
+.sidebar-link {
+    color: #B6E6FC;
 }
 
 .close-sidebar {
@@ -76,9 +83,13 @@ canvas {
     right: 20px;
     font-size: 30px;
     cursor: pointer;
+    color: white;
+    text-decoration: none;
 }
 
-.openbtn {
-    color: black;
+.open-sidebar {
     cursor: pointer;
+    position: absolute;
+    left: 15px;
+    top: 29px;
 }
