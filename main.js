@@ -167,7 +167,7 @@ function saveConfiguration() {
             // 'upload': {
             //     'image': document.getElementById(`image${i}`).value,
             // },
-            'resize': document.getElementById(`resie${i}`).checked,
+            'resize': document.getElementById(`resize${i}`).checked,
             // TODO: drawing priority
         };
     }
