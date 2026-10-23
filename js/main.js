@@ -546,7 +546,8 @@ function buildSpriteLink(index) {
             if (pokemon in pokemonIntroductionGeneration) {
                 const generation = gameGeneration[sprite];
 
-                if (generation < pokemonIntroductionGeneration[pokemon]) {
+                const basePokemon = getBasePokemon(pokemon);
+                if (generation < pokemonIntroductionGeneration[basePokemon]) {
                     return null;
                 }
             }
@@ -591,6 +592,14 @@ function buildSpriteLink(index) {
 
             return null;
     }
+}
+
+function getBasePokemon(name) {
+    if (['mr-mime', 'mr-rime', 'mime-jr', 'porygon-z'].includes(name)) {
+        return name;
+    }
+
+    return name.split('-')[0];
 }
 
 function darkenColor(hsb, light) {
