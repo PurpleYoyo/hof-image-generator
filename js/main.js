@@ -55,7 +55,7 @@ const gen3SpritePositions = {
     3: { x: 304, y: 16 },
     4: { x: 16, y: 112 },
     5: { x: 176, y: 112 },
-    6: { x: 304, y: 112 },
+    6: { x: 336, y: 112 },
 };
 
 const gen4SpritePositions = {
@@ -534,6 +534,11 @@ function placePokemon(generation) {
                 }
             }
             else {
+                if (['default-option', 'black-white-option'].includes(document.getElementById(`sprites${i}`).value)) {
+                    dWidth = 180;
+                    dHeight = 180;
+                }
+
                 const sizeDifference = dWidth - relativeSpriteSize;
 
                 x -= sizeDifference / 2;
