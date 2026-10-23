@@ -15,6 +15,12 @@ let color2;
 let color3;
 let color4;
 
+const generationSriteSizes = {
+    '3':    64,
+    '4':    80,
+    '5':    96,
+};
+
 const gameGeneration = {
 	'yellow':				1,
 	'red-blue':				1,
@@ -43,21 +49,21 @@ const generationRomanNumerals = {
 };
 
 const gen3SpritePositions = {
-    1: { x: 24, y: 8 },
-    2: { x: 88, y: 8 },
-    3: { x: 152, y: 8 },
-    4: { x: 8, y: 56 },
-    5: { x: 88, y: 56 },
-    6: { x: 168, y: 56 },
+    1: { x: 48, y: 16 },
+    2: { x: 176, y: 16 },
+    3: { x: 304, y: 16 },
+    4: { x: 16, y: 112 },
+    5: { x: 176, y: 112 },
+    6: { x: 304, y: 112 },
 };
 
 const gen4SpritePositions = {
-    1: { x: -8, y: 40 },
-    2: { x: 24, y: 48 },
-    3: { x: 56, y: 56 },
-    4: { x: 120 , y: 56 },
-    5: { x: 152, y: 48 },
-    6: { x: 184, y: 40 },
+    1: { x: -16, y: 80 },
+    2: { x: 48, y: 96 },
+    3: { x: 112, y: 112 },
+    4: { x: 240 , y: 112 },
+    5: { x: 304, y: 96 },
+    6: { x: 368, y: 80 },
 };
 
 const presetLinks = [
@@ -248,6 +254,8 @@ function modifyLabels(input, index) {
     else {
         document.getElementById(`shiny${index}-label`).textContent = 'Shiny?';
     }
+
+    start();
 }
 
 function randomizePlaceholders() {
@@ -498,14 +506,10 @@ function placePokemon(generation) {
         }
 		pokemon.src = src;
         
-        let x = positions[i].x * 2;
-        let y = positions[i].y * 2;
+        let x = positions[i].x;
+        let y = positions[i].y;
 
-        if (document.getElementById(`sprites${i}`).value === 'default-option'
-            && getType(i) === 'name') {
-            x -= 32;
-            y -= 32;
-        }
+        const relativeSpriteSize = generationSriteSizes[getGeneration()] * 2;
         
         pokemon.onload = () => {
             let dWidth = pokemon.width * 2;
@@ -513,16 +517,18 @@ function placePokemon(generation) {
 
             if (pokemon.width != pokemon.height) {
                 if (document.getElementById(`resize${i}`).checked) {
-			        dWidth = 128;
-			        dHeight = 128;
+			        dWidth = relativeSpriteSize;
+			        dHeight = relativeSpriteSize;
                 }
                 else {
                     return alert(`Pokemon ${i} sprite has invalid dimensions.`);
                 }
             }
             else {
-                dWidth = dWidth;
-		        dHeight = dWidth;
+                const sizeDifference = dWidth - relativeSpriteSize;
+
+                x -= sizeDifference;
+                y -= sizeDifference;
             }
 
             if (document.getElementById(`pokemon${i}`).value === 'blaziken-mega'
