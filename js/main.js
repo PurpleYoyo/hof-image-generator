@@ -66,6 +66,7 @@ const generation1Games = ['red-blue', 'yellow'];
 const generation2Games = ['gold', 'silver', 'crystal'];
 
 window.addEventListener("load", (event) => {
+    buildSidebar();
     buildDropdowns();
     randomizeStartColors();
 	buildSuggestions();
@@ -73,6 +74,14 @@ window.addEventListener("load", (event) => {
 	randomizePlaceholders();
     start();
 });
+
+function buildSidebar() {
+    fetch("sidebar.html")
+    .then(res => res.text())
+    .then(html => {
+        document.getElementById('sidebar-container').innerHTML = html;
+    });
+}
 
 function buildDropdowns() {
     for (let i = 1; i < 7; i++) {
@@ -140,6 +149,17 @@ function initializeEventListeners() {
 
     document.getElementById('save-configuration').addEventListener('click', saveConfiguration);
     document.getElementById('load-configuration').addEventListener('input', readFile);
+
+    document.getElementById('open-sidebar').addEventListener('click', toggleSidebar);
+    document.getElementById('close-sidebar').addEventListener('click', toggleSidebar);
+}
+
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+
+    if (!sidebar) return;
+    
+    sidebar.style.width = sidebar.style.width === '250px' ? '0' : '250px';
 }
 
 function saveConfiguration() {
@@ -356,7 +376,7 @@ function getType(index) {
 }
 
 function renderPreview(generation) {
-    img.src = `g${generation}-template.png`;
+    img.src = `images/g${generation}-template.png`;
     img.crossOrigin = 'Anonymous';
     img.onload = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
