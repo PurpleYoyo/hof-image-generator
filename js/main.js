@@ -409,6 +409,9 @@ function renderPreview(generation) {
     img.src = `images/g${generation}-template.png`;
     
     img.onload = () => {
+        canvas.style.width = generationBackgroundSizes[generation].x;
+        canvas.style.height = generationBackgroundSizes[generation].y;
+
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
 
