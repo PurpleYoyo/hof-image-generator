@@ -65,12 +65,6 @@ const presetLinks = [
 const generation1Games = ['red-blue', 'yellow'];
 const generation2Games = ['gold', 'silver', 'crystal'];
 
-fetch('../sidebar.html')
-.then(res => res.text())
-.then(html => {
-    document.getElementById('sidebar-container').innerHTML = html;
-});
-
 window.addEventListener("load", (event) => {
     buildDropdowns();
     randomizeStartColors();
