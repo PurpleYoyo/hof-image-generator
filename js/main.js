@@ -534,13 +534,13 @@ function placePokemon(generation) {
                 if (dimensions !== null) {
                     dWidth = dimensions.width
                     dHeight = dimensions.height
-                    
+
                     x += dimensions.x_offset
                     y += dimensions.y_offset
                 }
             }
 
-            ctx.imageSmoothingEnabled  = false;
+            ctx.imageSmoothingEnabled = false;
             ctx.drawImage(pokemon, x, y, dWidth, dHeight);
 
             copyCanvasToImage();
