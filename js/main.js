@@ -67,6 +67,17 @@ const gen4SpritePositions = {
     6: { x: 368, y: 80 },
 };
 
+const generationBackgroundSizes = {
+    '3': {
+        'x': 480,
+        'y': 320,
+    },
+    '4': {
+        'x': 510,
+        'y': 376,
+    },
+};
+
 const presetLinks = [
     'https://raw.githubusercontent.com/PurpleYoyo/hof-image-generator/refs/heads/main/smallchung.png',
 ];
@@ -390,8 +401,13 @@ function getType(index) {
 }
 
 function renderPreview(generation) {
-    img.src = `images/g${generation}-template.png`;
+    const preview = document.getElementById('preview');
+    preview.style.width = generationBackgroundSizes[generation].x;
+    preview.style.height = generationBackgroundSizes[generation].y;
+
     img.crossOrigin = 'Anonymous';
+    img.src = `images/g${generation}-template.png`;
+    
     img.onload = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
