@@ -71,6 +71,16 @@ const presetLinks = [
     'https://raw.githubusercontent.com/PurpleYoyo/hof-image-generator/refs/heads/main/smallchung.png',
 ];
 
+const presets = [
+    'emerald',
+    'firered-leafgreen',
+    'ruby-sapphire',
+    'heart-and-soul',
+    'unbound',
+    'soulgold',
+    'ghost-grey',
+];
+
 const generation1Games = ['red-blue', 'yellow'];
 const generation2Games = ['gold', 'silver', 'crystal'];
 
@@ -135,7 +145,7 @@ function initializeEventListeners() {
 	    input.addEventListener('input', () => modifyLabels(input, i));
 	}
 
-	['emerald', 'firered-leafgreen', 'ruby-sapphire', 'heart-and-soul', 'unbound', 'soulgold'].forEach((game) => {
+	presets.forEach((game) => {
 	    document.getElementById(`preset-${game}`).addEventListener('click', () => applyPreset(game));
 	});
 
@@ -271,11 +281,11 @@ function randomPokemon() {
 	let keys = Object.keys(allPokemon);
 
 	return keys[Math.floor(keys.length * Math.random())];
-};
+}
 
 function randomLink() {
 	return presetLinks[Math.floor(presetLinks.length * Math.random())];
-};
+}
 
 function applyPreset(game) {
     switch (game) {
@@ -303,6 +313,10 @@ function applyPreset(game) {
         case 'soulgold':
             document.getElementById('color1').value = '#191547';
             document.getElementById('color2').value = '#191547';
+            break;
+        case 'ghost-grey':
+            document.getElementById('color1').value = '#F8f8F8';
+            document.getElementById('color2').value = '#F8f8F8';
             break;
     }
 
