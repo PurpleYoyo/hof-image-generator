@@ -216,11 +216,14 @@ export function getType(index) {
 }
 
 export function getColors() {
+    const color1 = document.getElementById('color1').value;
+    const color2 = document.getElementById('color2').value;
+
     return {
-        color1: hexToRGB(document.getElementById('color1').value),
-        color2: hexToRGB(document.getElementById('color2').value),
-        color3: HSVtoRGB(darkenColor(RGBtoHSV(color1), true)),
-        color4: HSVtoRGB(darkenColor(RGBtoHSV(color2), false)),
+        color1: hexToRGB(color1),
+        color2: hexToRGB(color2),
+        color3: HSVtoRGB(darkenColor(RGBtoHSV(hexToRGB(color1)), true)),
+        color4: HSVtoRGB(darkenColor(RGBtoHSV(hexToRGB(color2)), false)),
     }
 }
 
