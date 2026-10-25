@@ -73,8 +73,7 @@ export function buildPresetDropdown() {
 
         presetGroups.forEach((name) => {
             const group = document.createElement('optgroup');
-            group.value = `${name.toLowerCase().replace(' ', '-')}-optgroup`;
-            group.text = name;
+            group.label = name;
 
             const options = presets[name.toLowerCase()];
             options.forEach((game) => {
@@ -131,6 +130,7 @@ export function initializeEventListeners(start) {
 
     const dropdown = document.getElementById('g3-presets');
 	dropdown.addEventListener('input', () => {
+        console.log(dropdown.value);
         applyPreset(dropdown.value);
         start();
     });
