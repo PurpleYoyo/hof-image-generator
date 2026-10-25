@@ -158,12 +158,14 @@ export function hideInputs(generation) {
         document.getElementById('color2').classList.add('hidden');
 
         document.getElementById('g3-presets').classList.add('hidden');
+        document.getElementById('g3-presets-label').classList.add('hidden');
     }
     else {
         document.getElementById('color1').classList.remove('hidden');
         document.getElementById('color2').classList.remove('hidden');
 
         document.getElementById('g3-presets').classList.remove('hidden');
+        document.getElementById('g3-presets-label').classList.remove('hidden');
     }
 
     for (let i = 1; i < 7; i++) {
