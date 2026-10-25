@@ -230,8 +230,8 @@ export function getColors() {
 export function getInputs(index) {
     return {
         type: getType(index),
-        name: document.getElementById(`pokemon${i}`).value,
-        sprite: document.getElementById(`sprites${i}`).value,
-        resize: document.getElementById(`resize${i}`).checked,
+        name: document.getElementById(`pokemon${index}`).value,
+        sprite: document.getElementById(`sprites${index}`).value,
+        resize: document.getElementById(`resize${index}`).checked,
     }
 }
