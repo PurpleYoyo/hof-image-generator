@@ -7,25 +7,51 @@ const presetLinks = [
 ];
 
 const presets = [
-    'emerald',
-    'firered-leafgreen',
-    'ruby-sapphire',
-    'heart-and-soul',
-    'unbound',
-    'soulgold',
-    'ghost-grey',
+    'Emerald',
+    'FireRed-LeafGreen',
+    'Ruby/Sapphire',
+    'Heart & Soul',
+    'Unbound',
+    'Soulgold',
+    'Ghost Grey',
 ];
 
-export function buildDropdowns() {
+const sprites = [
+    'Default',
+    'Yellow',
+    'Red/Blue',
+    'Crystal',
+    'Gold',
+    'Silver',
+    'Emerald',
+    'FireRed/LeafGreen',
+    'Ruby/Sapphire',
+    'HeartGold/SoulSilver',
+    'Platinum',
+    'Diamond/Pearl',
+    'Black/White'
+];
+
+export function buildSpriteDropdowns() {
     for (let i = 1; i < 7; i++) {
         const dropdown = document.getElementById(`sprites${i}`);
-        ['Default', 'Yellow', 'Red/Blue', 'Crystal', 'Gold', 'Silver', 'Emerald', 'FireRed/LeafGreen', 'Ruby/Sapphire', 'HeartGold/SoulSilver', 'Platinum', 'Diamond/Pearl', 'Black/White'].forEach((game) => {
+        sprites.forEach((game) => {
             let option = document.createElement('option');
             option.value = `${game.toLowerCase().replace('/', '-')}-option`;
             option.text = game;
             dropdown.appendChild(option);
         });
     }
+}
+
+export function buildPresetDropdown() {
+    const dropdown = document.getElementById('presets');
+    presets.forEach((game) => {
+        let option = document.createElement('option');
+        option.value = `${game.toLowerCase().replace('&', 'and').replace('/', '-')}-option`;
+        option.text = game;
+        dropdown.appendChild(option);
+    });
 }
 
 export function randomizeStartColors() {
@@ -67,12 +93,11 @@ export function initializeEventListeners(start) {
         });
 	}
 
-	presets.forEach((game) => {
-	    document.getElementById(`preset-${game}`).addEventListener('click', () => {
-            applyPreset(game);
-            start();
-        });
-	});
+    const dropdown = document.getElementById('presets');
+	dropdown.addEventListener('input', () => {
+        applyPreset(dropdown.value);
+        start();
+    });
 
     for (let i = 1; i < 7; i++) {
         document.getElementById(`name${i}`).addEventListener('change', start);
