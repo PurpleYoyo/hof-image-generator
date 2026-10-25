@@ -27,7 +27,7 @@ const generationPresets = {
     5: {},
 };
 
-generationPresetGroups = {
+const generationPresetGroups = {
     3: [
         'Vanilla',
         'Romhacks',
