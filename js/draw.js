@@ -12,11 +12,6 @@ const default_color4 = [50, 97, 79];
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
-let color1;
-let color2;
-let color3;
-let color4;
-
 const generationSpriteSizes = {
     '3': 64,
     '4': 80,
@@ -137,7 +132,12 @@ function copyCanvasToImage() {
 }
 
 function recolorGen3HOF(data) {
-    getColors('3')
+    const colors = getColors();
+
+    const color1 = colors.color1;
+    const color2 = colors.color2;
+    const color3 = colors.color3;
+    const color4 = colors.color4;
 
     for (let i = 0; i < data.length; i += 4) {
         if (

@@ -215,12 +215,12 @@ export function getType(index) {
     return 'name';
 }
 
-export function getColors(generation) {
-    if (generation === '3') {
-        color1 = hexToRGB(document.getElementById('color1').value);
-        color2 = hexToRGB(document.getElementById('color2').value);
-        color3 = HSVtoRGB(darkenColor(RGBtoHSV(color1), true));
-        color4 = HSVtoRGB(darkenColor(RGBtoHSV(color2), false));
+export function getColors() {
+    return {
+        color1: hexToRGB(document.getElementById('color1').value),
+        color2: hexToRGB(document.getElementById('color2').value),
+        color3: HSVtoRGB(darkenColor(RGBtoHSV(color1), true)),
+        color4: HSVtoRGB(darkenColor(RGBtoHSV(color2), false)),
     }
 }
 
