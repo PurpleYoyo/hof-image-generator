@@ -68,9 +68,9 @@ const drawingOrder = {
 };
 
 const recoloringFunctions = {
-    '3': recolorGen3HOF,
-    '4': {},
-    '5': {},
+    '3': recolorGen3Background,
+    '4': recolorGen4Background,
+    '5': recolorGen5Background,
 };
 
 const generation1Games = ['red-blue', 'yellow'];
@@ -132,7 +132,7 @@ function copyCanvasToImage() {
     img.src = url;
 }
 
-function recolorGen3HOF(data) {
+function recolorGen3Background(data) {
     const colors = getColors();
 
     const color1 = colors.color1;
@@ -182,6 +182,9 @@ function recolorGen3HOF(data) {
         }
     }
 }
+function recolorGen4Background(data) {}
+
+function recolorGen5Background(data) {}
 
 function loadImage(src) {
     return new Promise((resolve, reject) => {
