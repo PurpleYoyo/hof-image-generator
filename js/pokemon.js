@@ -1,3 +1,11 @@
+export function getBasePokemon(name) {
+    if (hyphenatedBasePokemon.includes(name)) {
+        return name;
+    }
+
+    return name.split('-')[0];
+}
+
 export const allPokemon = {
     "bulbasaur": 1,
     "ivysaur": 2,
@@ -2380,7 +2388,7 @@ export const pokemonIntroductionGeneration = {
     "pecharunt": 9
 };
 
-export const hyphenatedBasePokemon = [
+const hyphenatedBasePokemon = [
     'mr-mime',
     'mr-rime',
     'mime-jr',

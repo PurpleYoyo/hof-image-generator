@@ -1,0 +1,373 @@
+import { allPokemon, pokemonIntroductionGeneration, getBasePokemon } from './pokemon.js';
+import { buildDropdowns, randomizeStartColors, buildSuggestions, initializeEventListeners, randomizePlaceholders } from './load.js';
+import { getGeneration, getType, hideInputs, getColors, getInputs } from './utils.js';
+
+const img = new Image();
+
+const default_color1 = [132, 239, 198];
+const default_color2 = [115, 222, 181];
+const default_color3 = [57, 104, 86];
+const default_color4 = [50, 97, 79];
+
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d', { willReadFrequently: true });
+
+let color1;
+let color2;
+let color3;
+let color4;
+
+const generationSpriteSizes = {
+    '3': 64,
+    '4': 80,
+    '5': 96,
+};
+
+const gameGeneration = {
+	'yellow':				1,
+	'red-blue':				1,
+	'gold':					2,
+	'silver':				2,
+	'crystal':				2,
+	'ruby-sapphire':		3,
+	'emerald':				3,
+	'firered-leafgreen':	3,
+	'diamond-pearl':		4,
+	'platinum':				4,
+	'heartgold-soulsilver':	4,
+	'black-white':			5,
+};
+
+const generationRomanNumerals = {
+	1: 'i',
+	2: 'ii',
+	3: 'iii',
+	4: 'iv',
+	5: 'v',
+};
+
+const spritePositions = {
+    '3': {
+        1: { x: 48, y: 16 },
+        2: { x: 176, y: 16 },
+        3: { x: 304, y: 16 },
+        4: { x: 16, y: 112 },
+        5: { x: 176, y: 112 },
+        6: { x: 336, y: 112 },
+    },
+    '4': {
+        1: { x: -16, y: 80 },
+        2: { x: 48, y: 96 },
+        3: { x: 112, y: 112 },
+        4: { x: 240 , y: 112 },
+        5: { x: 304, y: 96 },
+        6: { x: 368, y: 80 },
+    },
+    '5': {},
+};
+
+const drawingOrder = {
+    '3': [1, 2, 3, 4, 5, 6],
+    '4': [1, 2, 3, 6, 5, 4],
+    '5': [],
+};
+
+const recoloringFunctions = {
+    '3': recolorGen3HOF,
+    '4': {},
+    '5': {},
+};
+
+const generation1Games = ['red-blue', 'yellow'];
+const generation2Games = ['gold', 'silver', 'crystal'];
+
+window.addEventListener('load', (event) => {
+    buildDropdowns();
+    randomizeStartColors();
+	buildSuggestions();
+	initializeEventListeners(start);
+	randomizePlaceholders();
+    start();
+});
+
+function start() {
+    const generation = getGeneration();
+
+    hideInputs(generation);
+    drawBackground(generation);
+}
+
+function drawBackground(generation) {
+    img.crossOrigin = 'Anonymous';
+    img.src = `images/g${generation}-template.png`;
+    
+    img.onload = () => {
+        const preview = document.getElementById('preview');
+        preview.style.width = img.width;
+        preview.style.height = img.height;
+
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+
+        recolorBackground(generation);
+    }
+}
+
+function recolorBackground(generation) {
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+        
+    recoloringFunctions[generation](data);
+
+    ctx.putImageData(imageData, 0, 0);
+
+    drawSprites(generation);
+}
+
+function copyCanvasToImage() {
+    const img = document.getElementById('preview');
+
+    const canvas = document.getElementById('canvas');
+    const url = canvas.toDataURL('image/png');
+
+    img.src = url;
+}
+
+function recolorGen3HOF(data) {
+    getColors('3')
+
+    for (let i = 0; i < data.length; i += 4) {
+        if (
+            data[i] === default_color1[0]
+            && data[i + 1] === default_color1[1]
+            && data[i + 2] === default_color1[2]
+        ) {
+            data[i] = color1[0];
+            data[i + 1] = color1[1];
+            data[i + 2] = color1[2];
+        }
+        
+        if (
+            data[i] === default_color2[0]
+            && data[i + 1] === default_color2[1]
+            && data[i + 2] === default_color2[2]
+        ) {
+            data[i] = color2[0];
+            data[i + 1] = color2[1];
+            data[i + 2] = color2[2];
+        }
+
+        if (
+            data[i] === default_color3[0]
+            && data[i + 1] === default_color3[1]
+            && data[i + 2] === default_color3[2]
+        ) {
+            data[i] = color3[0];
+            data[i + 1] = color3[1];
+            data[i + 2] = color3[2];
+        }
+        
+        if (
+            data[i] === default_color4[0]
+            && data[i + 1] === default_color4[1]
+            && data[i + 2] === default_color4[2]
+        ) {
+            data[i] = color4[0];
+            data[i + 1] = color4[1];
+            data[i + 2] = color4[2];
+        }
+    }
+}
+
+function loadImage(src) {
+    return new Promise((resolve, reject) => {
+        const pokemon = new Image();
+	    pokemon.crossOrigin = 'Anonymous';
+
+        pokemon.onload = () => resolve(pokemon);
+        pokemon.onerror = () => reject(`Error loading: ${src}`);
+        
+	    pokemon.src = src;
+    });
+}
+
+function drawSprites(generation) {
+    const images = [];
+    for (const i of drawingOrder[generation]) {
+        const src = buildSpriteLink(i);
+        if (src === null) {
+            continue;
+        }
+
+		images.push(
+            loadImage(src).then(image => {
+                return {
+                    index: i,
+                    image: image,
+                }
+            }).catch(error => {
+                console.error(error);
+                return null;
+            })
+        );
+    }
+
+    Promise.all(images).then((images) => {
+        for (const pokemon of images) {
+            const image = pokemon.image;
+            const index = pokemon.index;
+
+            if (image === null) {
+                continue;
+            }
+
+            const dimensions = placeSprite(image, index, generation);
+
+            if (dimensions === null) {
+                continue;
+            }
+
+            ctx.imageSmoothingEnabled = false;
+            ctx.drawImage(
+                image,
+                dimensions.x,
+                dimensions.y,
+                dimensions.dWidth,
+                dimensions.dHeight
+            ); 
+        };
+
+        copyCanvasToImage();
+    });
+}
+
+function placeSprite(image, index, generation) {
+    const relativeSpriteSize = generationSpriteSizes[generation] * 2;
+
+    const inputs = getInputs(index);
+
+    let x = spritePositions[generation][index].x;
+    let y = spritePositions[generation][index].y;
+    
+    let dWidth = image.width * 2;
+    let dHeight = image.height * 2;
+
+    if (inputs.type === 'name') {
+        if (['default-option', 'black-white-option'].includes(inputs.sprite)) {
+            dWidth = 160;
+            dHeight = 160;
+        }
+
+        const sizeDifference = dWidth - relativeSpriteSize;
+
+        x -= sizeDifference / 2;
+        y -= sizeDifference / 2;
+
+        const dimensions = placeSpecialCases(inputs.name);
+        if (dimensions !== null) {
+            return {
+                x: x + dimensions.x_offset,
+                y: y + dimensions.y_offset,
+                dWidth: dimensions.width,
+                dHeight: dimensions.height,
+            }
+        }
+    }
+    else {
+        if (inputs.resize || image.width === image.height) {
+	        dWidth = relativeSpriteSize;
+	        dHeight = relativeSpriteSize;
+        }
+        else {
+            alert(`Pokemon ${index} sprite has invalid dimensions.`);
+            return null;
+        }
+    }
+
+    return {
+        x: x,
+        y: y,
+        dWidth: dWidth,
+        dHeight: dHeight,
+    }
+}
+
+function placeSpecialCases(name) {
+    if (name === 'blaziken-mega') {
+        return {
+            'width': 160,
+            'height': 160,
+            'x_offset': 48,
+            'y_offset': 0,
+        };
+    }
+
+    return null;
+}
+
+function buildSpriteLink(index) {
+    const selected = getType(index);
+
+    switch (selected) {
+        default:
+        case 'name':
+            const pokemon = document.getElementById(`pokemon${index}`).value;
+            const sprite = document.getElementById(`sprites${index}`).value.replace('-option', '');
+            const shiny = document.getElementById(`shiny${index}`);
+
+            if (!(pokemon in allPokemon)) {
+                return null;
+            }
+
+            const basePokemon = getBasePokemon(pokemon);
+            if (pokemon in pokemonIntroductionGeneration) {
+                const generation = gameGeneration[sprite];
+                if (generation < pokemonIntroductionGeneration[basePokemon]) {
+                    return null;
+                }
+            }
+            else {
+                console.log(`${basePokemon} (${pokemon}) not in pokemonIntroductionGeneration.`);
+            }
+        
+	        const number = allPokemon[pokemon];
+	        const romanNumeral = generationRomanNumerals[gameGeneration[sprite]];
+        
+	        if ((generation1Games.concat(generation2Games)).includes(sprite)) {
+                let is_gray;
+
+                if (generation1Games.includes(sprite)) {
+                    is_gray = shiny.checked ? '' : 'gray/';
+                }
+
+                if (generation2Games.includes(sprite)) {
+                    is_gray = shiny.checked ? 'gray/' : '';
+                }
+            
+                return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-${romanNumeral}/${sprite}/transparent/${is_gray}${number}.png`;
+            }
+        
+	        let is_shiny = shiny.checked ? 'shiny/' : '';
+        
+            if (sprite === 'default') {
+                return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${is_shiny}${number}.png`;
+            }
+        
+	        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-${romanNumeral}/${sprite}/${is_shiny}${number}.png`;
+        case 'link':
+            const value = document.getElementById(`link${index}-text`).value;
+
+            return value === '' ? null : value;
+        case 'upload':
+            const image = document.getElementById(`image${index}`).files[0];
+	
+	        if (image) {
+    	        return URL.createObjectURL(image);
+  	        }
+
+            return null;
+    }
+}
