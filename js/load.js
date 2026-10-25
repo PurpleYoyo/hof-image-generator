@@ -45,7 +45,7 @@ export function buildSpriteDropdowns() {
 }
 
 export function buildPresetDropdown() {
-    const dropdown = document.getElementById('presets');
+    const dropdown = document.getElementById('g3-presets');
     presets.forEach((game) => {
         let option = document.createElement('option');
         option.value = `${game.toLowerCase().replace('&', 'and').replace('/', '-')}-option`;
