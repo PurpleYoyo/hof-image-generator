@@ -10,26 +10,26 @@ export function toggleSidebar() {
 
 export function saveConfiguration() {
     const data = {
-        'background': getGeneration(),
-        'colors': {
-            'color1': document.getElementById('color1').value,
-            'color2': document.getElementById('color2').value,
+        background: getGeneration(),
+        colors: {
+            color1: document.getElementById('color1').value,
+            color2: document.getElementById('color2').value,
         },
-        'pokemon': {},
+        pokemon: {},
     };
 
     for (let i = 1; i < 7; i++) {
         data.pokemon[i] = {
-            'type': getType(i),
-            'name': {
-                'pokemon': document.getElementById(`pokemon${i}`).value,
-                'sprite': document.getElementById(`sprites${i}`).value,
-                'shiny': document.getElementById(`shiny${i}`).checked,
+            type: getType(i),
+            name: {
+                pokemon: document.getElementById(`pokemon${i}`).value,
+                sprite: document.getElementById(`sprites${i}`).value,
+                shiny: document.getElementById(`shiny${i}`).checked,
             },
-            'link': {
-                'link': document.getElementById(`link${i}-text`).value,
+            link: {
+                link: document.getElementById(`link${i}-text`).value,
             },
-            'resize': document.getElementById(`resize${i}`).checked,
+            resize: document.getElementById(`resize${i}`).checked,
         };
     }
 
