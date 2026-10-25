@@ -129,7 +129,7 @@ export function initializeEventListeners(start) {
         });
 	}
 
-    const dropdown = document.getElementById('presets');
+    const dropdown = document.getElementById('g3-presets');
 	dropdown.addEventListener('input', () => {
         applyPreset(dropdown.value);
         start();
