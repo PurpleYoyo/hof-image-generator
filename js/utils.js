@@ -135,6 +135,10 @@ export function applyPreset(game) {
             document.getElementById('color1').value = '#F8f8F8';
             document.getElementById('color2').value = '#F8f8F8';
             break;
+        case 'omega-ruby':
+            document.getElementById('color1').value = '#EF4D5D';
+            document.getElementById('color2').value = '#990A0C';
+            break;
     }
 }
 

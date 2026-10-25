@@ -6,15 +6,36 @@ const presetLinks = [
     'https://raw.githubusercontent.com/PurpleYoyo/hof-image-generator/refs/heads/main/smallchung.png',
 ];
 
-const presets = [
-    'Emerald',
-    'FireRed-LeafGreen',
-    'Ruby/Sapphire',
-    'Heart & Soul',
-    'Unbound',
-    'Soulgold',
-    'Ghost Grey',
-];
+const generationPresets = {
+    3: {
+        vanilla: [
+            'Emerald',
+            'FireRed/LeafGreen',
+            'Ruby/Sapphire',
+        ],
+        romhacks: [
+            'Heart & Soul',
+            'Unbound',
+            'Soulgold',
+            'Ghost Grey',
+        ],
+        custom: [
+            'Omega Ruby'
+        ],
+    },
+    4: {},
+    5: {},
+};
+
+generationPresetGroups = {
+    3: [
+        'Vanilla',
+        'Romhacks',
+        'Custom',
+    ],
+    4: [],
+    5: [],
+};
 
 const sprites = [
     'Default',
@@ -45,12 +66,27 @@ export function buildSpriteDropdowns() {
 }
 
 export function buildPresetDropdown() {
-    const dropdown = document.getElementById('g3-presets');
-    presets.forEach((game) => {
-        let option = document.createElement('option');
-        option.value = `${game.toLowerCase().replace('&', 'and').replace('/', '-')}-option`;
-        option.text = game;
-        dropdown.appendChild(option);
+    [3].forEach((generation) => {
+        const dropdown = document.getElementById(`g${generation}-presets`);
+        const presets = generationPresets[generation];
+        const presetGroups = generationPresetGroups[generation];
+
+        presetGroups.forEach((name) => {
+            const group = document.createElement('optgroup');
+            group.value = `${name.toLowerCase().replace(' ', '-')}-optgroup`;
+            group.text = name;
+
+            const options = presets[name.toLowerCase()];
+            options.forEach((game) => {
+                let option = document.createElement('option');
+                option.value = `${game.toLowerCase().replace('&', 'and').replace('/', '-').replace(' ', '-')}-option`;
+                option.text = game;
+
+                group.appendChild(option);
+            });
+
+            dropdown.appendChild(group);
+        });
     });
 }
 
