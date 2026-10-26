@@ -120,7 +120,7 @@ export function buildPresetDropdown() {
 
             dropdown.appendChild(optgroup);
         });
-    });
+    }
 }
 
 export function randomizeStartColors() {
