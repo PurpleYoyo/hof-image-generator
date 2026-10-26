@@ -105,6 +105,8 @@ export function getRandomElement(arr) {
 }
 
 export function applyPreset(game) {
+    let border = true;
+
     switch (game) {
         default:
         case 'emerald':
@@ -130,8 +132,7 @@ export function applyPreset(game) {
         case 'soulgold':
             document.getElementById('color1').value = '#191547';
             document.getElementById('color2').value = '#191547';
-
-            const border = document.getElementById('borders').checked = false;
+            border = false;
             break;
         case 'ghost-grey':
             document.getElementById('color1').value = '#F8f8F8';
@@ -142,6 +143,8 @@ export function applyPreset(game) {
             document.getElementById('color2').value = '#990A0C';
             break;
     }
+
+    document.getElementById('borders').checked = border;
 }
 
 export function getRandomInt(max) {
