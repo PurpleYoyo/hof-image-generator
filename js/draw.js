@@ -1,6 +1,6 @@
 import { allPokemon, pokemonIntroductionGeneration, getBasePokemon } from './pokemon.js';
 import { buildSpriteDropdowns, buildPresetDropdown, randomizeStartColors, buildSuggestions, initializeEventListeners, randomizePlaceholders } from './load.js';
-import { getGeneration, getType, hideInputs, getColors, getInputs } from './utils.js';
+import { getGeneration, getType, hideInputs, getColors, getInputs, getTrainerType } from './utils.js';
 
 const img = new Image();
 
@@ -397,10 +397,33 @@ function drawTrainer(generation) {
         ctx.drawImage(trainer, position.x, position.y);
     }
 
-    const name = document.getElementById('trainers').value;
-    if (name === '') {
-        return;
+    trainer.src = buildTrainerLink();
+}
+
+function buildTrainerLink() {
+    const trainerType = getTrainerType();
+
+    switch (trainerType) {
+        default:
+        case 'name':
+            const name = document.getElementById('trainers').value;
+
+            if (name === '') {
+                return null;
+            }
+        
+            return `images/trainers/${trainer}.png`;
+        case 'link':
+            const value = document.getElementById('trainer-link-text').value;
+
+            return value === '' ? null : value;
+        case 'upload':
+            const image = document.getElementById('trainer-image').files[0];
+	
+	        if (image) {
+    	        return URL.createObjectURL(image);
+  	        }
+
+            return null;
     }
-    
-    trainer.src = `images/trainers/${trainer}.png`;
 }
