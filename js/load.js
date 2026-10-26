@@ -190,8 +190,8 @@ export function initializeEventListeners(start) {
 
         const presets = generationPresets[3];
 
-        presets.forEach((group) => {
-            group.forEach((game) => {
+        Object.keys(presets).forEach((group) => {
+            Object.keys(presets[group]).forEach((game) => {
                 if (presets[group][game].value === value) {
                     const preset = presets[group][game];
 
