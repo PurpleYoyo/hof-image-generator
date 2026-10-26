@@ -130,6 +130,8 @@ export function applyPreset(game) {
         case 'soulgold':
             document.getElementById('color1').value = '#191547';
             document.getElementById('color2').value = '#191547';
+
+            const border = document.getElementById('borders').checked = false;
             break;
         case 'ghost-grey':
             document.getElementById('color1').value = '#F8f8F8';

@@ -94,8 +94,10 @@ function start() {
 }
 
 function drawBackground(generation) {
+    const border = document.getElementById('borders').checked;
+
     img.crossOrigin = 'Anonymous';
-    img.src = `images/g${generation}-template.png`;
+    img.src = border ? `images/g${generation}-template.png` : `images/g${generation}-template-borderless.png`;
     
     img.onload = () => {
         const preview = document.getElementById('preview');

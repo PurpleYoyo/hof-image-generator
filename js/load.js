@@ -116,6 +116,8 @@ export function initializeEventListeners(start) {
 	    }
 	});
 
+    document.getElementById('borders').addEventListener('input', start);
+
     for (let i = 1; i < 7; i++) {
         document.getElementById(`link${i}-text`).addEventListener('input', start);
 	}
