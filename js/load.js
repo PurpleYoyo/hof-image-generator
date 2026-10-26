@@ -100,6 +100,10 @@ export function buildPresetDropdown() {
         const dropdown = document.getElementById(`g${generation}-presets`);
         const presets = generationPresets[generation];
 
+        const none = document.createElement('option');
+        none.value = 'none-option';
+        none.text = 'None';
+
         Object.keys(presets).forEach((group) => {
             const optgroup = document.createElement('optgroup');
             optgroup.label = group;
@@ -132,35 +136,50 @@ export function buildSuggestions() {
 }
 
 export function initializeEventListeners(start) {
-    document.getElementById('g3').addEventListener('change', start);
-    document.getElementById('g4').addEventListener('change', start);
-    //document.getElementById('g5').addEventListener('change', start);
+    for (const i = 3; i < 5; i++) {
+        document.getElementById(`g${i}`).addEventListener('change', () => {
+            document.getElementById(`g${}-presets`).value = 'none-option';
 
-	document.getElementById('color1').addEventListener('input', start);
-	document.getElementById('color2').addEventListener('input', start);
+            start();
+        });
+    }
+
+    for (const i = 1; i < 3; i++) {
+	    document.getElementById(`color${i}`).addEventListener('input', start);
+	}
+
 	['shiny', 'pokemon', 'image'].forEach((id) => {
-	    for (let i = 1; i < 7; i++) {
+	    for (const i = 1; i < 7; i++) {
 	        document.getElementById(`${id}${i}`).addEventListener('input', start);
 	    }
 	});
 
     document.getElementById('borders').addEventListener('input', start);
 
-    for (let i = 1; i < 7; i++) {
+    for (const i = 1; i < 7; i++) {
         document.getElementById(`link${i}-text`).addEventListener('input', start);
 	}
 
-    for (let i = 1; i < 7; i++) {
+    for (const i = 1; i < 7; i++) {
         const input = document.getElementById(`sprites${i}`);
 	    input.addEventListener('input', () => {
             modifyLabels(input, i);
+
             start();
         });
+
+        document.getElementById(`name${i}`).addEventListener('change', start);
+        document.getElementById(`link${i}`).addEventListener('change', start);
+        document.getElementById(`upload${i}`).addEventListener('change', start);
 	}
 
     const dropdown = document.getElementById('g3-presets');
 	dropdown.addEventListener('input', () => {
         const value = dropdown.value.replace('-option', '');
+        if (value === 'none') {
+            return;
+        }
+
         const presets = generationPresets[3];
 
         presets.forEach((group) => {
@@ -178,17 +197,12 @@ export function initializeEventListeners(start) {
         start();
     });
 
-    for (let i = 1; i < 7; i++) {
-        document.getElementById(`name${i}`).addEventListener('change', start);
-        document.getElementById(`link${i}`).addEventListener('change', start);
-        document.getElementById(`upload${i}`).addEventListener('change', start);
-	}
-
     document.getElementById('download').addEventListener('click', downloadImage);
 
     document.getElementById('save-configuration').addEventListener('click', saveConfiguration);
     document.getElementById('load-configuration').addEventListener('input', () => {
         readFile();
+        
         start();
     });
 
