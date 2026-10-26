@@ -73,6 +73,11 @@ const recoloringFunctions = {
     '5': recolorGen5Background,
 };
 
+const gemerationTrainerPositions = {
+    '3': { x: 80, y: 32 },
+    '4': { x: 88, y: 64 },
+};
+
 const generation1Games = ['red-blue', 'yellow'];
 const generation2Games = ['gold', 'silver', 'crystal'];
 
@@ -246,6 +251,10 @@ function drawSprites(generation) {
             ); 
         };
 
+        if (document.getElementById('trainer').checked) {
+            drawTrainer(generation);
+        }
+
         copyCanvasToImage();
     });
 }
@@ -376,4 +385,17 @@ function buildSpriteLink(index) {
 
             return null;
     }
+}
+
+function drawTrainer(generation) {
+    const position = gemerationTrainerPositions[generation];
+
+    const trainer = new Image();
+    trainer.crossOrigin = 'Anonymous';
+
+    trainer.onload = () => {
+        ctx.drawImage(trainer, position.x, position.y);
+    }
+
+    trainer.src = `images/traiiners/${document.getElementById('trainers').value}.png`;
 }

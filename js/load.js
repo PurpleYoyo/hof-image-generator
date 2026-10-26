@@ -67,28 +67,136 @@ const generationPresets = {
     5: {},
 };
 
-const sprites = [
-    'Default',
-    'Yellow',
-    'Red/Blue',
-    'Crystal',
-    'Gold',
-    'Silver',
-    'Emerald',
-    'FireRed/LeafGreen',
-    'Ruby/Sapphire',
-    'HeartGold/SoulSilver',
-    'Platinum',
-    'Diamond/Pearl',
-    'Black/White'
-];
+const sprites = {
+    'Default': {
+        value: 'default',
+    },
+    'Yellow': {
+        value: 'yellow',
+    },
+    'Red/Blue': {
+        value: 'red-blue',
+    },
+    'Crystal': {
+        value: 'crystal',
+    },
+    'Gold': {
+        value: 'gold',
+    },
+    'Silver': {
+        value: 'silver',
+    },
+    'Emerald': {
+        value: 'emerald',
+    },
+    'FireRed/LeafGreen': {
+        value: 'firered-leafgreen',
+    },
+    'Ruby/Sapphire': {
+        value: 'ruby-sapphire',
+    },
+    'HeartGold/SoulSilver': {
+        value: 'heartgold-soulsilver',
+    },
+    'Platinum': {
+        value: 'platinum',
+    },
+    'Diamond/Pearl': {
+        value: 'diamond-pearl',
+    },
+    'Black/White': {
+        value: 'black-white',
+    },
+};
+
+const trainers = {
+    'Red (Yellow)': {
+        value: 'red-y',
+    },
+    'Red (Red/Blue)': {
+        value: 'red-rb',
+    },
+    'Red (Generation 2)': {
+        value: 'red-g2',
+    },
+    'Red (Generation 3)': {
+        value: 'red-g3',
+    },
+    'Red (Generation 4)': {
+        value: 'red-g4',
+    },
+    'Blue (Generation 1)': {
+        value: 'blue-g1',
+    },
+    'Blue (Generation 2)': {
+        value: 'blue-g2',
+    },
+    'Blue (Generation 3)': {
+        value: 'blue-g3',
+    },
+    'Blue (Generation 4)': {
+        value: 'nlue-g4',
+    },
+    'Ethan (Gold/Silver)': {
+        value: 'ethan-gs',
+    },
+    'Ethan (Crystal)': {
+        value: 'ethan-c',
+    },
+    'Ethan (Generation 4)': {
+        value: 'ethan-g4',
+    },
+    'Lyra (Generation 4)': {
+        value: 'lyra-g4',
+    },
+    'Brendan (Ruby/Sapphire)': {
+        value: 'brendan-rs',
+    },
+    'Brendan (Emerald)': {
+        value: 'brendan-e',
+    },
+    'May (Ruby/Sapphire)': {
+        value: 'may-rs',
+    },
+    'May (Emerald)': {
+        value: 'may-e',
+    },
+    'Lucas (Diamond/Pearl': {
+        value: 'lucas-dp',
+    },
+    'Lucas (Platinum)': {
+        value: 'lucas-p',
+    },
+    'Dawn (Diamond/Pearl)': {
+        value: 'dawn-dp',
+    },
+    'Dawn (Platinum)': {
+        value: 'dawn-p',
+    },
+    'Hilbert': {
+        value: 'hilbert',
+    },
+    'Hilda': {
+        value: 'hilda',
+    },
+};
+
+export function buildTrainerDropdown() {
+    const dropdown = document.getElementById('trainers');
+    Object.keys(trainers).forEach((trainer) => {
+        let option = document.createElement('option');
+        option.value = trainers[trainer].value;
+        option.text = trainer;
+        dropdown.appendChild(option);
+    });
+}
 
 export function buildSpriteDropdowns() {
     for (let i = 1; i < 7; i++) {
         const dropdown = document.getElementById(`sprites${i}`);
-        sprites.forEach((game) => {
+        Object.keys(sprites).forEach((game) => {
             let option = document.createElement('option');
-            option.value = `${game.toLowerCase().replace('/', '-')}-option`;
+            option.value = `${sprites[game].value}-option`;
             option.text = game;
             dropdown.appendChild(option);
         });
@@ -163,6 +271,9 @@ export function initializeEventListeners(start) {
 
         start();
     });
+
+    document.getElementById('trainer').addEventListener('input', start);
+    document.getElementById('trainers').addEventListener('input', start);
 
     for (let i = 1; i < 7; i++) {
         document.getElementById(`link${i}-text`).addEventListener('input', start);

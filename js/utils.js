@@ -119,6 +119,13 @@ export function getGeneration() {
 }
 
 export function hideInputs(generation) {
+    if (!document.getElementById('trainer').checked) {
+        document.getElementById('trainer-sprite').classList.add('hidden');
+    }
+    else {
+        document.getElementById('trainer-sprite').classList.remove('hidden');
+    }
+
     if (generation !== '3') {
         document.getElementById('color1').classList.add('hidden');
         document.getElementById('color1-label').classList.add('hidden');
