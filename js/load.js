@@ -96,9 +96,9 @@ export function buildSpriteDropdowns() {
 }
 
 export function buildPresetDropdown() {
-    [3].forEach((generation) => {
-        const dropdown = document.getElementById(`g${generation}-presets`);
-        const presets = generationPresets[generation];
+    for (let i = 3; i < 4; i++) {
+        const dropdown = document.getElementById(`g${i}-presets`);
+        const presets = generationPresets[i];
 
         const none = document.createElement('option');
         none.value = 'none-option';
@@ -138,7 +138,7 @@ export function buildSuggestions() {
 }
 
 export function initializeEventListeners(start) {
-    for (let i = 3; i < 5; i++) {
+    for (let i = 3; i < 4; i++) {
         document.getElementById(`g${i}`).addEventListener('change', () => {
             document.getElementById(`g${i}-presets`).value = 'none-option';
 
@@ -157,7 +157,7 @@ export function initializeEventListeners(start) {
 	});
 
     document.getElementById('borders').addEventListener('input', () => { 
-        for (let i = 3; i < 5; i++) {
+        for (let i = 3; i < 4; i++) {
             document.getElementById(`g${i}-presets`).value = 'none-option';
         }
 
