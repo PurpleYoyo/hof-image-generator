@@ -138,7 +138,7 @@ export function buildSuggestions() {
 export function initializeEventListeners(start) {
     for (const i = 3; i < 5; i++) {
         document.getElementById(`g${i}`).addEventListener('change', () => {
-            document.getElementById(`g${}-presets`).value = 'none-option';
+            document.getElementById(`g${i}-presets`).value = 'none-option';
 
             start();
         });
@@ -202,7 +202,7 @@ export function initializeEventListeners(start) {
     document.getElementById('save-configuration').addEventListener('click', saveConfiguration);
     document.getElementById('load-configuration').addEventListener('input', () => {
         readFile();
-        
+
         start();
     });
 
