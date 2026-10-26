@@ -130,8 +130,7 @@ export function initializeEventListeners(start) {
 
     const dropdown = document.getElementById('g3-presets');
 	dropdown.addEventListener('input', () => {
-        console.log(dropdown.value);
-        applyPreset(dropdown.value);
+        applyPreset(dropdown.value.replace('-option', ''));
         start();
     });
 

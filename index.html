@@ -46,246 +46,248 @@
 
             <br>
 
-            <input type="color" id="color1" name="color1" value="#731810" />
-            <label for="color1">Color 1</label>
+            <fieldset>
+                <legend>Options</legend>
 
-            <input type="color" id="color2" name="color2" value="#631010" />
-            <label for="color2">Color 2</label>
+                <input type="color" id="color1" name="color1" value="#731810" />
+                <label for="color1">Color 1</label>
 
-            <br>
+                <input type="color" id="color2" name="color2" value="#631010" />
+                <label for="color2">Color 2</label>
 
-            <div id="pokemon">
-                <datalist id="pokemon-suggestions"></datalist>
+                <br>
 
-                <fieldset class="pokemon">
-                    <legend>Pokémon 1</legend>
+                <label for="g3-presets" id="g3-presets-label">Presets</label>
+                <select name="g3-presets" id="g3-presets"></select>
+            </fieldset>
 
-                    <input type="radio" id="name1" name="type1" class="type1" value="name" checked />
-                    <label for="name1">Name</label>
+            <br><br>
 
-                    <input type="radio" id="link1" name="type1" class="type1" value="link" />
-                    <label for="link1">Link</label>
-
-                    <input type="radio" id="upload1" name="type1" class="type1" value="upload" />
-                    <label for="upload1">Upload</label>
-                    
-                    <div id="name1-input">
-                        <input type="text" id="pokemon1" list="pokemon-suggestions" name="pokemon1" />
-
-                        <label for="sprites1" id="sprites1-label">Sprite</label>
-                        <select name="sprites1" id="sprites1"></select>
-                        
-                        <input type="checkbox" id="shiny1" name="shiny1" />
-                        <label for="shiny1" id="shiny1-label">Shiny?</label>
-                    </div>
-
-                    <div id="link1-input">
-                        <input type="text" id="link1-text" name="link1" />
-                        <label for="link1">Link</label>
-                    </div>
-                    
-                    <div id="upload1-input">
-                        <input type="file" id="image1" name="image1" accept="image/png, image/jpeg" />
-                    </div>
-
-                    <input type="checkbox" id="resize1" name="resize1" checked />
-                    <label for="resize1" id="resize1-label" class="tooltip" tooltip="Resize the image if it has invalid dimensions?">Resize Image?</label>
-                </fieldset>
-
-                <fieldset class="pokemon">
-                    <legend>Pokémon 2</legend>
-
-                    <input type="radio" id="name2" name="type2" class="type2" value="name" checked />
-                    <label for="name2">Name</label>
-
-                    <input type="radio" id="link2" name="type2" class="type2" value="link" />
-                    <label for="link2">Link</label>
-
-                    <input type="radio" id="upload2" name="type2" class="type2" value="upload" />
-                    <label for="upload2">Upload</label>
-                    
-                    <div id="name2-input">
-                        <input type="text" id="pokemon2" list="pokemon-suggestions" name="pokemon2" />
-
-                        <label for="sprites2" id="sprites2-label">Sprite</label>
-                        <select name="sprites2" id="sprites2"></select>
-                        
-                        <input type="checkbox" id="shiny2" name="shiny2" />
-                        <label for="shiny2" id="shiny2-label">Shiny?</label>
-                    </div>
-                    
-                    <div id="link2-input">
-                        <input type="text" id="link2-text" name="link2" />
-                        <label for="link2">Link</label>
-                    </div>
-                    
-                    <div id="upload2-input">
-                        <input type="file" id="image2" name="image2" accept="image/png, image/jpeg" />
-                    </div>
-
-                    <input type="checkbox" id="resize2" name="resize2" checked />
-                    <label for="resize2" id="resize2-label" class="tooltip" tooltip="Resize the image if it has invalid dimensions?">Resize Image?</label>
-                </fieldset>
-                
-                <fieldset class="pokemon">
-                    <legend>Pokémon 3</legend>
-
-                    <input type="radio" id="name3" name="type3" class="type3" value="name" checked />
-                    <label for="name3">Name</label>
-
-                    <input type="radio" id="link3" name="type3" class="type3" value="link" />
-                    <label for="link3">Link</label>
-
-                    <input type="radio" id="upload3" name="type3" class="type3" value="upload" />
-                    <label for="upload3">Upload</label>
-
-                    <div id="name3-input">
-                        <input type="text" id="pokemon3" list="pokemon-suggestions" name="pokemon3" />
-
-                        <label for="sprites3" id="sprites3-label">Sprite</label>
-                        <select name="sprites3" id="sprites3"></select>
-                        
-                        <input type="checkbox" id="shiny3" name="shiny3" />
-                        <label for="shiny3" id="shiny3-label">Shiny?</label>
-                    </div>
-                    
-                    <div id="link3-input">
-                        <input type="text" id="link3-text" name="link3" />
-                        <label for="link3">Link</label>
-                    </div>
-                    
-                    <div id="upload3-input">
-                        <input type="file" id="image3" name="image3" accept="image/png, image/jpeg" />
-                    </div>
-
-                    <input type="checkbox" id="resize3" name="resize3" checked />
-                    <label for="resize3" id="resize3-label" class="tooltip" tooltip="Resize the image if it has invalid dimensions?">Resize Image?</label>
-                </fieldset>
-
-                <fieldset class="pokemon">
-                    <legend>Pokémon 4</legend>
-
-                    <input type="radio" id="name4" name="type4" class="type4" value="name" checked />
-                    <label for="name4">Name</label>
-
-                    <input type="radio" id="link4" name="type4" class="type4" value="link" />
-                    <label for="link4">Link</label>
-
-                    <input type="radio" id="upload4" name="type4" class="type4" value="upload" />
-                    <label for="upload4">Upload</label>
-
-                    <div id="name4-input">
-                        <input type="text" id="pokemon4" list="pokemon-suggestions" name="pokemon4" />
-                    
-                        <label for="sprites4" id="sprites4-label">Sprite</label>
-                        <select name="sprites4" id="sprites4"></select>
-                        
-                        <input type="checkbox" id="shiny4" name="shiny4" />
-                        <label for="shiny4" id="shiny4-label">Shiny?</label>
-                    </div>
-                    
-                    <div id="link4-input">
-                        <input type="text" id="link4-text" name="link4" />
-                        <label for="link4">Link</label>
-                    </div>
-
-                    <div id="upload4-input">
-                        <input type="file" id="image4" name="image4" accept="image/png, image/jpeg" />
-                    </div>
-
-                    <input type="checkbox" id="resize4" name="resize4" checked />
-                    <label for="resize4" id="resize4-label" class="tooltip" tooltip="Resize the image if it has invalid dimensions?">Resize Image?</label>
-                </fieldset>
-
-                <fieldset class="pokemon">
-                    <legend>Pokémon 5</legend>
-
-                    <input type="radio" id="name5" name="type5" class="type5" value="name" checked />
-                    <label for="name5">Name</label>
-
-                    <input type="radio" id="link5" name="type5" class="type5" value="link" />
-                    <label for="link5">Link</label>
-
-                    <input type="radio" id="upload5" name="type5" class="type5" value="upload" />
-                    <label for="upload5">Upload</label>
-
-                    <div id="name5-input">
-                        <input type="text" id="pokemon5" list="pokemon-suggestions" name="pokemon5" />
-                    
-                        <label for="sprites5" id="sprites5-label">Sprite</label>
-                        <select name="sprites5" id="sprites5"></select>
-                        
-                        <input type="checkbox" id="shiny5" name="shiny5" />
-                        <label for="shiny5" id="shiny5-label">Shiny?</label>
-                    </div>
-                    
-                    <div id="link5-input">
-                        <input type="text" id="link5-text" name="link5" />
-                        <label for="link5">Link</label>
-                    </div>
-
-                    <div id="upload5-input">
-                        <input type="file" id="image5" name="image5" accept="image/png, image/jpeg" />
-                    </div>
-
-                    <input type="checkbox" id="resize5" name="resize5" checked />
-                    <label for="resize5" id="resize5-label" class="tooltip" tooltip="Resize the image if it has invalid dimensions?">Resize Image?</label>
-                </fieldset>
-
-                <fieldset class="pokemon">
-                    <legend>Pokémon 6</legend>
-
-                    <input type="radio" id="name6" name="type6" class="type6" value="name" checked />
-                    <label for="name6">Name</label>
-
-                    <input type="radio" id="link6" name="type6" class="type6" value="link" />
-                    <label for="link6">Link</label>
-
-                    <input type="radio" id="upload6" name="type6" class="type6" value="upload" />
-                    <label for="upload6">Upload</label>
-
-                    <div id="name6-input">
-                        <input type="text" id="pokemon6" list="pokemon-suggestions" name="pokemon6" />
-                    
-                        <label for="sprites6" id="sprites6-label">Sprite</label>
-                        <select name="sprites6" id="sprites6"></select>
-                        
-                        <input type="checkbox" id="shiny6" name="shiny6" />
-                        <label for="shiny6" id="shiny6-label">Shiny?</label>
-                    </div>
-            
-                    <div id="link6-input">
-                        <input type="text" id="link6-text" name="link6" />
-                        <label for="link6">Link</label>
-                    </div>
-
-                    <div id="upload6-input">
-                        <input type="file" id="image6" name="image6" accept="image/png, image/jpeg" />
-                    </div>
-
-                    <input type="checkbox" id="resize6" name="resize6" checked />
-                    <label for="resize6" id="resize6-label" class="tooltip" tooltip="Resize the image if it has invalid dimensions?">Resize Image?</label>
-                </fieldset>
+            <div id="image">
+                <img id="preview" width="480", height="320"></img>
+                <canvas id="canvas" class="hidden" width="480", height="320"></canvas>
             </div>
+
+            <input type="button" id="download" value="Save Image" />
+        </div>
+
+        <div id="pokemon">
+            <datalist id="pokemon-suggestions"></datalist>
+
+            <fieldset class="pokemon">
+                <legend>Pokémon 1</legend>
+
+                <input type="radio" id="name1" name="type1" class="type1" value="name" checked />
+                <label for="name1">Name</label>
+
+                <input type="radio" id="link1" name="type1" class="type1" value="link" />
+                <label for="link1">Link</label>
+
+                <input type="radio" id="upload1" name="type1" class="type1" value="upload" />
+                <label for="upload1">Upload</label>
+                    
+                <div id="name1-input">
+                    <input type="text" id="pokemon1" list="pokemon-suggestions" name="pokemon1" />
+
+                    <label for="sprites1" id="sprites1-label">Sprite</label>
+                    <select name="sprites1" id="sprites1"></select>
+                        
+                    <input type="checkbox" id="shiny1" name="shiny1" />
+                    <label for="shiny1" id="shiny1-label">Shiny?</label>
+                </div>
+
+                <div id="link1-input">
+                    <input type="text" id="link1-text" name="link1" />
+                    <label for="link1">Link</label>
+                </div>
+                    
+                <div id="upload1-input">
+                    <input type="file" id="image1" name="image1" accept="image/png, image/jpeg" />
+                </div>
+
+                <input type="checkbox" id="resize1" name="resize1" checked />
+                <label for="resize1" id="resize1-label" class="tooltip" tooltip="Resize the image if it has invalid dimensions?">Resize Image?</label>
+            </fieldset>
+
+            <fieldset class="pokemon">
+                <legend>Pokémon 2</legend>
+
+                <input type="radio" id="name2" name="type2" class="type2" value="name" checked />
+                <label for="name2">Name</label>
+
+                <input type="radio" id="link2" name="type2" class="type2" value="link" />
+                <label for="link2">Link</label>
+
+                <input type="radio" id="upload2" name="type2" class="type2" value="upload" />
+                <label for="upload2">Upload</label>
+                
+                <div id="name2-input">
+                    <input type="text" id="pokemon2" list="pokemon-suggestions" name="pokemon2" />
+
+                    <label for="sprites2" id="sprites2-label">Sprite</label>
+                    <select name="sprites2" id="sprites2"></select>
+                    
+                    <input type="checkbox" id="shiny2" name="shiny2" />
+                    <label for="shiny2" id="shiny2-label">Shiny?</label>
+                </div>
+                
+                <div id="link2-input">
+                    <input type="text" id="link2-text" name="link2" />
+                    <label for="link2">Link</label>
+                </div>
+                
+                <div id="upload2-input">
+                    <input type="file" id="image2" name="image2" accept="image/png, image/jpeg" />
+                </div>
+
+                <input type="checkbox" id="resize2" name="resize2" checked />
+                <label for="resize2" id="resize2-label" class="tooltip" tooltip="Resize the image if it has invalid dimensions?">Resize Image?</label>
+            </fieldset>
+                
+            <fieldset class="pokemon">
+                <legend>Pokémon 3</legend>
+                
+                <input type="radio" id="name3" name="type3" class="type3" value="name" checked />
+                <label for="name3">Name</label>
+                
+                <input type="radio" id="link3" name="type3" class="type3" value="link" />
+                <label for="link3">Link</label>
+                
+                <input type="radio" id="upload3" name="type3" class="type3" value="upload" />
+                <label for="upload3">Upload</label>
+                
+                <div id="name3-input">
+                    <input type="text" id="pokemon3" list="pokemon-suggestions" name="pokemon3" />
+                   
+                    <label for="sprites3" id="sprites3-label">Sprite</label>
+                    <select name="sprites3" id="sprites3"></select>
+                    
+                    <input type="checkbox" id="shiny3" name="shiny3" />
+                    <label for="shiny3" id="shiny3-label">Shiny?</label>
+                </div>
+                
+                <div id="link3-input">
+                    <input type="text" id="link3-text" name="link3" />
+                    <label for="link3">Link</label>
+                </div>
+                
+                <div id="upload3-input">
+                    <input type="file" id="image3" name="image3" accept="image/png, image/jpeg" />
+                </div>
+                
+                <input type="checkbox" id="resize3" name="resize3" checked />
+                <label for="resize3" id="resize3-label" class="tooltip" tooltip="Resize the image if it has invalid dimensions?">Resize Image?</label>
+            </fieldset>
+
+            <fieldset class="pokemon">
+                <legend>Pokémon 4</legend>
+                
+                <input type="radio" id="name4" name="type4" class="type4" value="name" checked />
+                <label for="name4">Name</label>
+                
+                <input type="radio" id="link4" name="type4" class="type4" value="link" />
+                <label for="link4">Link</label>
+                
+                <input type="radio" id="upload4" name="type4" class="type4" value="upload" />
+                <label for="upload4">Upload</label>
+                
+                <div id="name4-input">
+                    <input type="text" id="pokemon4" list="pokemon-suggestions" name="pokemon4" />
+                
+                    <label for="sprites4" id="sprites4-label">Sprite</label>
+                    <select name="sprites4" id="sprites4"></select>
+                    
+                    <input type="checkbox" id="shiny4" name="shiny4" />
+                    <label for="shiny4" id="shiny4-label">Shiny?</label>
+                </div>
+                
+                <div id="link4-input">
+                    <input type="text" id="link4-text" name="link4" />
+                    <label for="link4">Link</label>
+                </div>
+                
+                <div id="upload4-input">
+                    <input type="file" id="image4" name="image4" accept="image/png, image/jpeg" />
+                </div>
+                
+                <input type="checkbox" id="resize4" name="resize4" checked />
+                <label for="resize4" id="resize4-label" class="tooltip" tooltip="Resize the image if it has invalid dimensions?">Resize Image?</label>
+            </fieldset>
+
+            <fieldset class="pokemon">
+                <legend>Pokémon 5</legend>
+                
+                <input type="radio" id="name5" name="type5" class="type5" value="name" checked />
+                <label for="name5">Name</label>
+                
+                <input type="radio" id="link5" name="type5" class="type5" value="link" />
+                <label for="link5">Link</label>
+                
+                <input type="radio" id="upload5" name="type5" class="type5" value="upload" />
+                <label for="upload5">Upload</label>
+                
+                <div id="name5-input">
+                    <input type="text" id="pokemon5" list="pokemon-suggestions" name="pokemon5" />
+                
+                    <label for="sprites5" id="sprites5-label">Sprite</label>
+                    <select name="sprites5" id="sprites5"></select>
+                    
+                    <input type="checkbox" id="shiny5" name="shiny5" />
+                    <label for="shiny5" id="shiny5-label">Shiny?</label>
+                </div>
+                
+                <div id="link5-input">
+                    <input type="text" id="link5-text" name="link5" />
+                    <label for="link5">Link</label>
+                </div>
+                
+                <div id="upload5-input">
+                    <input type="file" id="image5" name="image5" accept="image/png, image/jpeg" />
+                </div>
+                
+                <input type="checkbox" id="resize5" name="resize5" checked />
+                <label for="resize5" id="resize5-label" class="tooltip" tooltip="Resize the image if it has invalid dimensions?">Resize Image?</label>
+            </fieldset>
+
+            <fieldset class="pokemon">
+                <legend>Pokémon 6</legend>
+                
+                <input type="radio" id="name6" name="type6" class="type6" value="name" checked />
+                <label for="name6">Name</label>
+                
+                <input type="radio" id="link6" name="type6" class="type6" value="link" />
+                <label for="link6">Link</label>
+                
+                <input type="radio" id="upload6" name="type6" class="type6" value="upload" />
+                <label for="upload6">Upload</label>
+                
+                <div id="name6-input">
+                    <input type="text" id="pokemon6" list="pokemon-suggestions" name="pokemon6" />
+                
+                    <label for="sprites6" id="sprites6-label">Sprite</label>
+                    <select name="sprites6" id="sprites6"></select>
+                    
+                    <input type="checkbox" id="shiny6" name="shiny6" />
+                    <label for="shiny6" id="shiny6-label">Shiny?</label>
+                </div>
+        
+                <div id="link6-input">
+                    <input type="text" id="link6-text" name="link6" />
+                    <label for="link6">Link</label>
+                </div>
+                
+                <div id="upload6-input">
+                    <input type="file" id="image6" name="image6" accept="image/png, image/jpeg" />
+                </div>
+
+                <input type="checkbox" id="resize6" name="resize6" checked />
+                <label for="resize6" id="resize6-label" class="tooltip" tooltip="Resize the image if it has invalid dimensions?">Resize Image?</label>
+            </fieldset>
         </div>
 
         <input type="button" id="save-configuration" value="Save Configuration" />
         <label for="load-configuration">Load Configuration</label>
         <input type="file" id="load-configuration" name="load-configuration" accept=".json" />
-
-        <div id="image">
-            <h3>Preview</h3>
-
-            <label for="g3-presets" id="g3-presets-label">Presets</label>
-            <select name="g3-presets" id="g3-presets"></select>
-
-            <br><br>
-
-            <img id="preview" width="480", height="320"></img>
-            <canvas id="canvas" class="hidden" width="480", height="320"></canvas>
-        </div>
-
-        <input type="button" id="download" value="Save Image" />
     </div>
 </body>
 </html>
