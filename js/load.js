@@ -258,7 +258,15 @@ export function initializeEventListeners(start) {
 	    document.getElementById(`color${i}`).addEventListener('input', start);
 	}
 
-	['shiny', 'pokemon', 'image'].forEach((id) => {
+    ['link-text', 'resize', 'image'].forEach((id) => {
+	    document.getElementById(`trainer-${id}`).addEventListener('input', start);
+	});
+
+    document.getElementById('trainer-name').addEventListener('change', start);
+    document.getElementById('trainer-link').addEventListener('change', start);
+    document.getElementById('trainer-upload').addEventListener('change', start);
+
+	['resize', 'shiny', 'pokemon', 'image'].forEach((id) => {
 	    for (let i = 1; i < 7; i++) {
 	        document.getElementById(`${id}${i}`).addEventListener('input', start);
 	    }

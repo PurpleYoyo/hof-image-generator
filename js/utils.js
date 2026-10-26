@@ -145,6 +145,42 @@ export function hideInputs(generation) {
         document.getElementById('g3-presets-label').classList.remove('hidden');
     }
 
+    const trainerType = getTrainerType();
+
+    if (trainerType === 'name') {
+        document.getElementById('trainer-resize').classList.add('hidden');
+        document.getElementById('trainer-resize-label').classList.add('hidden');
+    }
+    else {
+        document.getElementById('trainer-resize').classList.remove('hidden');
+        document.getElementById('trainer-resize-label').classList.remove('hidden');
+    }
+
+    switch (trainerType) {
+        default:
+        case 'name':
+            document.getElementById('trainer-sprite-input').classList.remove('hidden');
+
+            document.getElementById('trainer-link-input').classList.add('hidden');
+            document.getElementById('trainer-upload-input').classList.add('hidden');
+            
+            break;
+        case 'link':
+            document.getElementById('trainer-link-input').classList.remove('hidden');
+
+            document.getElementById('trainer-sprite-input').classList.add('hidden');
+            document.getElementById('trainer-upload-input').classList.add('hidden');
+            
+            break;
+        case 'upload':
+            document.getElementById('trainer-upload-input').classList.remove('hidden');
+
+            document.getElementById('trainer-link-input').classList.add('hidden');
+            document.getElementById('trainer-sprite-input').classList.add('hidden');
+            
+            break;
+    }
+
     for (let i = 1; i < 7; i++) {
         const selected = getType(i);
 
@@ -187,6 +223,16 @@ export function hideInputs(generation) {
 export function getType(index) {
     for (const input_type of ['name', 'link', 'upload']) {
         if (document.getElementById(`${input_type}${index}`).checked) {
+            return input_type;
+        }
+    }
+    
+    return 'name';
+}
+
+export function getTrainerType() {
+    for (const input_type of ['name', 'link', 'upload']) {
+        if (document.getElementById(`trainer-${input_type}`).checked) {
             return input_type;
         }
     }

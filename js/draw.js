@@ -397,5 +397,10 @@ function drawTrainer(generation) {
         ctx.drawImage(trainer, position.x, position.y);
     }
 
-    trainer.src = `images/traiiners/${document.getElementById('trainers').value}.png`;
+    const name = document.getElementById('trainers').value;
+    if (name === '') {
+        return;
+    }
+    
+    trainer.src = `images/trainers/${trainer}.png`;
 }

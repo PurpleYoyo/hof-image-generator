@@ -68,8 +68,35 @@
                 <div id="trainer-sprite" class="hidden">
                     <br>
 
-                    <label for="trainers" id="trainers-label">Sprite</label>
-                    <select name="trainers" id="trainers"></select>
+                    <fieldset class="trainer">
+                        <legend>Trainer Sprite</legend>
+
+                        <input type="radio" id="trainer-name" name="trainer-type" class="trainer-type" value="name" checked />
+                        <label for="trainer-name">Sprite</label>
+                            
+                        <input type="radio" id="trainer-link" name="trainer-type" class="trainer-type" value="link" />
+                        <label for="trainer-link">Link</label>
+                            
+                        <input type="radio" id="trainer-upload" name="trainer-type" class="trainer-type" value="upload" />
+                        <label for="trainer-upload">Upload</label>
+
+                        <div id="trainer-sprite-input">
+                            <label for="trainers" id="trainers-label">Sprite</label>
+                            <select name="trainers" id="trainers"></select>
+                        </div>
+
+                        <div id="trainer-link-input">
+                            <input type="text" id="trainer-link-text" name="trainer-link" />
+                            <label for="trainer-link">Link</label>
+                        </div>
+
+                        <div id="trainer-upload-input">
+                            <input type="file" id="trainer-image" name="trainer-image" accept="image/png, image/jpeg" />
+                        </div>
+                    
+                        <input type="checkbox" id="trainer-resize" name="trainer-resize" checked />
+                        <label for="trainer-resize" id="trainer-resize-label" class="tooltip" tooltip="Resize the image if it has invalid dimensions?">Resize Image?</label>
+                    </fieldset>
                 </div>
 
                 <br>
