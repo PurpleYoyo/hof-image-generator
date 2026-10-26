@@ -103,6 +103,8 @@ export function buildPresetDropdown() {
         const none = document.createElement('option');
         none.value = 'none-option';
         none.text = 'None';
+        
+        dropdown.appendChild(none);
 
         Object.keys(presets).forEach((group) => {
             const optgroup = document.createElement('optgroup');
@@ -154,8 +156,10 @@ export function initializeEventListeners(start) {
 	    }
 	});
 
-    document.getElementById('borders').addEventListener('input', () => {
-        document.getElementById(`g${i}-presets`).value = 'none-option';
+    document.getElementById('borders').addEventListener('input', () => { 
+        for (let i = 3; i < 5; i++) {
+            document.getElementById(`g${i}-presets`).value = 'none-option';
+        }
 
         start();
     });
