@@ -149,7 +149,7 @@ export function initializeEventListeners(start) {
 	}
 
 	['shiny', 'pokemon', 'image'].forEach((id) => {
-	    for (const i = 1; i < 7; i++) {
+	    for (let i = 1; i < 7; i++) {
 	        document.getElementById(`${id}${i}`).addEventListener('input', start);
 	    }
 	});
