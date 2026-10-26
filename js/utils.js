@@ -104,49 +104,6 @@ export function getRandomElement(arr) {
 	return arr[Math.floor(arr.length * Math.random())];
 }
 
-export function applyPreset(game) {
-    let border = true;
-
-    switch (game) {
-        default:
-        case 'emerald':
-            document.getElementById('color1').value = '#84EFC6';
-            document.getElementById('color2').value = '#73DEB5';
-            break;
-        case 'ruby-sapphire':
-            document.getElementById('color1').value = '#FFD6E7';
-            document.getElementById('color2').value = '#FFB5E7';
-            break;
-        case 'firered-leafgreen':
-            document.getElementById('color1').value = '#B5C6EF';
-            document.getElementById('color2').value = '#A5B5EF';
-            break;
-        case 'unbound':
-            document.getElementById('color1').value = '#BC84E9';
-            document.getElementById('color2').value = '#BC84E9';
-            break;
-        case 'heart-and-soul':
-            document.getElementById('color1').value = '#731810';
-            document.getElementById('color2').value = '#631010';
-            break;
-        case 'soulgold':
-            document.getElementById('color1').value = '#191547';
-            document.getElementById('color2').value = '#191547';
-            border = false;
-            break;
-        case 'ghost-grey':
-            document.getElementById('color1').value = '#F8f8F8';
-            document.getElementById('color2').value = '#F8f8F8';
-            break;
-        case 'omega-ruby':
-            document.getElementById('color1').value = '#EF4D5D';
-            document.getElementById('color2').value = '#990A0C';
-            break;
-    }
-
-    document.getElementById('borders').checked = border;
-}
-
 export function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }

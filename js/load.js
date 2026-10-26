@@ -1,5 +1,5 @@
 import { allPokemon } from './pokemon.js';
-import { modifyLabels, getRandomElement, saveConfiguration, readFile, toggleSidebar, downloadImage, applyPreset, getRandomInt } from './utils.js';
+import { modifyLabels, getRandomElement, saveConfiguration, readFile, toggleSidebar, downloadImage, getRandomInt } from './utils.js';
 import { RGBToHex } from './colors.js';
 
 const presetLinks = [
@@ -8,33 +8,63 @@ const presetLinks = [
 
 const generationPresets = {
     3: {
-        vanilla: [
-            'Emerald',
-            'FireRed/LeafGreen',
-            'Ruby/Sapphire',
-        ],
-        romhacks: [
-            'Heart & Soul',
-            'Unbound',
-            'Soulgold',
-            'Ghost Grey',
-        ],
-        custom: [
-            'Omega Ruby'
-        ],
+        Vanilla: {
+            'Emerald': {
+                value: 'emerald',
+                color1: '#84EFC6',
+                color2: '#73DEB5',
+                borders: true,
+            },
+            'FireRed/LeafGreen': {
+                value: 'firered-leafgreen',
+                color1: '#B5C6EF',
+                color2: '#A5B5EF',
+                borders: true,
+            },
+            'Ruby/Sapphire': {
+                value: 'ruby-sapphire',
+                color1: '#FFD6E7',
+                color2: '#FFB5E7',
+                borders: true,
+            },
+        },
+        Romhacks: {
+            'Heart & Soul': {
+                value: 'heart-and-soul',
+                color1: '#731810',
+                color2: '#631010',
+                borders: true,
+            },
+            'Unbound': {
+                value: 'unbound',
+                color1: '#BC84E9',
+                color2: '#BC84E9',
+                borders: true,
+            },
+            'Soulgold': {
+                value: 'soulgold',
+                color1: '#191547',
+                color2: '#191547',
+                borders: false,
+            },
+            'Ghost Grey': {
+                value: 'ghost-grey',
+                color1: '#F8f8F8',
+                color2: '#F8f8F8',
+                borders: true,
+            },
+        },
+        Custom: {
+            'Omega Ruby': {
+                value: 'omega-ruby',
+                color1: '#EF4D5D',
+                color2: '#990A0C',
+                borders: true,
+            },
+        },
     },
     4: {},
     5: {},
-};
-
-const generationPresetGroups = {
-    3: [
-        'Vanilla',
-        'Romhacks',
-        'Custom',
-    ],
-    4: [],
-    5: [],
 };
 
 const sprites = [
@@ -69,22 +99,20 @@ export function buildPresetDropdown() {
     [3].forEach((generation) => {
         const dropdown = document.getElementById(`g${generation}-presets`);
         const presets = generationPresets[generation];
-        const presetGroups = generationPresetGroups[generation];
 
-        presetGroups.forEach((name) => {
-            const group = document.createElement('optgroup');
-            group.label = name;
+        Object.keys(presets).forEach((group) => {
+            const optgroup = document.createElement('optgroup');
+            optgroup.label = group;
 
-            const options = presets[name.toLowerCase()];
-            options.forEach((game) => {
-                let option = document.createElement('option');
-                option.value = `${game.toLowerCase().replace('&', 'and').replaceAll('/', '-').replaceAll(' ', '-')}-option`;
+            Object.keys(presets[group]).forEach((game) => {
+                const option = document.createElement('option');
+                option.value = `${presets[group][game].value}-option`;
                 option.text = game;
 
-                group.appendChild(option);
+                optgroup.appendChild(option);
             });
 
-            dropdown.appendChild(group);
+            dropdown.appendChild(optgroup);
         });
     });
 }
@@ -132,7 +160,21 @@ export function initializeEventListeners(start) {
 
     const dropdown = document.getElementById('g3-presets');
 	dropdown.addEventListener('input', () => {
-        applyPreset(dropdown.value.replace('-option', ''));
+        const value = dropdown.value.replace('-option', '');
+        const presets = generationPresets[3];
+
+        presets.forEach((group) => {
+            group.forEach((game) => {
+                if (presets[group][game].value === value) {
+                    const preset = presets[group][game];
+
+                    document.getElementById('color1').value = preset.color1;
+                    document.getElementById('color2').value = preset.color2;
+                    document.getElementById('borders').checked = preset.borders;
+                }
+            });
+        });
+        
         start();
     });
 
