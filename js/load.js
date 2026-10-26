@@ -136,7 +136,7 @@ export function buildSuggestions() {
 }
 
 export function initializeEventListeners(start) {
-    for (const i = 3; i < 5; i++) {
+    for (let i = 3; i < 5; i++) {
         document.getElementById(`g${i}`).addEventListener('change', () => {
             document.getElementById(`g${i}-presets`).value = 'none-option';
 
@@ -144,7 +144,7 @@ export function initializeEventListeners(start) {
         });
     }
 
-    for (const i = 1; i < 3; i++) {
+    for (let i = 1; i < 3; i++) {
 	    document.getElementById(`color${i}`).addEventListener('input', start);
 	}
 
@@ -156,11 +156,11 @@ export function initializeEventListeners(start) {
 
     document.getElementById('borders').addEventListener('input', start);
 
-    for (const i = 1; i < 7; i++) {
+    for (let i = 1; i < 7; i++) {
         document.getElementById(`link${i}-text`).addEventListener('input', start);
 	}
 
-    for (const i = 1; i < 7; i++) {
+    for (let i = 1; i < 7; i++) {
         const input = document.getElementById(`sprites${i}`);
 	    input.addEventListener('input', () => {
             modifyLabels(input, i);
