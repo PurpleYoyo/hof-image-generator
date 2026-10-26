@@ -78,7 +78,7 @@ export function buildPresetDropdown() {
             const options = presets[name.toLowerCase()];
             options.forEach((game) => {
                 let option = document.createElement('option');
-                option.value = `${game.toLowerCase().replace('&', 'and').replace('/', '-').replace(' ', '-')}-option`;
+                option.value = `${game.toLowerCase().replace('&', 'and').replaceAll('/', '-').replaceAll(' ', '-')}-option`;
                 option.text = game;
 
                 group.appendChild(option);

@@ -105,7 +105,6 @@ export function getRandomElement(arr) {
 }
 
 export function applyPreset(game) {
-    console.log(game);
     let border = true;
 
     switch (game) {
