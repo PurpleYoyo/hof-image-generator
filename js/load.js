@@ -185,7 +185,7 @@ const MIN_GENERATION = 3;
 const MAX_GENERATION = 4;
 
 export function buildTrainerDropdown() {
-    const dropdown = document.getElementById('trainer-sprite');
+    const dropdown = document.getElementById('trainer-sprites');
     Object.keys(trainers).forEach((trainer) => {
         let option = document.createElement('option');
         option.value = trainers[trainer].value;
