@@ -135,7 +135,7 @@ const trainers = {
         value: 'blue-g3',
     },
     'Blue (Generation 4)': {
-        value: 'nlue-g4',
+        value: 'blue-g4',
     },
     'Ethan (Gold/Silver)': {
         value: 'ethan-gs',
