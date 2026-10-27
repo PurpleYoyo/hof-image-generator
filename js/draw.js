@@ -390,7 +390,6 @@ function drawTrainer(generation) {
     const position = gemerationTrainerPositions[generation];
 
     const trainer = new Image();
-    trainer.crossOrigin = 'Anonymous';
 
     trainer.onload = () => {
         let dWidth = trainer.width;
