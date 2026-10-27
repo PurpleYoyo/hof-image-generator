@@ -1,3 +1,6 @@
+const generation1Games = ['red-blue', 'yellow'];
+const generation2Games = ['gold', 'silver', 'crystal'];
+
 export function getBasePokemon(name) {
     if (hyphenatedBasePokemon.includes(name)) {
         return name;

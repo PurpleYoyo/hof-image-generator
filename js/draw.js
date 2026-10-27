@@ -1,4 +1,4 @@
-import { allPokemon, pokemonIntroductionGeneration, getBasePokemon } from './pokemon.js';
+import { allPokemon, pokemonIntroductionGeneration, getBasePokemon, generation1Games, generation2Games } from './pokemon.js';
 import { buildSpriteDropdowns, buildPresetDropdown, randomizeStartColors, buildSuggestions, initializeEventListeners, randomizePlaceholders, buildTrainerDropdown } from './load.js';
 import { getGeneration, getType, hideInputs, getColors, getInputs, getTrainerType } from './utils.js';
 
@@ -77,9 +77,6 @@ const gemerationTrainerPositions = {
     '3': { x: 160, y: 64 },
     '4': { x: 176, y: 128 },
 };
-
-const generation1Games = ['red-blue', 'yellow'];
-const generation2Games = ['gold', 'silver', 'crystal'];
 
 window.addEventListener('load', (event) => {
     buildSpriteDropdowns();

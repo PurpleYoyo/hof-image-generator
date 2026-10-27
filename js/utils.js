@@ -1,4 +1,5 @@
 import { darkenColor, hexToRGB, RGBtoHSV, HSVtoRGB } from './colors.js';
+import { generation1Games, generation2Games } from './pokemon.js';
 
 export function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
@@ -86,7 +87,7 @@ export function downloadImage() {
     a.click()
 }
 
-export function modifyLabels(input, index, start) {
+export function modifyLabels(input, index) {
     let value = input.value.replace('-option', '');
 
     if (generation1Games.includes(value)) {
