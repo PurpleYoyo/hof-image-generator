@@ -419,7 +419,7 @@ function buildTrainerLink() {
                 return null;
             }
         
-            return `images/trainers/${trainer}.png`;
+            return `images/trainers/${name}.png`;
         case 'link':
             const value = document.getElementById('trainer-link-text').value;
 
