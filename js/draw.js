@@ -74,8 +74,8 @@ const recoloringFunctions = {
 };
 
 const gemerationTrainerPositions = {
-    '3': { x: 80, y: 32 },
-    '4': { x: 88, y: 64 },
+    '3': { x: 160, y: 64 },
+    '4': { x: 176, y: 128 },
 };
 
 const generation1Games = ['red-blue', 'yellow'];
@@ -255,8 +255,9 @@ function drawSprites(generation) {
         if (document.getElementById('trainer').checked) {
             drawTrainer(generation);
         }
-
-        copyCanvasToImage();
+        else {
+            copyCanvasToImage();
+        }
     });
 }
 
@@ -396,6 +397,8 @@ function drawTrainer(generation) {
 
     trainer.onload = () => {
         ctx.drawImage(trainer, position.x, position.y);
+
+        copyCanvasToImage();
     }
 
     const src = buildTrainerLink();
