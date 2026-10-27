@@ -185,7 +185,7 @@ const MIN_GENERATION = 3;
 const MAX_GENERATION = 4;
 
 export function buildTrainerDropdown() {
-    const dropdown = document.getElementById('trainers');
+    const dropdown = document.getElementById('trainer-sprite');
     Object.keys(trainers).forEach((trainer) => {
         let option = document.createElement('option');
         option.value = trainers[trainer].value;
@@ -316,7 +316,7 @@ export function initializeEventListeners(start) {
 
     // Download
     document.getElementById('download').addEventListener('click', downloadImage);
-    
+
     // Pokémon
     for (let i = 1; i < 7; i++) {
         document.getElementById(`name${i}`).addEventListener('change', start);
