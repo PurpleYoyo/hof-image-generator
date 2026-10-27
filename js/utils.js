@@ -128,19 +128,13 @@ export function hideInputs(generation) {
     }
 
     if (generation !== '3') {
-        document.getElementById('color1').classList.add('hidden');
-        document.getElementById('color1-label').classList.add('hidden');
-        document.getElementById('color2').classList.add('hidden');
-        document.getElementById('color2-label').classList.add('hidden');
+        document.getElementById('colors').classList.add('hidden');
 
         document.getElementById('g3-presets').classList.add('hidden');
         document.getElementById('g3-presets-label').classList.add('hidden');
     }
     else {
-        document.getElementById('color1').classList.remove('hidden');
-        document.getElementById('color1-label').classList.remove('hidden');
-        document.getElementById('color2').classList.remove('hidden');
-        document.getElementById('color2-label').classList.remove('hidden');
+        document.getElementById('colors').classList.remove('hidden');
 
         document.getElementById('g3-presets').classList.remove('hidden');
         document.getElementById('g3-presets-label').classList.remove('hidden');
