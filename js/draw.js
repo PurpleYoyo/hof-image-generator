@@ -396,7 +396,19 @@ function drawTrainer(generation) {
     trainer.crossOrigin = 'Anonymous';
 
     trainer.onload = () => {
-        ctx.drawImage(trainer, position.x, position.y);
+        let dWidth = trainer.width;
+        let dHeight = trainer.height;
+
+        if (document.getElementById('trainer-resize').checked || trainer.width === trainer.height) {
+	        dWidth = 160;
+	        dHeight = 160;
+        }
+        else {
+            alert('Trainer sprite has invalid dimensions.');
+            return null;
+        }
+
+        ctx.drawImage(trainer, position.x, position.y, dWidth, dHeight);
 
         copyCanvasToImage();
     }
