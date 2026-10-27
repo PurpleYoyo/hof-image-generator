@@ -408,6 +408,7 @@ function drawTrainer(generation) {
             return null;
         }
 
+        ctx.imageSmoothingEnabled = false;
         ctx.drawImage(trainer, position.x, position.y, dWidth, dHeight);
 
         copyCanvasToImage();
