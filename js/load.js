@@ -181,6 +181,9 @@ const trainers = {
     },
 };
 
+const MIN_GENERATION = 3;
+const MAX_GENERATION = 4;
+
 export function buildTrainerDropdown() {
     const dropdown = document.getElementById('trainers');
     Object.keys(trainers).forEach((trainer) => {
@@ -203,8 +206,8 @@ export function buildSpriteDropdowns() {
     }
 }
 
-export function buildPresetDropdown() {
-    for (let i = 3; i < 4; i++) {
+export function buildPresetDropdowns() {
+    for (let i = MIN_GENERATION; i < MAX_GENERATION + 1; i++) {
         const dropdown = document.getElementById(`g${i}-presets`);
         const presets = generationPresets[i];
 
@@ -246,7 +249,12 @@ export function buildSuggestions() {
 }
 
 export function initializeEventListeners(start) {
-    for (let i = 3; i < 4; i++) {
+    // Sidebar
+    document.getElementById('open-sidebar').addEventListener('click', toggleSidebar);
+    document.getElementById('close-sidebar').addEventListener('click', toggleSidebar);
+
+    // Background
+    for (let i = MIN_GENERATION; i < MAX_GENERATION + 1; i++) {
         document.getElementById(`g${i}`).addEventListener('change', () => {
             document.getElementById(`g${i}-presets`).value = 'none-option';
 
@@ -254,40 +262,67 @@ export function initializeEventListeners(start) {
         });
     }
 
+    // Colors
     for (let i = 1; i < 3; i++) {
 	    document.getElementById(`color${i}`).addEventListener('input', start);
 	}
 
-    ['link-text', 'resize', 'image'].forEach((id) => {
-	    document.getElementById(`trainer-${id}`).addEventListener('input', start);
-	});
-
-    document.getElementById('trainer-name').addEventListener('change', start);
-    document.getElementById('trainer-link').addEventListener('change', start);
-    document.getElementById('trainer-upload').addEventListener('change', start);
-
-	['resize', 'shiny', 'pokemon', 'image'].forEach((id) => {
-	    for (let i = 1; i < 7; i++) {
-	        document.getElementById(`${id}${i}`).addEventListener('input', start);
-	    }
-	});
-
+    // Borders
     document.getElementById('borders').addEventListener('input', () => { 
-        for (let i = 3; i < 4; i++) {
+        for (let i = MIN_GENERATION; i < MAX_GENERATION + 1; i++) {
             document.getElementById(`g${i}-presets`).value = 'none-option';
         }
 
         start();
     });
-
+    
+    // Trainer
     document.getElementById('trainer').addEventListener('input', start);
-    document.getElementById('trainers').addEventListener('input', start);
 
-    for (let i = 1; i < 7; i++) {
-        document.getElementById(`link${i}-text`).addEventListener('input', start);
-	}
+    ['name', 'link', 'upload'].forEach((id) => {
+	    document.getElementById(`trainer-${id}`).addEventListener('change', start);
+	});
 
+    ['link-text', 'resize', 'image', 'sprite'].forEach((id) => {
+	    document.getElementById(`trainer-${id}`).addEventListener('input', start);
+	});
+
+    // Presets
+    for (let i = MIN_GENERATION; i < MAX_GENERATION + 1; i++) {
+        const dropdown = document.getElementById(`g${i}-presets`);
+	    dropdown.addEventListener('input', () => {
+            const value = dropdown.value.replace('-option', '');
+            if (value === 'none') {
+                return;
+            }
+
+            const presets = generationPresets[i];
+
+            Object.keys(presets).forEach((group) => {
+                Object.keys(presets[group]).forEach((game) => {
+                    if (presets[group][game].value === value) {
+                        const preset = presets[group][game];
+
+                        document.getElementById('color1').value = preset.color1;
+                        document.getElementById('color2').value = preset.color2;
+                        document.getElementById('borders').checked = preset.borders;
+                    }
+                });
+            });
+
+            start();
+        });
+    }
+
+    // Download
+    document.getElementById('download').addEventListener('click', downloadImage);
+    
+    // Pokémon
     for (let i = 1; i < 7; i++) {
+        document.getElementById(`name${i}`).addEventListener('change', start);
+        document.getElementById(`link${i}`).addEventListener('change', start);
+        document.getElementById(`upload${i}`).addEventListener('change', start);
+
         const input = document.getElementById(`sprites${i}`);
 	    input.addEventListener('input', () => {
             modifyLabels(input, i);
@@ -295,46 +330,22 @@ export function initializeEventListeners(start) {
             start();
         });
 
-        document.getElementById(`name${i}`).addEventListener('change', start);
-        document.getElementById(`link${i}`).addEventListener('change', start);
-        document.getElementById(`upload${i}`).addEventListener('change', start);
+        document.getElementById(`link${i}-text`).addEventListener('input', start);
 	}
 
-    const dropdown = document.getElementById('g3-presets');
-	dropdown.addEventListener('input', () => {
-        const value = dropdown.value.replace('-option', '');
-        if (value === 'none') {
-            return;
-        }
+	['resize', 'shiny', 'pokemon', 'image'].forEach((id) => {
+        for (let i = 1; i < 7; i++) {
+	        document.getElementById(`${id}${i}`).addEventListener('input', start);
+	    }
+	});
 
-        const presets = generationPresets[3];
-
-        Object.keys(presets).forEach((group) => {
-            Object.keys(presets[group]).forEach((game) => {
-                if (presets[group][game].value === value) {
-                    const preset = presets[group][game];
-
-                    document.getElementById('color1').value = preset.color1;
-                    document.getElementById('color2').value = preset.color2;
-                    document.getElementById('borders').checked = preset.borders;
-                }
-            });
-        });
-        
-        start();
-    });
-
-    document.getElementById('download').addEventListener('click', downloadImage);
-
+    // Save & Load Configuration
     document.getElementById('save-configuration').addEventListener('click', saveConfiguration);
     document.getElementById('load-configuration').addEventListener('input', () => {
         readFile();
 
         start();
     });
-
-    document.getElementById('open-sidebar').addEventListener('click', toggleSidebar);
-    document.getElementById('close-sidebar').addEventListener('click', toggleSidebar);
 }
 
 export function randomizePlaceholders() {

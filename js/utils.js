@@ -130,25 +130,23 @@ export function hideInputs(generation) {
     if (generation !== '3') {
         document.getElementById('colors').classList.add('hidden');
 
-        document.getElementById('g3-presets').classList.add('hidden');
-        document.getElementById('g3-presets-label').classList.add('hidden');
+        document.getElementById('g3-presets-input').classList.add('hidden');
+        //document.getElementById('g4-presets-input').classList.remove('hidden');
     }
     else {
         document.getElementById('colors').classList.remove('hidden');
 
-        document.getElementById('g3-presets').classList.remove('hidden');
-        document.getElementById('g3-presets-label').classList.remove('hidden');
+        document.getElementById('g3-presets-input').classList.remove('hidden');
+        //document.getElementById('g4-presets-input').classList.add('hidden');
     }
 
     const trainerType = getTrainerType();
 
     if (trainerType === 'name') {
-        document.getElementById('trainer-resize').classList.add('hidden');
-        document.getElementById('trainer-resize-label').classList.add('hidden');
+        document.getElementById('trainer-resize-input').classList.add('hidden');
     }
     else {
-        document.getElementById('trainer-resize').classList.remove('hidden');
-        document.getElementById('trainer-resize-label').classList.remove('hidden');
+        document.getElementById('trainer-resize-input').classList.remove('hidden');
     }
 
     switch (trainerType) {

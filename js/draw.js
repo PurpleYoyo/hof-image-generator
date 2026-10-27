@@ -1,5 +1,5 @@
 import { allPokemon, pokemonIntroductionGeneration, getBasePokemon, generation1Games, generation2Games } from './pokemon.js';
-import { buildSpriteDropdowns, buildPresetDropdown, randomizeStartColors, buildSuggestions, initializeEventListeners, randomizePlaceholders, buildTrainerDropdown } from './load.js';
+import { buildSpriteDropdowns, buildPresetDropdowns, randomizeStartColors, buildSuggestions, initializeEventListeners, randomizePlaceholders, buildTrainerDropdown } from './load.js';
 import { getGeneration, getType, hideInputs, getColors, getInputs, getTrainerType } from './utils.js';
 
 const img = new Image();
@@ -80,7 +80,7 @@ const gemerationTrainerPositions = {
 
 window.addEventListener('load', (event) => {
     buildSpriteDropdowns();
-    buildPresetDropdown();
+    buildPresetDropdowns();
     buildTrainerDropdown();
     randomizeStartColors();
 	buildSuggestions();

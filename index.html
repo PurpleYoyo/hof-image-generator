@@ -83,31 +83,38 @@
                         <label for="trainer-upload">Upload</label>
 
                         <div id="trainer-sprite-input">
-                            <label for="trainers" id="trainers-label">Sprite</label>
-                            <select name="trainers" id="trainers"></select>
+                            <label for="trainer-sprite">Sprite</label>
+                            <select name="trainers" id="trainer-sprite"></select>
                         </div>
 
                         <div id="trainer-link-input">
-                            <input type="text" id="trainer-link-text" name="trainer-link" />
                             <label for="trainer-link">Link</label>
+                            <input type="text" id="trainer-link-text" name="trainer-link" />
                         </div>
 
                         <div id="trainer-upload-input">
+                            <label for="trainer-image">Upload Image</label>
                             <input type="file" id="trainer-image" name="trainer-image" accept="image/png, image/jpeg" />
                         </div>
                     
-                        <input type="checkbox" id="trainer-resize" name="trainer-resize" checked />
-                        <label for="trainer-resize" id="trainer-resize-label" class="tooltip" tooltip="Resize the image if it has invalid dimensions?">Resize Image?</label>
+                        <div id="trainer-resize-input">
+                            <input type="checkbox" id="trainer-resize" name="trainer-resize" checked />
+                            <label for="trainer-resize" class="tooltip" tooltip="Resize the image if it has invalid dimensions?">Resize Image?</label>
+                        </div>
                     </fieldset>
                 </div>
 
                 <br>
 
-                <label for="g3-presets" id="g3-presets-label">Presets</label>
-                <select name="g3-presets" id="g3-presets"></select>
+                <div id="g3-presets-input">
+                    <label for="g3-presets" id="g3-presets-label">Presets</label>
+                    <select name="g3-presets" id="g3-presets"></select>
+                </div>
 
-                <!-- <label for="g4-presets" id="g4-presets-label">Presets</label>
-                <select name="g4-presets" id="g4-presets"></select> -->
+                <div id="g4-presets-input" class="hidden">
+                    <label for="g4-presets" id="g4-presets-label" class="hidden">Presets</label>
+                    <select name="g4-presets" id="g4-presets" class="hidden"></select>
+                </div>
 
                 <!-- <label for="g5-presets" id="g5-presets-label">Presets</label>
                 <select name="g5-presets" id="g5-presets"></select> -->
