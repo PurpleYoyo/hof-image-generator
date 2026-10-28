@@ -240,7 +240,7 @@ function drawSprites(generation) {
             }
 
             if (document.getElementById('darken').checked && generation === '3') {
-                ctx.filter = 'opacity(0.5)';
+                ctx.filter = 'opacity(0.7)';
             }
 
             ctx.imageSmoothingEnabled = false;
