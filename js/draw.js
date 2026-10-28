@@ -429,7 +429,7 @@ function buildTrainerLink() {
     switch (trainerType) {
         default:
         case 'name':
-            const name = document.getElementById('trainers').value;
+            const name = document.getElementById('trainer-sprite').value;
 
             if (name === '') {
                 return null;
