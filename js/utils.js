@@ -132,12 +132,16 @@ export function hideInputs(generation) {
 
         document.getElementById('g3-presets-input').classList.add('hidden');
         //document.getElementById('g4-presets-input').classList.remove('hidden');
+
+        document.getElementById('darken-input').classList.add('hidden');
     }
     else {
         document.getElementById('colors').classList.remove('hidden');
 
         document.getElementById('g3-presets-input').classList.remove('hidden');
         //document.getElementById('g4-presets-input').classList.add('hidden');
+
+        document.getElementById('darken-input').classList.remove('hidden');
     }
 
     const trainerType = getTrainerType();

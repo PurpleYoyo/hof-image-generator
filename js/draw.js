@@ -239,6 +239,10 @@ function drawSprites(generation) {
                 continue;
             }
 
+            if (document.getElementById('darken').checked && generation === '3') {
+                ctx.filter = 'opacity(0.5)';
+            }
+
             ctx.imageSmoothingEnabled = false;
             ctx.drawImage(
                 image,

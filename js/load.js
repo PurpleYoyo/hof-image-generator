@@ -275,7 +275,10 @@ export function initializeEventListeners(start) {
 
         start();
     });
-    
+
+    // Darken
+    document.getElementById('darken').addEventListener('input', start);
+
     // Trainer
     document.getElementById('trainer').addEventListener('input', start);
 
