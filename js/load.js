@@ -317,6 +317,9 @@ export function initializeEventListeners(start) {
         });
     }
 
+    // Game
+    document.getElementById('game-name').addEventListener('input', start);
+
     // Download
     document.getElementById('download').addEventListener('click', downloadImage);
 

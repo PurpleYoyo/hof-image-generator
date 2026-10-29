@@ -1,6 +1,6 @@
 import { allPokemon, pokemonIntroductionGeneration, getBasePokemon, generation1Games, generation2Games } from './pokemon.js';
 import { buildSpriteDropdowns, buildPresetDropdowns, randomizeStartColors, buildSuggestions, initializeEventListeners, randomizePlaceholders, buildTrainerDropdown } from './load.js';
-import { getGeneration, getType, hideInputs, getColors, getInputs, getTrainerType } from './utils.js';
+import { getGeneration, getType, hideInputs, getColors, getInputs, getTrainerType, validSpecialCharacters, validateText, isNumeric } from './utils.js';
 
 const img = new Image();
 
@@ -11,6 +11,13 @@ const default_color4 = [50, 97, 79];
 
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d', { willReadFrequently: true });
+
+const CHARACTER_HEIGHT = 22;
+
+const generationTextHeights = {
+    '3': { y: 288 },
+    '4': { y: 348 },
+};
 
 const generationSpriteSizes = {
     '3': 64,
@@ -253,6 +260,11 @@ function drawSprites(generation) {
             ); 
         };
 
+        const game = document.getElementById('game-name').value;
+        if (validateText(game)) {
+            drawText(game, generation);
+        }
+
         if (document.getElementById('trainer').checked) {
             drawTrainer(generation);
         }
@@ -449,4 +461,79 @@ function buildTrainerLink() {
 
             return null;
     }
+}
+
+function drawText(text, generation) {
+    const totalWidth = getTextWidth(text);
+
+    let x = parseInt((canvas.width - totalWidth) / 2);
+
+    for (let i = 0; i < text.length; i++) {
+        const character = text.charAt(i);
+        const width = getCharacterWidth(character);
+
+        let y = generationTextHeights[generation].y;
+
+        if (['y', 'g', 'p', 'j', 'q', ','].includes(character)) {
+            y += 4;
+        }
+        else if (['\''].includes(character)) {
+            y -= 14;
+        }
+        else {
+            y = generationTextHeights[generation].y;
+        }
+
+        const height = character === 'j' ? 26 : CHARACTER_HEIGHT;
+
+        const image =  new Image(width, height);
+        image.onload = () => {
+            ctx.drawImage(x, y, width, CHARACTER_HEIGHT);
+        };
+
+        let src;
+
+        if (character in validSpecialCharacters) {
+            src = `images/characters/special/${validSpecialCharacters[character].filename}.png`;
+        }
+        else if (isNumeric(character)) {
+            src = `images/characters/numbers/${character}.png`;
+        }
+        else if (character === character.toUpperCase()) {
+            src = `images/characters/uppercase/${character.toLowerCase()}.png`;
+        }
+        else if (character === character.toLowerCase()) {
+            src = `images/characters/lowercase/${character}.png`;
+        }
+
+        image.src = src;
+
+        x += width;
+    }
+}
+
+function getTextWidth(text) {
+    let width = 0;
+
+    for (let i = 0; i < text.length; i++) {
+        width += getCharacterWidth(text.charAt(i));
+    }
+
+    return width;
+}
+
+function getCharacterWidth(character) {
+    if ([' ', '.'].includes(character)) {
+        return 6;
+    }
+
+    if (['i', 'l', '!'].includes(character)) {
+        return 8;
+    }
+
+    if (['j'].includes(character)) {
+        return 10;
+    }
+
+    return 12;
 }

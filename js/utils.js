@@ -1,6 +1,18 @@
 import { darkenColor, hexToRGB, RGBtoHSV, HSVtoRGB } from './colors.js';
 import { generation1Games, generation2Games } from './pokemon.js';
 
+export const validSpecialCharacters = {
+    '!': { filename: 'ep' },
+    ' ': { filename: 'sp' },
+    '.': { filename: 'pd' },
+    '\'': { filename: 'ap' },
+    ',': { filename: 'co' },
+    'é': { filename: 'ae' },
+    '?': { filename: 'qm' },
+    '"': { filename: 'qu' },
+    '-': { filename: 'hy' },
+};
+
 export function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
 
@@ -256,4 +268,30 @@ export function getInputs(index) {
         sprite: document.getElementById(`sprites${index}`).value,
         resize: document.getElementById(`resize${index}`).checked,
     }
+}
+
+export function validateText(text) {
+    if (text === '') {
+        return false;
+    }
+    
+    for (let i = 0; i < text.length; i++) {
+        const character = text.charAt(i);
+
+        if (!isAlphaNumeric(character)) {
+            if (!(character in validSpecialCharacters)) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+function isAlphaNumeric(character) {
+    return /^[a-zA-Z0-9]$/i.test(character);
+}
+
+export function isNumeric(character) {
+    return /^[0-9]$/i.test(character);
 }
