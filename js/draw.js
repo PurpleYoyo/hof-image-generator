@@ -488,7 +488,7 @@ function drawText(text, generation) {
 
         const image =  new Image(width, height);
         image.onload = () => {
-            ctx.drawImage(x, y, width, CHARACTER_HEIGHT);
+            ctx.drawImage(image, x, y, width, height);
         };
 
         let src;
