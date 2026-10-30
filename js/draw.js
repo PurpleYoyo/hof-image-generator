@@ -260,8 +260,17 @@ function drawSprites(generation) {
             ); 
         };
 
-        if (document.getElementById('trainer').checked) {
-            drawTrainer(generation);
+        const game = validateText(document.getElementById('game-name').value);
+        const trainer = document.getElementById('trainer').checked;
+
+        if (game || trainer) {
+            if (trainer) {
+                drawTrainer(generation);
+            }
+
+            if (game) {
+                drawText(game, generation);
+            }
         }
         else {
             copyCanvasToImage();
@@ -417,11 +426,10 @@ function drawTrainer(generation) {
 
         ctx.imageSmoothingEnabled = false;
         ctx.drawImage(trainer, position.x, position.y, dWidth, dHeight);
+q       
+        const game = validateText(document.getElementById('game-name').value);
 
-        if (validateText(document.getElementById('game-name').value)) {
-            drawText(game, generation);
-        }
-        else {
+        if (!game) {
             copyCanvasToImage();
         }
     }
@@ -533,9 +541,9 @@ function drawText(text, generation) {
 
             x += width;
         }
-    });
 
-    copyCanvasToImage();
+        copyCanvasToImage();
+    });
 }
 
 function getTextWidth(text) {
