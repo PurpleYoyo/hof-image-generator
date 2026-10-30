@@ -260,15 +260,12 @@ function drawSprites(generation) {
             ); 
         };
 
-        if (validateText(document.getElementById('game-name').value)) {
-            drawText(game, generation);
-        }
-
         if (document.getElementById('trainer').checked) {
             drawTrainer(generation);
         }
-        
-        copyCanvasToImage();
+        else {
+            copyCanvasToImage();
+        }
     });
 }
 
@@ -421,7 +418,12 @@ function drawTrainer(generation) {
         ctx.imageSmoothingEnabled = false;
         ctx.drawImage(trainer, position.x, position.y, dWidth, dHeight);
 
-        copyCanvasToImage();
+        if (validateText(document.getElementById('game-name').value)) {
+            drawText(game, generation);
+        }
+        else {
+            copyCanvasToImage();
+        }
     }
 
     const src = buildTrainerLink();
