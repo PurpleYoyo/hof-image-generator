@@ -260,17 +260,15 @@ function drawSprites(generation) {
             ); 
         };
 
-        const game = document.getElementById('game-name').value;
-        if (validateText(game)) {
+        if (validateText(document.getElementById('game-name').value)) {
             drawText(game, generation);
         }
 
         if (document.getElementById('trainer').checked) {
             drawTrainer(generation);
         }
-        else {
-            copyCanvasToImage();
-        }
+        
+        copyCanvasToImage();
     });
 }
 
@@ -534,6 +532,8 @@ function drawText(text, generation) {
             x += width;
         }
     });
+
+    copyCanvasToImage();
 }
 
 function getTextWidth(text) {
