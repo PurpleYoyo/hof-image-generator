@@ -457,11 +457,7 @@ function buildTrainerLink() {
     switch (trainerType) {
         default:
         case 'name':
-            const name = document.getElementById('trainer-sprite').value;
-
-            if (name === '') {
-                return null;
-            }
+            const name = document.getElementById('trainer-sprites').value;
         
             return `images/trainers/${name}.png`;
         case 'link':
