@@ -234,12 +234,12 @@ function drawSprites(generation) {
 
     Promise.all(images).then((images) => {
         for (const pokemon of images) {
-            const image = pokemon.image;
-            const index = pokemon.index;
-
-            if (image === null) {
+            if (pokemon === null) {
                 continue;
             }
+
+            const image = pokemon.image;
+            const index = pokemon.index;
 
             const dimensions = placeSprite(image, index, generation);
 
@@ -267,19 +267,11 @@ function drawSprites(generation) {
         const promises = [];
 
         if (trainer) {
-            promises.push(new Promise((resolve) => {
-                drawTrainer(generation);
-
-                resolve(null);
-            }));
+            promises.push(drawTrainer(generation));
         }
 
         if (game) {
-            promises.push(new Promise((resolve) => {
-                drawText(game, generation);
-
-                resolve(null);
-            }));
+            promises.push(drawText(game, generation));
         }
 
         Promise.all(promises).then(() => {
@@ -417,34 +409,46 @@ function buildSpriteLink(index) {
 }
 
 function drawTrainer(generation) {
-    const position = gemerationTrainerPositions[generation];
+    return new Promise((resolve, reject) => {
+        const position = gemerationTrainerPositions[generation];
+        const trainer = new Image();
 
-    const trainer = new Image();
+        trainer.onload = () => {
+            let dWidth = trainer.width;
+            let dHeight = trainer.height;
 
-    trainer.onload = () => {
-        let dWidth = trainer.width;
-        let dHeight = trainer.height;
+            if (document.getElementById('trainer-resize').checked || trainer.width === trainer.height) {
+	            dWidth = 160;
+	            dHeight = 160;
+            }
+            else {
+                alert('Trainer sprite has invalid dimensions.');
+                return null;
+            }
 
-        if (document.getElementById('trainer-resize').checked || trainer.width === trainer.height) {
-	        dWidth = 160;
-	        dHeight = 160;
+            ctx.imageSmoothingEnabled = false;
+            ctx.drawImage(
+                trainer,
+                position.x,
+                position.y,
+                dWidth,
+                dHeight
+            );
+
+            resolve();
         }
-        else {
-            alert('Trainer sprite has invalid dimensions.');
-            return null;
+
+        trainer.onerror = () => reject(console.error('Failed to load trainer.'));
+
+        const src = buildTrainerLink();
+
+        if (src === null) {
+            resolve();
+            return;
         }
 
-        ctx.imageSmoothingEnabled = false;
-        ctx.drawImage(trainer, position.x, position.y, dWidth, dHeight);
-    }
-
-    const src = buildTrainerLink();
-
-    if (src === null) {
-        return;
-    }
-
-    trainer.src = src;
+        trainer.src = src;
+    });
 }
 
 function buildTrainerLink() {
@@ -476,75 +480,83 @@ function buildTrainerLink() {
 }
 
 function drawText(text, generation) {
-    const characters = [];
+    return new Promise((resolve) => {
+        const characters = [];
 
-    for (let i = 0; i < text.length; i++) {
-        const character = text.charAt(i);
+        for (let i = 0; i < text.length; i++) {
+            const character = text.charAt(i);
 
-        let src;
+            let src;
 
-        if (character in validSpecialCharacters) {
-            src = `images/characters/special/${validSpecialCharacters[character].filename}.png`;
-        }
-        else if (isNumeric(character)) {
-            src = `images/characters/numbers/${character}.png`;
-        }
-        else if (character === character.toUpperCase()) {
-            src = `images/characters/uppercase/${character.toLowerCase()}.png`;
-        }
-        else if (character === character.toLowerCase()) {
-            src = `images/characters/lowercase/${character}.png`;
-        }
+            if (character in validSpecialCharacters) {
+                src = `images/characters/special/${validSpecialCharacters[character].filename}.png`;
+            }
+            else if (isNumeric(character)) {
+                src = `images/characters/numbers/${character}.png`;
+            }
+            else if (character === character.toUpperCase()) {
+                src = `images/characters/uppercase/${character.toLowerCase()}.png`;
+            }
+            else if (character === character.toLowerCase()) {
+                src = `images/characters/lowercase/${character}.png`;
+            }
 
-        characters.push(
-            loadImage(src).then(image => {
-                return {
-                    character: character,
-                    image: image
-                };
-            }).catch(error => {
-                console.error(error);
-                return null;
-            })
-        );
-    }
-
-    Promise.all(characters).then((images) => {
-        const totalWidth = getTextWidth(text);
-
-        let x = parseInt((canvas.width - totalWidth) / 2);
-
-        for (const char of images) {
-            if (char === null) {
+            if (src === undefined) {
                 continue;
             }
 
-            const character = char.character;
-            const image = char.image;
-
-            const width = getCharacterWidth(character);
-
-            let y = generationTextHeights[generation].y;
-
-            if (['y', 'g', 'p', 'j', 'q', ','].includes(character)) {
-                y += 4;
-            }
-            else if (['\''].includes(character)) {
-                y -= 14;
-            }
-
-            const height = character === 'j' ? 26 : CHARACTER_HEIGHT;
-
-            ctx.drawImage(
-                image,
-                x,
-                y,
-                width,
-                height
+            characters.push(
+                loadImage(src).then(image => {
+                    return {
+                        character: character,
+                        image: image
+                    };
+                }).catch(error => {
+                    console.error(error);
+                    return null;
+                })
             );
-
-            x += width;
         }
+
+        Promise.all(characters).then((images) => {
+            const totalWidth = getTextWidth(text);
+
+            let x = parseInt((canvas.width - totalWidth) / 2);
+
+            for (const char of images) {
+                if (char === null) {
+                    continue;
+                }
+
+                const character = char.character;
+                const image = char.image;
+
+                const width = getCharacterWidth(character);
+
+                let y = generationTextHeights[generation].y;
+
+                if (['y', 'g', 'p', 'j', 'q', ','].includes(character)) {
+                    y += 4;
+                }
+                else if (['\''].includes(character)) {
+                    y -= 14;
+                }
+
+                const height = character === 'j' ? 26 : CHARACTER_HEIGHT;
+
+                ctx.drawImage(
+                    image,
+                    x,
+                    y,
+                    width,
+                    height
+                );
+
+                x += width;
+            }
+
+            resolve();
+        });
     });
 }
 
