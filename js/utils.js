@@ -160,6 +160,7 @@ export function getGeneration() {
 
 const allInputs = [
     'colors',
+    'g1-presets-input',
     'g3-presets-input',
     'g4-presets-input',
     'darken-input',
@@ -167,7 +168,10 @@ const allInputs = [
 ];
 
 const generationSpecificInputs = {
-    '1': [],
+    '1': [
+        'colors',
+        'g1-presets-input',
+    ],
     '3': [
         'colors',
         'g3-presets-input',

@@ -33,8 +33,8 @@
                 <legend>Background</legend>
 
                 <div>
-                    <input type="radio" id="g1" name="generation" class="generation" value="1" class="tooltip" tooltip="This is a custom background, made by me!" />
-                    <label for="g1">Generation 1</label>
+                    <input type="radio" id="g1" name="generation" class="generation" value="1" />
+                    <label for="g1" class="tooltip" tooltip="This is a custom background, made by me!">Generation 1</label>
 
                     <input type="radio" id="g3" name="generation" class="generation" value="3" checked />
                     <label for="g3">Generation 3</label>
@@ -117,6 +117,11 @@
                 </div>
 
                 <br><br>
+
+                <div id="g1-presets-input" class="hidden">
+                    <label for="g1-presets" id="g1-presets-label">Presets</label>
+                    <select name="g1-presets" id="g1-presets"></select>
+                </div>
 
                 <div id="g3-presets-input">
                     <label for="g3-presets" id="g3-presets-label">Presets</label>

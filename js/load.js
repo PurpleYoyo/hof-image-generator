@@ -414,7 +414,7 @@ export function initializeEventListeners(start) {
     document.getElementById('close-sidebar').addEventListener('click', toggleSidebar);
 
     // Background
-    for (let i = MIN_GENERATION; i < MAX_GENERATION + 1; i++) {
+    for (const i of ['1', '3', '4']) {
         document.getElementById(`g${i}`).addEventListener('change', () => {
             document.getElementById(`g${i}-presets`).value = 'none-option';
 
