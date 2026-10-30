@@ -508,9 +508,7 @@ export function initializeEventListeners(start) {
     // Save & Load Configuration
     document.getElementById('save-configuration').addEventListener('click', saveConfiguration);
     document.getElementById('load-configuration').addEventListener('input', () => {
-        readFile();
-
-        start();
+        readFile(start);
     });
 }
 

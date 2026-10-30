@@ -65,7 +65,7 @@ export function saveConfiguration() {
     a.click();
 }
 
-export function readFile() {
+export function readFile(start) {
     const files = document.getElementById('load-configuration').files;
 
     if (files.length < 1) {
@@ -76,7 +76,9 @@ export function readFile() {
 
     reader.onload = function(e) {
         const result = e.target.result;
-        loadConfiguration(JSON.parse(result))
+        loadConfiguration(JSON.parse(result));
+
+        start();
     }
 
     reader.readAsText(files[0])
