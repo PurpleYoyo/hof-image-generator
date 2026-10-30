@@ -261,7 +261,7 @@ function drawSprites(generation) {
             ); 
         };
 
-        const game = validateText(document.getElementById('game-name').value);
+        const game = document.getElementById('game-name').value;
         const trainer = document.getElementById('trainer').checked;
 
         const promises = [];
@@ -270,7 +270,7 @@ function drawSprites(generation) {
             promises.push(drawTrainer(generation));
         }
 
-        if (game) {
+        if (validateText(game)) {
             promises.push(drawText(game, generation));
         }
 
