@@ -158,6 +158,29 @@ export function getGeneration() {
     return '3';
 }
 
+const allInputs = [
+    'colors',
+    'g3-presets-input',
+    'g4-presets-input',
+    'darken-input',
+    'borders-input',
+];
+
+const generationSpecificInputs = {
+    '1': [],
+    '3': [
+        'colors',
+        'g3-presets-input',
+        'darken-input',
+        'borders-input',
+    ],
+    '4': [
+        'g4-presets-input',
+        'borders-input',
+    ],
+    '5': [],
+};
+
 export function hideInputs(generation) {
     if (!document.getElementById('trainer').checked) {
         document.getElementById('trainer-sprite').classList.add('hidden');
@@ -166,21 +189,12 @@ export function hideInputs(generation) {
         document.getElementById('trainer-sprite').classList.remove('hidden');
     }
 
-    if (generation !== '3') {
-        document.getElementById('colors').classList.add('hidden');
-
-        document.getElementById('g3-presets-input').classList.add('hidden');
-        //document.getElementById('g4-presets-input').classList.remove('hidden');
-
-        document.getElementById('darken-input').classList.add('hidden');
+    for (const input of allInputs) {
+        document.getElementById(input).classList.add('hidden');
     }
-    else {
-        document.getElementById('colors').classList.remove('hidden');
 
-        document.getElementById('g3-presets-input').classList.remove('hidden');
-        //document.getElementById('g4-presets-input').classList.add('hidden');
-
-        document.getElementById('darken-input').classList.remove('hidden');
+    for (const input of generationSpecificInputs[generation]) {
+        document.getElementById(input).classList.remove('hidden');
     }
 
     const trainerType = getTrainerType();

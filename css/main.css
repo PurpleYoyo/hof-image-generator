@@ -96,5 +96,5 @@ canvas {
 }
 
 .tooltip {
-    text-decoration: dotted;
+    border-bottom: 1px dotted black;
 }

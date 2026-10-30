@@ -33,6 +33,9 @@
                 <legend>Background</legend>
 
                 <div>
+                    <input type="radio" id="g1" name="generation" class="generation" value="1" class="tooltip" tooltip="This is a custom background, made by me!" />
+                    <label for="g1">Generation 1</label>
+
                     <input type="radio" id="g3" name="generation" class="generation" value="3" checked />
                     <label for="g3">Generation 3</label>
 
@@ -59,8 +62,10 @@
                     <br>
                 </div>
 
-                <label for="borders" class="tooltip" tooltip="Show the borders at the top and bottom of the background?">Show Borders?</label>
-                <input type="checkbox" id="borders" name="borders" checked>
+                <div id="borders-input">
+                    <label for="borders" class="tooltip" tooltip="Show the borders at the top and bottom of the background?">Show Borders?</label>
+                    <input type="checkbox" id="borders" name="borders" checked>
+                </div>
 
                 <div id="darken-input">
                     <br>

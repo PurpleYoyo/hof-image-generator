@@ -15,6 +15,7 @@ const ctx = canvas.getContext('2d', { willReadFrequently: true });
 const CHARACTER_HEIGHT = 22;
 
 const generationTextHeights = {
+    '1': { y: 280 },
     '3': { y: 280 },
     '4': { y: 340 },
 };
@@ -49,6 +50,14 @@ const generationRomanNumerals = {
 };
 
 const spritePositions = {
+    '1': {
+        1: { x: 16, y: 16 },
+        2: { x: 142, y: 16 },
+        3: { x: 240, y: 16 },
+        4: { x: 48, y: 112 },
+        5: { x: 176, y: 112 },
+        6: { x: 272, y: 112 },
+    },
     '3': {
         1: { x: 48, y: 16 },
         2: { x: 176, y: 16 },
@@ -69,18 +78,21 @@ const spritePositions = {
 };
 
 const drawingOrder = {
+    '1': [1, 2, 3, 4, 5, 6],
     '3': [1, 2, 3, 4, 5, 6],
     '4': [1, 2, 3, 6, 5, 4],
     '5': [],
 };
 
 const recoloringFunctions = {
+    '1': recolorGen1Background,
     '3': recolorGen3Background,
     '4': recolorGen4Background,
     '5': recolorGen5Background,
 };
 
 const gemerationTrainerPositions = {
+    '1': { x: 160, y: 64 },
     '3': { x: 160, y: 64 },
     '4': { x: 176, y: 128 },
 };
@@ -145,6 +157,8 @@ function copyCanvasToImage() {
     img.src = url;
 }
 
+function recolorGen1Background(data) {}
+
 function recolorGen3Background(data) {
     const colors = getColors();
 
@@ -195,6 +209,7 @@ function recolorGen3Background(data) {
         }
     }
 }
+
 function recolorGen4Background(data) {}
 
 function recolorGen5Background(data) {}
