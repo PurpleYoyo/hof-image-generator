@@ -29,6 +29,7 @@ export function saveConfiguration() {
             color2: document.getElementById('color2').value,
         },
         darken: document.getElementById('darken').checked,
+        borders: document.getElementById('borders').checked,
 
         trainer: document.getElementById('trainer').checked,
         trainer_type: getTrainerType(),
@@ -89,6 +90,7 @@ function loadConfiguration(data) {
     document.getElementById('color1').value = data.colors.color1;
     document.getElementById('color2').value = data.colors.color2;
     document.getElementById('darken').checked = data.darken;
+    document.getElementById('borders').checked = data.borders;
 
     document.getElementById('trainer').checked = data.trainer;
     document.getElementById(`trainer-${data.trainer_type}`).checked = true;

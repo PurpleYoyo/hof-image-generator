@@ -408,6 +408,14 @@ export function buildGameSuggestions() {
     });
 }
 
+function resetInputs() {
+    document.getElementById('darken').checked = false;
+    document.getElementById('borders').checked = false;
+
+    document.getElementById('trainer').checked = false;
+    document.getElementById('trainer-resize').checked = true;
+}
+
 export function initializeEventListeners(start) {
     // Sidebar
     document.getElementById('open-sidebar').addEventListener('click', toggleSidebar);
@@ -417,6 +425,8 @@ export function initializeEventListeners(start) {
     for (const i of ['1', '3', '4']) {
         document.getElementById(`g${i}`).addEventListener('change', () => {
             document.getElementById(`g${i}-presets`).value = 'none-option';
+            
+            resetInputs();
 
             start();
         });
