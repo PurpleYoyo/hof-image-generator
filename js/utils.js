@@ -28,6 +28,13 @@ export function saveConfiguration() {
             color1: document.getElementById('color1').value,
             color2: document.getElementById('color2').value,
         },
+        darken: document.getElementById('darken').checked,
+        
+        trainer: document.getElementById('trainer').checked,
+        trainer_type: getTrainerType(),
+        trainer_sprite: document.getElementById('trainer-sprites').value,
+        trainer_link: document.getElementById('trainer-link-text').value,
+        trainer_resize: document.getElementById('trainer-resize').checked,
         pokemon: {},
     };
 
@@ -73,6 +80,13 @@ function loadConfiguration(data) {
     document.getElementById(`g${data.background}`).checked = true;
     document.getElementById('color1').value = data.colors.color1;
     document.getElementById('color2').value = data.colors.color2;
+    document.getElementById('darken').checked = data.darken;
+
+    document.getElementById('trainer').checked = data.trainer;
+    document.getElementById(`trainer-${data.trainer_type}`).checked = true;
+    document.getElementById('trainer-sprites').value = data.trainer_sprite;
+    document.getElementById('trainer-link-text').value = data.trainer_link;
+    document.getElementById('trainer-resize').checked = trainer_resize;
 
     for (let i = 1; i < 7; i++) {
         document.getElementById(`${data.pokemon[i].type}${i}`).checked = true;
