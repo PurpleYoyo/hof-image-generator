@@ -464,32 +464,10 @@ function buildTrainerLink() {
 }
 
 function drawText(text, generation) {
-    const totalWidth = getTextWidth(text);
-
-    let x = parseInt((canvas.width - totalWidth) / 2);
+    const characters = [];
 
     for (let i = 0; i < text.length; i++) {
         const character = text.charAt(i);
-        const width = getCharacterWidth(character);
-
-        let y = generationTextHeights[generation].y;
-
-        if (['y', 'g', 'p', 'j', 'q', ','].includes(character)) {
-            y += 4;
-        }
-        else if (['\''].includes(character)) {
-            y -= 14;
-        }
-        else {
-            y = generationTextHeights[generation].y;
-        }
-
-        const height = character === 'j' ? 26 : CHARACTER_HEIGHT;
-
-        const image =  new Image(width, height);
-        image.onload = () => {
-            ctx.drawImage(image, x, y, width, height);
-        };
 
         let src;
 
@@ -506,10 +484,56 @@ function drawText(text, generation) {
             src = `images/characters/lowercase/${character}.png`;
         }
 
-        image.src = src;
-
-        x += width;
+        characters.push(
+            loadImage(src).then(image => {
+                return {
+                    character: character,
+                    image: image
+                };
+            }).catch(error => {
+                console.error(error);
+                return null;
+            })
+        );
     }
+
+    Promise.all(images).then((images) => {
+        const totalWidth = getTextWidth(text);
+
+        let x = parseInt((canvas.width - totalWidth) / 2);
+
+        for (const char of images) {
+            if (char === null) {
+                continue;
+            }
+
+            const character = char.character;
+            const image = char.image;
+
+            const width = getCharacterWidth(character);
+
+            let y = generationTextHeights[generation].y;
+
+            if (['y', 'g', 'p', 'j', 'q', ','].includes(character)) {
+                y += 4;
+            }
+            else if (['\''].includes(character)) {
+                y -= 14;
+            }
+
+            const height = character === 'j' ? 26 : CHARACTER_HEIGHT;
+
+            ctx.drawImage(
+                image,
+                x,
+                y,
+                width,
+                height
+            );
+
+            x += width;
+        }
+    });
 }
 
 function getTextWidth(text) {
