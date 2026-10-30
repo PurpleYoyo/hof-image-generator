@@ -280,11 +280,11 @@ function drawSprites(generation) {
                 resolve(null);
             }));
         }
-    });
 
-    Promise.all(promises).then(() => {
-        copyCanvasToImage();
-    })
+        Promise.all(promises).then(() => {
+            copyCanvasToImage();
+        })
+    });
 }
 
 function placeSprite(image, index, generation) {
