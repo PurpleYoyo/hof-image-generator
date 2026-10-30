@@ -248,7 +248,7 @@ function drawSprites(generation) {
             }
 
             if (document.getElementById('darken').checked && generation === '3') {
-                ctx.filter = 'opacity(0.7)';
+                ctx.filter = 'opacity(0.6)';
             }
 
             ctx.imageSmoothingEnabled = false;
@@ -258,7 +258,9 @@ function drawSprites(generation) {
                 dimensions.y,
                 dimensions.dWidth,
                 dimensions.dHeight
-            ); 
+            );
+
+            ctx.filter = 'opacity(1)';
         };
 
         const game = document.getElementById('game-name').value;
