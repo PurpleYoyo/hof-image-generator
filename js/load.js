@@ -410,7 +410,7 @@ export function buildGameSuggestions() {
 
 function resetInputs() {
     document.getElementById('darken').checked = false;
-    document.getElementById('borders').checked = false;
+    document.getElementById('borders').checked = true;
 
     document.getElementById('trainer').checked = false;
     document.getElementById('trainer-resize').checked = true;
