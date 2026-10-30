@@ -276,7 +276,7 @@ function drawSprites(generation) {
 
         Promise.all(promises).then(() => {
             copyCanvasToImage();
-        })
+        });
     });
 }
 
