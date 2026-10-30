@@ -263,19 +263,28 @@ function drawSprites(generation) {
         const game = validateText(document.getElementById('game-name').value);
         const trainer = document.getElementById('trainer').checked;
 
-        if (game || trainer) {
-            if (trainer) {
-                drawTrainer(generation);
-            }
+        const promises = [];
 
-            if (game) {
-                drawText(game, generation);
-            }
+        if (trainer) {
+            promises.push(new Promise((resolve) => {
+                drawTrainer(generation);
+
+                resolve(null);
+            }));
         }
-        else {
-            copyCanvasToImage();
+
+        if (game) {
+            promises.push(new Promise((resolve) => {
+                drawText(game, generation);
+
+                resolve(null);
+            }));
         }
     });
+
+    Promise.all(promises).then(() => {
+        copyCanvasToImage();
+    })
 }
 
 function placeSprite(image, index, generation) {
@@ -426,12 +435,6 @@ function drawTrainer(generation) {
 
         ctx.imageSmoothingEnabled = false;
         ctx.drawImage(trainer, position.x, position.y, dWidth, dHeight);
-q       
-        const game = validateText(document.getElementById('game-name').value);
-
-        if (!game) {
-            copyCanvasToImage();
-        }
     }
 
     const src = buildTrainerLink();
@@ -541,8 +544,6 @@ function drawText(text, generation) {
 
             x += width;
         }
-
-        copyCanvasToImage();
     });
 }
 
