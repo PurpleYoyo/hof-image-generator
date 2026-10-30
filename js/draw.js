@@ -334,8 +334,8 @@ function placeSprite(image, index, generation) {
 function placeSpecialCases(name) {
     if (name === 'blaziken-mega') {
         return {
-            'width': 160,
-            'height': 160,
+            'width': 140,
+            'height': 140,
             'x_offset': 48,
             'y_offset': 0,
         };
