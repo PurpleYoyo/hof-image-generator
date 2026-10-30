@@ -1,5 +1,5 @@
 import { allPokemon, pokemonIntroductionGeneration, getBasePokemon, generation1Games, generation2Games } from './pokemon.js';
-import { buildSpriteDropdowns, buildPresetDropdowns, randomizeStartColors, buildSuggestions, initializeEventListeners, randomizePlaceholders, buildTrainerDropdown } from './load.js';
+import { buildSpriteDropdowns, buildPresetDropdowns, randomizeStartColors, buildGameSuggestions, buildPokemonSuggestions, initializeEventListeners, randomizePlaceholders, buildTrainerDropdown } from './load.js';
 import { getGeneration, getType, hideInputs, getColors, getInputs, getTrainerType, validSpecialCharacters, validateText, isNumeric } from './utils.js';
 
 const img = new Image();
@@ -90,7 +90,8 @@ window.addEventListener('load', (event) => {
     buildPresetDropdowns();
     buildTrainerDropdown();
     randomizeStartColors();
-	buildSuggestions();
+	buildGameSuggestions();
+    buildPokemonSuggestions();
 	initializeEventListeners(start);
 	randomizePlaceholders();
     start();

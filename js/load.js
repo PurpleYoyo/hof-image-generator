@@ -110,6 +110,9 @@ const sprites = {
 };
 
 const trainers = {
+    'Red (Generation 3)': {
+        value: 'red-g3',
+    },
     'Red (Yellow)': {
         value: 'red-y',
     },
@@ -118,9 +121,6 @@ const trainers = {
     },
     'Red (Generation 2)': {
         value: 'red-g2',
-    },
-    'Red (Generation 3)': {
-        value: 'red-g3',
     },
     'Red (Generation 4)': {
         value: 'red-g4',
@@ -181,6 +181,157 @@ const trainers = {
     },
 };
 
+const games = [
+    'Red',
+    'Blue',
+    'Yellow',
+    'Green',
+    'Gold',
+    'Silver',
+    'Crystal',
+    'Ruby',
+    'Sapphire',
+    'Emerald',
+    'FireRed',
+    'LeafGreen',
+    'Diamond',
+    'Pearl',
+    'Platinum',
+    'Black',
+    'White',
+    'Black 2',
+    'White 2',
+    'X',
+    'Y',
+    'Omega Ruby',
+    'Alpha Sapphire',
+    'Sun',
+    'Moon',
+    'Ultra Sun',
+    'Ultra Moon',
+    'Sword',
+    'Shield',
+    'Let\'s Go Pikachu',
+    'Let\'s Go Eevee',
+    'Legends Arceus',
+    'Scarlet',
+    'Violet',
+    'Legends Z-A',
+    'Winds',
+    'Waves',
+    'Little Emerald',
+    'FireRed Little Omega',
+    'Mini Moon',
+    'Ultra Small Sun',
+    'Sippy Cup Sapphire',
+    'Nosplit White 2',
+    'Baby Blue',
+    'Petit Pearl',
+    'Gauntlet Gold',
+    'Volcanic Red',
+    'FireRed Omega',
+    'Renegade Platinum',
+    'Blaze Black',
+    'Volt White',
+    'Blaze Black 2',
+    'Volt White 2',
+    'Blaze Black 2 Redux',
+    'Volt White 2 Redux',
+    'Rising Ruby',
+    'Sinking Sapphire',
+    'Goblin Gold',
+    'Inclement Emerald',
+    'Photonic Sun',
+    'Prismatic Moon',
+    'Eternal X',
+    'Wilting Y',
+    'Sacred Gold',
+    'Storm Silver',
+    'Ancestral X',
+    'Nouveau Y',
+    'Emerald Imperium',
+    'Radical Red',
+    'Emerald Kaizo',
+    'Platinum Kaizo',
+    'Navy Sapphire',
+    'Rho Ruby',
+    'Rigorous Red',
+    'Brutal Black',
+    'Colors',
+    'Cascade White',
+    'Emerald But Bad',
+    'Royal Sapphire',
+    'Null',
+    'Run and Bun',
+    'Vintage White',
+    'Vintage White Plus',
+    'Wishy Washy White 2',
+    'Wishy Washy White 2 Redux',
+    'Blue Kaizo',
+    'Crystal Kaizo',
+    'Crystal Kaizo Plus',
+    'Aether White 2',
+    'Blinding White 2',
+    'Autumn Red',
+    'FireRed Deluxe',
+    'Maximum Platinum',
+    'Maximum Emerald',
+    'Crystal Legacy',
+    'Emerald Legacy',
+    'Platinum Redux',
+    'Luminescent Platinum',
+    'Ghost Grey',
+    'Heart and Soul',
+    'Soulgold',
+    'Unbound',
+    'Pitch Black 2',
+    'Meissa Moon',
+    'Righteous Red',
+    'Uranium',
+    'Lucid',
+    'Emerald Trashlocke',
+    'Emerald Seaglass',
+    'Lazarus',
+    'Trash Can Y',
+    'Vanta Black',
+    'Amethyst',
+    'Gaia',
+    'RenHERgade Platinum',
+    'Maximum Red',
+    'Brilliant Diamond',
+    'Shining Pearl',
+    'Mariomon',
+    'Garbage Green',
+    'Infinite Fusion',
+    'Nuzlomizer',
+    'Monster Hunter Emerald',
+    'Kalos Crystal',
+    'Unova Red',
+    'Emerald Cross',
+    'Parallel Emerald',
+    'Emerald Rogue',
+    'Anil',
+    'Blazing Emerald',
+    'Colosseum',
+    'XD: Gale of Darkness',
+    'Dark Rising',
+    'Insurgence',
+    'Quetzal',
+    'Divine Sword',
+    'Blessed Shield',
+    'Scorched Silver',
+    'Crystal Clear',
+    'Evolved',
+    'Too Many Types',
+    'Too Many Types 2',
+    'Project Bug',
+    'Project Bugn\'t',
+    'Snakewood',
+    'Yellow Kaizo',
+    'Z',
+    'Recharged Emerald',
+];
+
 const MIN_GENERATION = 3;
 const MAX_GENERATION = 4;
 
@@ -239,11 +390,20 @@ export function randomizeStartColors() {
     document.getElementById('color2').value = RGBToHex(getRandomInt(255), getRandomInt(255), getRandomInt(255));
 }
 
-export function buildSuggestions() {
+export function buildPokemonSuggestions() {
     const datalist = document.getElementById('pokemon-suggestions');
     Object.entries(allPokemon).forEach(([name, _]) => {
         const option = document.createElement('option');
         option.value = name;
+        datalist.appendChild(option);
+    });
+}
+
+export function buildGameSuggestions() {
+    const datalist = document.getElementById('games');
+    games.forEach((game) => {
+        const option = document.createElement('option');
+        option.value = game;
         datalist.appendChild(option);
     });
 }
