@@ -15,8 +15,8 @@ const ctx = canvas.getContext('2d', { willReadFrequently: true });
 const CHARACTER_HEIGHT = 22;
 
 const generationTextHeights = {
-    '3': { y: 288 },
-    '4': { y: 348 },
+    '3': { y: 280 },
+    '4': { y: 340 },
 };
 
 const generationSpriteSizes = {
@@ -534,7 +534,7 @@ function drawText(text, generation) {
                 if (['y', 'g', 'p', 'j', 'q', ','].includes(character)) {
                     y += 4;
                 }
-                else if (['\''].includes(character)) {
+                else if (['\'', '"'].includes(character)) {
                     y -= 14;
                 }
 
@@ -567,7 +567,7 @@ function getTextWidth(text) {
 }
 
 function getCharacterWidth(character) {
-    if ([' ', '.'].includes(character)) {
+    if ([' ', '.', '\''].includes(character)) {
         return 6;
     }
 
