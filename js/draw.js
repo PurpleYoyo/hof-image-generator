@@ -497,7 +497,7 @@ function drawText(text, generation) {
         );
     }
 
-    Promise.all(images).then((images) => {
+    Promise.all(characters).then((images) => {
         const totalWidth = getTextWidth(text);
 
         let x = parseInt((canvas.width - totalWidth) / 2);
