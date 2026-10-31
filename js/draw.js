@@ -1,6 +1,7 @@
 import { allPokemon, pokemonIntroductionGeneration, getBasePokemon, generation1Games, generation2Games } from './pokemon.js';
 import { buildSpriteDropdowns, buildPresetDropdowns, randomizeStartColors, buildGameSuggestions, buildPokemonSuggestions, initializeEventListeners, randomizePlaceholders, buildTrainerDropdown } from './load.js';
 import { getGeneration, getType, hideInputs, getColors, getInputs, getTrainerType, validSpecialCharacters, validateText, isNumeric } from './utils.js';
+import { characterWidths, characterHeights, characterYShifts, getTextWidth } from './text.js';
 
 const img = new Image();
 
@@ -20,8 +21,6 @@ const default_colors = {
 
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d', { willReadFrequently: true });
-
-const CHARACTER_HEIGHT = 22;
 
 const generationTextHeights = {
     '1': { y: 280 },
@@ -538,17 +537,17 @@ function drawText(text, generation) {
 
             let src;
 
-            if (character in validSpecialCharacters) {
-                src = `images/characters/special/${validSpecialCharacters[character].filename}.png`;
+            if (character in validSpecialCharacters[generation]) {
+                src = `images/characters/g${generation}/special/${validSpecialCharacters[generation][character].filename}.png`;
             }
             else if (isNumeric(character)) {
-                src = `images/characters/numbers/${character}.png`;
+                src = `images/characters/g${generation}/numbers/${character}.png`;
             }
             else if (character === character.toUpperCase()) {
-                src = `images/characters/uppercase/${character.toLowerCase()}.png`;
+                src = `images/characters/g${generation}/uppercase/${character.toLowerCase()}.png`;
             }
             else if (character === character.toLowerCase()) {
-                src = `images/characters/lowercase/${character}.png`;
+                src = `images/characters/g${generation}/lowercase/${character}.png`;
             }
 
             if (src === undefined) {
@@ -569,7 +568,7 @@ function drawText(text, generation) {
         }
 
         Promise.all(characters).then((images) => {
-            const totalWidth = getTextWidth(text);
+            const totalWidth = getTextWidth(text, generation);
 
             let x = parseInt((canvas.width - totalWidth) / 2);
 
@@ -581,18 +580,10 @@ function drawText(text, generation) {
                 const character = char.character;
                 const image = char.image;
 
-                const width = getCharacterWidth(character);
+                const y = generationTextHeights[generation].y + characterYShifts[generation][character] ?? 0;
 
-                let y = generationTextHeights[generation].y;
-
-                if (['y', 'g', 'p', 'j', 'q', ','].includes(character)) {
-                    y += 4;
-                }
-                else if (['\'', '"'].includes(character)) {
-                    y -= 14;
-                }
-
-                const height = character === 'j' ? 26 : CHARACTER_HEIGHT;
+                const width = characterWidths[generation][character] ?? characterWidths[generation].default;
+                const height = characterHeights[generation][character] ?? characterHeights[generation].default;
 
                 ctx.drawImage(
                     image,
@@ -608,30 +599,4 @@ function drawText(text, generation) {
             resolve();
         });
     });
-}
-
-function getTextWidth(text) {
-    let width = 0;
-
-    for (let i = 0; i < text.length; i++) {
-        width += getCharacterWidth(text.charAt(i));
-    }
-
-    return width;
-}
-
-function getCharacterWidth(character) {
-    if ([' ', '.', '\''].includes(character)) {
-        return 6;
-    }
-
-    if (['i', 'l', '!'].includes(character)) {
-        return 8;
-    }
-
-    if (['j'].includes(character)) {
-        return 10;
-    }
-
-    return 12;
 }

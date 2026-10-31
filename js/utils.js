@@ -4,15 +4,17 @@ import { generation1Games, generation2Games } from './pokemon.js';
 const generations = ['1', '3', '4'];
 
 export const validSpecialCharacters = {
-    '!': { filename: 'ep' },
-    ' ': { filename: 'sp' },
-    '.': { filename: 'pd' },
-    '\'': { filename: 'ap' },
-    ',': { filename: 'co' },
-    'é': { filename: 'ae' },
-    '?': { filename: 'qm' },
-    '"': { filename: 'qu' },
-    '-': { filename: 'hy' },
+    '3': {
+        '!': { filename: 'ep' },
+        ' ': { filename: 'sp' },
+        '.': { filename: 'pd' },
+        '\'': { filename: 'ap' },
+        ',': { filename: 'co' },
+        'é': { filename: 'ae' },
+        '?': { filename: 'qm' },
+        '"': { filename: 'qu' },
+        '-': { filename: 'hy' },
+    },
 };
 
 const allInputs = [
