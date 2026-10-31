@@ -151,9 +151,9 @@ export function getRandomInt(max) {
 }
 
 export function getGeneration() {
-    for (let i = 3; i < 5; i++) {
+    for (const i of ['1', '3', '4']) {
         if (document.getElementById(`g${i}`).checked) {
-            return i.toString();
+            return i;
         }
     }
 
