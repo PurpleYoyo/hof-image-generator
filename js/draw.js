@@ -1,7 +1,7 @@
 import { allPokemon, pokemonIntroductionGeneration, getBasePokemon, generation1Games, generation2Games } from './pokemon.js';
 import { buildSpriteDropdowns, buildPresetDropdowns, randomizeStartColors, buildGameSuggestions, buildPokemonSuggestions, initializeEventListeners, randomizePlaceholders, buildTrainerDropdown } from './load.js';
-import { getGeneration, getType, hideInputs, getColors, getInputs, getTrainerType, validSpecialCharacters, validateText, isNumeric } from './utils.js';
-import { characterWidths, characterHeights, characterYShifts, getTextWidth } from './text.js';
+import { getGeneration, getType, hideInputs, getColors, getInputs, getTrainerType, validateText, isNumeric } from './utils.js';
+import { characterWidths, characterHeights, characterYShifts, getTextWidth, validSpecialCharacters } from './text.js';
 
 const img = new Image();
 
@@ -580,10 +580,10 @@ function drawText(text, generation) {
                 const character = char.character;
                 const image = char.image;
 
-                const y = generationTextHeights[generation].y + characterYShifts[generation][character] ?? 0;
-
                 const width = characterWidths[generation][character] ?? characterWidths[generation].default;
                 const height = characterHeights[generation][character] ?? characterHeights[generation].default;
+
+                const y = generationTextHeights[generation].y + characterYShifts[generation][character] ?? 0;
 
                 ctx.drawImage(
                     image,

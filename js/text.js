@@ -1,4 +1,58 @@
+export const validSpecialCharacters = {
+    '1': {
+        '×': { filename: 'ti' },
+        '(': { filename: 'lp' },
+        ')': { filename: 'rp' },
+        ':': { filename: 'cl' },
+        ';': { filename: 'sc' },
+        '[': { filename: 'lb' },
+        ']': { filename: 'rb' },
+        ',': { filename: 'co' },
+        '.': { filename: 'pd' },
+        '/': { filename: 'rs' },
+        '♀': { filename: 'fe' },
+        '♂': { filename: 'ma' },
+        '!': { filename: 'ep' },
+        '?': { filename: 'qm' },
+        '-': { filename: 'hy' },
+    },
+    '3': {
+        '!': { filename: 'ep' },
+        ' ': { filename: 'sp' },
+        '.': { filename: 'pd' },
+        '\'': { filename: 'ap' },
+        ',': { filename: 'co' },
+        'é': { filename: 'ae' },
+        '?': { filename: 'qm' },
+        '"': { filename: 'qu' },
+        '-': { filename: 'hy' },
+        'Nº': { filename: 'no' },
+        '…': { filename: 'el' },
+        '♀': { filename: 'fe' },
+        '♂': { filename: 'ma' },
+        '/': { filename: 'rs' },
+    },
+    '4': {},
+};
+
 export const characterWidths = {
+    '1': {
+        default: 14,
+        '×': 10,
+        '(': 8,
+        ')': 8,
+        ':': 4,
+        ';': 4,
+        '[': 6,
+        ']': 6,
+        ',': 4,
+        '.': 4,
+        '♀': 10,
+        '!': 8,
+        '?': 16,
+        '-': 12,
+        'j': 6,
+    },
     '3': {
         default: 12,
         ' ': 6,
@@ -8,17 +62,40 @@ export const characterWidths = {
         'l': 8,
         '!': 8,
         'j': 10,
+        '…': 12,
     },
+    '4': {},
 };
 
 export const characterHeights = {
+    '1': {
+        default: 14,
+        '×': 10,
+        ':': 12,
+        ',': 8,
+        '.': 4,
+        '♀': 16,
+        '♂': 16,
+        '!': 16,
+        '-': 2,
+    },
     '3': {
         default: 22,
         'j': 26,
+        '…': 4,
     },
+    '4': {},
 };
 
 export const characterYShifts = {
+    '1': {      
+        '-': -7,
+        'g': 2,
+        'j': 2,
+        'p': 2,
+        'q': 2,
+        'y': 2,
+    },
     '3': {
         'y': 4,
         'g': 4,
@@ -29,6 +106,7 @@ export const characterYShifts = {
         '\'': -14,
         '"': -14,
     },
+    '4': {},
 };
 
 export function getTextWidth(text, generation) {
