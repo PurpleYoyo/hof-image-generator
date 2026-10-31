@@ -7,7 +7,14 @@ const presetLinks = [
 ];
 
 const generationPresets = {
-    1: {},
+    1: {
+        Custom: {
+            'Red/Blue': {
+                value: 'red-blue',
+                color1: '#FFFFFF',
+            }
+        },
+    },
     3: {
         Vanilla: {
             'Emerald': {

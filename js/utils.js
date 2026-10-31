@@ -18,7 +18,9 @@ export const validSpecialCharacters = {
 const allInputs = [
     'colors',
     'color1',
+    'color1-label',
     'color2',
+    'color2-label',
     'g1-presets-input',
     'g3-presets-input',
     'g4-presets-input',
@@ -30,12 +32,15 @@ const generationSpecificInputs = {
     '1': [
         'colors',
         'color1',
+        'color1-label',
         'g1-presets-input',
     ],
     '3': [
         'colors',
         'color1',
+        'color1-label',
         'color2',
+        'color2-label',
         'g3-presets-input',
         'darken-input',
         'borders-input',

@@ -4,10 +4,19 @@ import { getGeneration, getType, hideInputs, getColors, getInputs, getTrainerTyp
 
 const img = new Image();
 
-const default_color1 = [132, 239, 198];
-const default_color2 = [115, 222, 181];
-const default_color3 = [57, 104, 86];
-const default_color4 = [50, 97, 79];
+const default_colors = {
+    '1' : {
+        1: [255, 255, 255],
+    },
+    '3' : {
+        1: [132, 239, 198],
+        2: [115, 222, 181],
+        3: [57, 104, 86],
+        4: [50, 97, 79],
+    },
+    '4' : {},
+    '5' : {},
+};
 
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d', { willReadFrequently: true });
@@ -52,12 +61,12 @@ const generationRomanNumerals = {
 
 const spritePositions = {
     '1': {
-        1: { x: 16, y: 16 },
-        2: { x: 142, y: 16 },
-        3: { x: 240, y: 16 },
-        4: { x: 48, y: 112 },
-        5: { x: 176, y: 112 },
-        6: { x: 272, y: 112 },
+        1: { x: 32, y: 24 },
+        2: { x: 158, y: 24 },
+        3: { x: 256, y: 24 },
+        4: { x: 64, y: 120 },
+        5: { x: 192, y: 120 },
+        6: { x: 288, y: 120 },
     },
     '3': {
         1: { x: 48, y: 16 },
@@ -158,7 +167,27 @@ function copyCanvasToImage() {
     img.src = url;
 }
 
-function recolorGen1Background(data) {}
+function recolorGen1Background(data) {
+    const colors = getColors();
+
+    const color1 = colors.color1;
+
+    const defaultColors = default_colors['1'];
+
+    const default_color1 = defaultColors[1];
+
+    for (let i = 0; i < data.length; i += 4) {
+        if (
+            data[i] === default_color1[0]
+            && data[i + 1] === default_color1[1]
+            && data[i + 2] === default_color1[2]
+        ) {
+            data[i] = color1[0];
+            data[i + 1] = color1[1];
+            data[i + 2] = color1[2];
+        }
+    }
+}
 
 function recolorGen3Background(data) {
     const colors = getColors();
@@ -167,6 +196,13 @@ function recolorGen3Background(data) {
     const color2 = colors.color2;
     const color3 = colors.color3;
     const color4 = colors.color4;
+
+    const defaultColors = default_colors['3'];
+
+    const default_color1 = defaultColors[1];
+    const default_color2 = defaultColors[2];
+    const default_color3 = defaultColors[3];
+    const default_color4 = defaultColors[4];
 
     for (let i = 0; i < data.length; i += 4) {
         if (
