@@ -7,6 +7,7 @@ const presetLinks = [
 ];
 
 const generationPresets = {
+    1: {},
     3: {
         Vanilla: {
             'Emerald': {
@@ -332,8 +333,7 @@ const games = [
     'Recharged Emerald',
 ];
 
-const MIN_GENERATION = 3;
-const MAX_GENERATION = 4;
+const generations = ['1', '3', '4'];
 
 export function buildTrainerDropdown() {
     const dropdown = document.getElementById('trainer-sprites');
@@ -358,7 +358,7 @@ export function buildSpriteDropdowns() {
 }
 
 export function buildPresetDropdowns() {
-    for (let i = MIN_GENERATION; i < MAX_GENERATION + 1; i++) {
+    for (const i of generations) {
         const dropdown = document.getElementById(`g${i}-presets`);
         const presets = generationPresets[i];
 
@@ -422,7 +422,7 @@ export function initializeEventListeners(start) {
     document.getElementById('close-sidebar').addEventListener('click', toggleSidebar);
 
     // Background
-    for (const i of ['1', '3', '4']) {
+    for (const i of generations) {
         document.getElementById(`g${i}`).addEventListener('change', () => {
             document.getElementById(`g${i}-presets`).value = 'none-option';
             
@@ -439,7 +439,7 @@ export function initializeEventListeners(start) {
 
     // Borders
     document.getElementById('borders').addEventListener('input', () => { 
-        for (let i = MIN_GENERATION; i < MAX_GENERATION + 1; i++) {
+        for (const i of generations) {
             document.getElementById(`g${i}-presets`).value = 'none-option';
         }
 
@@ -461,7 +461,7 @@ export function initializeEventListeners(start) {
 	});
 
     // Presets
-    for (let i = MIN_GENERATION; i < MAX_GENERATION + 1; i++) {
+    for (const i of generations) {
         const dropdown = document.getElementById(`g${i}-presets`);
 	    dropdown.addEventListener('input', () => {
             const value = dropdown.value.replace('-option', '');

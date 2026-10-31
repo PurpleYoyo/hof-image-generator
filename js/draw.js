@@ -21,6 +21,7 @@ const generationTextHeights = {
 };
 
 const generationSpriteSizes = {
+    '1': 64,
     '3': 64,
     '4': 80,
     '5': 96,
@@ -262,7 +263,7 @@ function drawSprites(generation) {
                 continue;
             }
 
-            if (document.getElementById('darken').checked && generation === '3') {
+            if (document.getElementById('darken').checked) {
                 ctx.filter = 'opacity(0.6)';
             }
 

@@ -1,6 +1,8 @@
 import { darkenColor, hexToRGB, RGBtoHSV, HSVtoRGB } from './colors.js';
 import { generation1Games, generation2Games } from './pokemon.js';
 
+const generations = ['1', '3', '4'];
+
 export const validSpecialCharacters = {
     '!': { filename: 'ep' },
     ' ': { filename: 'sp' },
@@ -11,6 +13,38 @@ export const validSpecialCharacters = {
     '?': { filename: 'qm' },
     '"': { filename: 'qu' },
     '-': { filename: 'hy' },
+};
+
+const allInputs = [
+    'colors',
+    'color1',
+    'color2',
+    'g1-presets-input',
+    'g3-presets-input',
+    'g4-presets-input',
+    'darken-input',
+    'borders-input',
+];
+
+const generationSpecificInputs = {
+    '1': [
+        'colors',
+        'color1',
+        'g1-presets-input',
+    ],
+    '3': [
+        'colors',
+        'color1',
+        'color2',
+        'g3-presets-input',
+        'darken-input',
+        'borders-input',
+    ],
+    '4': [
+        'g4-presets-input',
+        'borders-input',
+    ],
+    '5': [],
 };
 
 export function toggleSidebar() {
@@ -151,7 +185,7 @@ export function getRandomInt(max) {
 }
 
 export function getGeneration() {
-    for (const i of ['1', '3', '4']) {
+    for (const i of generations) {
         if (document.getElementById(`g${i}`).checked) {
             return i;
         }
@@ -159,33 +193,6 @@ export function getGeneration() {
 
     return '3';
 }
-
-const allInputs = [
-    'colors',
-    'g1-presets-input',
-    'g3-presets-input',
-    'g4-presets-input',
-    'darken-input',
-    'borders-input',
-];
-
-const generationSpecificInputs = {
-    '1': [
-        'colors',
-        'g1-presets-input',
-    ],
-    '3': [
-        'colors',
-        'g3-presets-input',
-        'darken-input',
-        'borders-input',
-    ],
-    '4': [
-        'g4-presets-input',
-        'borders-input',
-    ],
-    '5': [],
-};
 
 export function hideInputs(generation) {
     if (!document.getElementById('trainer').checked) {
