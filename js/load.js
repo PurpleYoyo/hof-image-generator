@@ -9,9 +9,9 @@ const presetLinks = [
 const generationPresets = {
     1: {
         Custom: {
-            'Red/Blue': {
-                value: 'red-blue',
-                color1: '#FFFFFF',
+            'Yellow/Red/Blue/Green': {
+                value: 'yellow-red-blue-green',
+                color1: '#F7F2F6',
             }
         },
     },
@@ -484,8 +484,8 @@ export function initializeEventListeners(start) {
                         const preset = presets[group][game];
 
                         document.getElementById('color1').value = preset.color1;
-                        document.getElementById('color2').value = preset.color2;
-                        document.getElementById('borders').checked = preset.borders;
+                        document.getElementById('color2').value = preset.color2 ?? '#FFFFFF';
+                        document.getElementById('borders').checked = preset.borders ?? true;
                     }
                 });
             });
