@@ -7,7 +7,10 @@ const img = new Image();
 
 const default_colors = {
     '1' : {
-        1: [247, 242, 246],
+        1: [255, 255, 255],
+    },
+    '2' : {
+        1: [248, 248, 248],
     },
     '3' : {
         1: [132, 239, 198],
@@ -24,12 +27,14 @@ const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
 const generationTextHeights = {
     '1': { y: 280 },
+    '2': { y: 280 },
     '3': { y: 280 },
     '4': { y: 340 },
 };
 
 const generationSpriteSizes = {
     '1': 64,
+    '2': 64,
     '3': 64,
     '4': 80,
     '5': 96,
@@ -67,6 +72,14 @@ const spritePositions = {
         5: { x: 216, y: 128 },
         6: { x: 324, y: 128 },
     },
+    '2': {
+        1: { x: -16, y: 96 },
+        2: { x: 48, y: 96 },
+        3: { x: 112, y: 96 },
+        4: { x: 240 , y: 96 },
+        5: { x: 304, y: 96 },
+        6: { x: 368, y: 96 },
+    },
     '3': {
         1: { x: 48, y: 16 },
         2: { x: 176, y: 16 },
@@ -88,6 +101,7 @@ const spritePositions = {
 
 const drawingOrder = {
     '1': [1, 2, 3, 4, 5, 6],
+    '2': [1, 2, 3, 6, 5, 4],
     '3': [1, 2, 3, 4, 5, 6],
     '4': [1, 2, 3, 6, 5, 4],
     '5': [],
@@ -95,6 +109,7 @@ const drawingOrder = {
 
 const recoloringFunctions = {
     '1': recolorGen1Background,
+    '2': recolorGen2Background,
     '3': recolorGen3Background,
     '4': recolorGen4Background,
     '5': recolorGen5Background,
@@ -102,6 +117,7 @@ const recoloringFunctions = {
 
 const gemerationTrainerPositions = {
     '1': { x: 160, y: 64 },
+    '2': { x: 176, y: 112 },
     '3': { x: 160, y: 64 },
     '4': { x: 176, y: 128 },
 };
@@ -172,6 +188,28 @@ function recolorGen1Background(data) {
     const color1 = colors.color1;
 
     const defaultColors = default_colors['1'];
+
+    const default_color1 = defaultColors[1];
+
+    for (let i = 0; i < data.length; i += 4) {
+        if (
+            data[i] === default_color1[0]
+            && data[i + 1] === default_color1[1]
+            && data[i + 2] === default_color1[2]
+        ) {
+            data[i] = color1[0];
+            data[i + 1] = color1[1];
+            data[i + 2] = color1[2];
+        }
+    }
+}
+
+function recolorGen2Background(data) {
+    const colors = getColors();
+
+    const color1 = colors.color1;
+
+    const defaultColors = default_colors['2'];
 
     const default_color1 = defaultColors[1];
 

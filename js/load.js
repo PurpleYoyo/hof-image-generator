@@ -11,7 +11,15 @@ const generationPresets = {
         Custom: {
             'Yellow/Red/Blue/Green': {
                 value: 'yellow-red-blue-green',
-                color1: '#F7F2F6',
+                color1: '#FFFFFF',
+            }
+        },
+    },
+    2: {
+        Custom: {
+            'Gold/Silver/Crystal': {
+                value: 'gold-silver-crstal',
+                color1: '#F8F8F8',
             }
         },
     },
@@ -340,7 +348,7 @@ const games = [
     'Recharged Emerald',
 ];
 
-const generations = ['1', '3', '4'];
+const generations = ['1', '2', '3', '4'];
 
 export function buildTrainerDropdown() {
     const dropdown = document.getElementById('trainer-sprites');

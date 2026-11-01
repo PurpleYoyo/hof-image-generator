@@ -24,6 +24,13 @@ const generationSpecificInputs = {
         'color1-label',
         'g1-presets-input',
     ],
+    '2': [
+        'colors',
+        'color1',
+        'color1-label',
+        'g2-presets-input',
+        'borders-input',
+    ],
     '3': [
         'colors',
         'color1',
