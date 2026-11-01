@@ -2,7 +2,7 @@ import { darkenColor, hexToRGB, RGBtoHSV, HSVtoRGB } from './colors.js';
 import { generation1Games, generation2Games } from './pokemon.js';
 import { validSpecialCharacters } from './text.js';
 
-const generations = ['1', '3', '4'];
+const generations = ['1', '2', '3', '4'];
 
 const allInputs = [
     'colors',
