@@ -583,7 +583,7 @@ function drawText(text, generation) {
                 const width = characterWidths[generation][character] ?? characterWidths[generation].default;
                 const height = characterHeights[generation][character] ?? characterHeights[generation].default;
 
-                const y = generationTextHeights[generation].y + characterYShifts[generation][character] ?? 0;
+                const y = generationTextHeights[generation].y + (characterYShifts[generation][character] ?? 0) ;
 
                 ctx.drawImage(
                     image,
