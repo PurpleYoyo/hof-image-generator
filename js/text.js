@@ -139,7 +139,7 @@ export const characterHeights = {
 };
 
 export const characterYShifts = {
-    '1': {      
+    '1': {
         '-': -7,
         'g': 2,
         'j': 2,
@@ -147,7 +147,7 @@ export const characterYShifts = {
         'q': 2,
         'y': 2,
     },
-    '2': {      
+    '2': {
         '-': -7,
         'g': 2,
         'j': 2,
@@ -168,6 +168,13 @@ export const characterYShifts = {
     '4': {},
 };
 
+export const invalidMessages = {
+    '1': 'Game name may only include letters, number, and the following special characters:',
+    '2': 'Game name may only include letters, number, and the following special characters:',
+    '3': 'Game name may only include letters, number, and the following special characters:',
+    '4': 'Game name may only include letters, number, and the following special characters:',
+};
+
 export function getTextWidth(text, generation) {
     let width = 0;
 
@@ -176,5 +183,32 @@ export function getTextWidth(text, generation) {
         width += characterWidths[generation][character] ?? characterWidths[generation].default;
     }
 
-    return width;
+    const spaceBetween = generation === '3' ? 0 : 1;
+    return width + (spaceBetween * text.length);
+}
+
+export function validateText(text, generation) {
+    if (text === '') {
+        return false;
+    }
+    
+    for (let i = 0; i < text.length; i++) {
+        const character = text.charAt(i);
+
+        if (!isAlphaNumeric(character)) {
+            if (!(character in validSpecialCharacters[generation])) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+function isAlphaNumeric(character) {
+    return /^[a-zA-Z0-9]$/i.test(character);
+}
+
+export function isNumeric(character) {
+    return /^[0-9]$/i.test(character);
 }

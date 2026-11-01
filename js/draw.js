@@ -1,7 +1,7 @@
 import { allPokemon, pokemonIntroductionGeneration, getBasePokemon, generation1Games, generation2Games } from './pokemon.js';
 import { buildSpriteDropdowns, buildPresetDropdowns, randomizeStartColors, buildGameSuggestions, buildPokemonSuggestions, initializeEventListeners, randomizePlaceholders, buildTrainerDropdown } from './load.js';
-import { getGeneration, getType, hideInputs, getColors, getInputs, getTrainerType, validateText, isNumeric } from './utils.js';
-import { characterWidths, characterHeights, characterYShifts, getTextWidth, validSpecialCharacters } from './text.js';
+import { getGeneration, getType, hideInputs, getColors, getInputs, getTrainerType } from './utils.js';
+import { characterWidths, characterHeights, characterYShifts, getTextWidth, validSpecialCharacters, invalidMessages, validateText, isNumeric } from './text.js';
 
 const img = new Image();
 
@@ -361,8 +361,15 @@ function drawSprites(generation) {
             promises.push(drawTrainer(generation));
         }
 
-        if (validateText(game)) {
+        const invalidTextbox = document.getElementById('invalid-text');
+        if (validateText(game, generation)) {
             promises.push(drawText(game, generation));
+
+            invalidTextbox.classList.add('hidden');
+        }
+        else {
+            invalidTextbox.classList.remove('hidden');
+            invalidTextbox.textContent = invalidMessages[generation];
         }
 
         Promise.all(promises).then(() => {
@@ -631,7 +638,8 @@ function drawText(text, generation) {
                     height
                 );
 
-                x += width;
+                const spaceBetween = generation === '3' ? 0 : 1;
+                x += width + spaceBetween;
             }
 
             resolve();

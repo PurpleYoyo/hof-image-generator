@@ -324,29 +324,3 @@ export function getInputs(index) {
         resize: document.getElementById(`resize${index}`).checked,
     }
 }
-
-export function validateText(text) {
-    if (text === '') {
-        return false;
-    }
-    
-    for (let i = 0; i < text.length; i++) {
-        const character = text.charAt(i);
-
-        if (!isAlphaNumeric(character)) {
-            if (!(character in validSpecialCharacters)) {
-                return false;
-            }
-        }
-    }
-
-    return true;
-}
-
-function isAlphaNumeric(character) {
-    return /^[a-zA-Z0-9]$/i.test(character);
-}
-
-export function isNumeric(character) {
-    return /^[0-9]$/i.test(character);
-}
