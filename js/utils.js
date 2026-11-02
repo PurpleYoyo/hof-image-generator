@@ -26,6 +26,8 @@ const generationSpecificInputs = {
         'color1',
         'color1-label',
         'g1-presets-input',
+        'borders-input',
+        'darken-input',
         'game-name-input',
         'trainer-input',
     ],

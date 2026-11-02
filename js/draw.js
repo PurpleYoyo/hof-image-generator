@@ -26,8 +26,8 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
 const generationTextHeights = {
-    '1': { y: 280 },
-    '2': { y: 280 },
+    '1': { y: 272 },
+    '2': { y: 264 },
     '3': { y: 280 },
     '4': { y: 340 },
     '5': { y: 50 },
@@ -66,20 +66,20 @@ const generationRomanNumerals = {
 
 const spritePositions = {
     '1': {
-        1: { x: 40, y: 32 },
-        2: { x: 168, y: 32 },
-        3: { x: 296, y: 32 },
-        4: { x: 88, y: 128 },
-        5: { x: 216, y: 128 },
-        6: { x: 324, y: 128 },
+        1: { x: 40, y: 48 },
+        2: { x: 168, y: 48 },
+        3: { x: 296, y: 48 },
+        4: { x: 88, y: 144 },
+        5: { x: 216, y: 144 },
+        6: { x: 324, y: 144 },
     },
     '2': {
-        1: { x: 0, y: 96 },
-        2: { x: 64, y: 96 },
-        3: { x: 128, y: 96 },
-        4: { x: 256 , y: 96 },
-        5: { x: 320, y: 96 },
-        6: { x: 384, y: 96 },
+        1: { x: 0, y: 104 },
+        2: { x: 64, y: 104 },
+        3: { x: 128, y: 104 },
+        4: { x: 256 , y: 104 },
+        5: { x: 320, y: 104 },
+        6: { x: 384, y: 104 },
     },
     '3': {
         1: { x: 48, y: 16 },
@@ -124,8 +124,8 @@ const recoloringFunctions = {
 };
 
 const gemerationTrainerPositions = {
-    '1': { x: 160, y: 64 },
-    '2': { x: 176, y: 112 },
+    '1': { x: 160, y: 80 },
+    '2': { x: 176, y: 104 },
     '3': { x: 160, y: 64 },
     '4': { x: 176, y: 128 },
     '5': {},
