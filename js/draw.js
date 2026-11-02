@@ -372,7 +372,9 @@ function drawSprites(generation) {
 
         const invalidTextbox = document.getElementById('invalid-text');
         if (validateText(game, generation)) {
-            promises.push(drawText(game, generation));
+            if (game !== '') {
+                promises.push(drawText(game, generation));
+            }
 
             invalidTextbox.classList.add('hidden');
         }

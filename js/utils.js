@@ -14,9 +14,8 @@ const allInputs = [
     'g4-presets-input',
     'darken-input',
     'borders-input',
-    'game-name',
-    'trainer',
-    'trainer-label',
+    'game-name-input',
+    'trainer-input',
 ];
 
 const generationSpecificInputs = {
@@ -25,9 +24,8 @@ const generationSpecificInputs = {
         'color1',
         'color1-label',
         'g1-presets-input',
-        'game-name',
-        'trainer',
-        'trainer-label',
+        'game-name-input',
+        'trainer-input',
     ],
     '2': [
         'colors',
@@ -35,9 +33,8 @@ const generationSpecificInputs = {
         'color1-label',
         'g2-presets-input',
         'borders-input',
-        'game-name',
-        'trainer',
-        'trainer-label',
+        'game-name-input',
+        'trainer-input',
     ],
     '3': [
         'colors',
@@ -48,19 +45,19 @@ const generationSpecificInputs = {
         'g3-presets-input',
         'darken-input',
         'borders-input',
-        'game-name',
-        'trainer',
-        'trainer-label',
+        'game-name-input',
+        'trainer-input',
     ],
     '4': [
         'g4-presets-input',
         'borders-input',
-        'trainer',
-        'trainer-label',
+        'trainer-input',
+        'game-name-input',
     ],
     '5': [
         'g5-presets-input',
         'borders-input',
+        'game-name-input',
     ],
 };
 

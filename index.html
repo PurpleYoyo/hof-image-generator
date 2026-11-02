@@ -46,7 +46,7 @@
                     <label for="g4">Generation 4</label>
 
                     <input type="radio" id="g5" name="generation" class="generation" value="5" />
-                    <label for="g5">5</label>
+                    <label for="g5">Generation 5</label>
                 </div>
             </fieldset>
 
@@ -77,10 +77,12 @@
                     <input type="checkbox" id="darken" name="darken">
                 </div>
 
-                <br>
+                <div id="trainer-input">
+                    <br>
 
-                <label for="trainer" id="trainer-label">Show Trainer?</label>
-                <input type="checkbox" id="trainer" name="trainer">
+                    <label for="trainer" id="trainer-label">Show Trainer?</label>
+                    <input type="checkbox" id="trainer" name="trainer">
+                </div>
 
                 <div id="trainer-sprite" class="hidden">
                     <br>
@@ -146,10 +148,12 @@
                     <select name="g5-presets" id="g5-presets" class="hidden"></select>
                 </div>
 
-                <br>
+                <div id="game-name-input">
+                    <br>
 
-                <label for="game-name">Game</label>
-                <input type="text" id="game-name" name="game-name" maxlength="30" list="games" />
+                    <label for="game-name" id="game-name-label">Game</label>
+                    <input type="text" id="game-name" name="game-name" maxlength="30" list="games" />
+                </div>
 
                 <span id="invalid-text" class="hidden"></span>
 
