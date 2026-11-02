@@ -348,7 +348,7 @@ const games = [
     'Recharged Emerald',
 ];
 
-const generations = ['1', '2', '3', '4'];
+const generations = ['1', '2', '3', '4', '5'];
 
 export function buildTrainerDropdown() {
     const dropdown = document.getElementById('trainer-sprites');

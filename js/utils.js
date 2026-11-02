@@ -1,8 +1,7 @@
 import { darkenColor, hexToRGB, RGBtoHSV, HSVtoRGB } from './colors.js';
 import { generation1Games, generation2Games } from './pokemon.js';
-import { validSpecialCharacters } from './text.js';
 
-const generations = ['1', '2', '3', '4'];
+const generations = ['1', '2', '3', '4', '5'];
 
 const allInputs = [
     'colors',
@@ -15,6 +14,9 @@ const allInputs = [
     'g4-presets-input',
     'darken-input',
     'borders-input',
+    'game-name',
+    'trainer',
+    'trainer-label',
 ];
 
 const generationSpecificInputs = {
@@ -23,6 +25,9 @@ const generationSpecificInputs = {
         'color1',
         'color1-label',
         'g1-presets-input',
+        'game-name',
+        'trainer',
+        'trainer-label',
     ],
     '2': [
         'colors',
@@ -30,6 +35,9 @@ const generationSpecificInputs = {
         'color1-label',
         'g2-presets-input',
         'borders-input',
+        'game-name',
+        'trainer',
+        'trainer-label',
     ],
     '3': [
         'colors',
@@ -40,12 +48,20 @@ const generationSpecificInputs = {
         'g3-presets-input',
         'darken-input',
         'borders-input',
+        'game-name',
+        'trainer',
+        'trainer-label',
     ],
     '4': [
         'g4-presets-input',
         'borders-input',
+        'trainer',
+        'trainer-label',
     ],
-    '5': [],
+    '5': [
+        'g5-presets-input',
+        'borders-input',
+    ],
 };
 
 export function toggleSidebar() {

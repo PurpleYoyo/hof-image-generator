@@ -30,6 +30,7 @@ const generationTextHeights = {
     '2': { y: 280 },
     '3': { y: 280 },
     '4': { y: 340 },
+    '5': { y: 340 },
 };
 
 const generationSpriteSizes = {
@@ -96,7 +97,14 @@ const spritePositions = {
         5: { x: 304, y: 96 },
         6: { x: 368, y: 80 },
     },
-    '5': {},
+    '5': {
+        1: { x: -14, y: 42 },
+        2: { x: 158, y: -2 },
+        3: { x: 334, y: 42 },
+        4: { x: -14 , y: 128 },
+        5: { x: 158, y: 178 },
+        6: { x: 324, y: 128 },
+    },
 };
 
 const drawingOrder = {
@@ -104,7 +112,7 @@ const drawingOrder = {
     '2': [1, 2, 3, 6, 5, 4],
     '3': [1, 2, 3, 4, 5, 6],
     '4': [1, 2, 3, 6, 5, 4],
-    '5': [],
+    '5': [1, 2, 3, 4, 5, 6],
 };
 
 const recoloringFunctions = {
@@ -120,6 +128,7 @@ const gemerationTrainerPositions = {
     '2': { x: 176, y: 112 },
     '3': { x: 160, y: 64 },
     '4': { x: 176, y: 128 },
+    '5': {},
 };
 
 window.addEventListener('load', (event) => {
