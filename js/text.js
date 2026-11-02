@@ -194,7 +194,7 @@ export function getTextWidth(text, generation) {
 
 export function validateText(text, generation) {
     if (text === '') {
-        return false;
+        return true;
     }
     
     for (let i = 0; i < text.length; i++) {

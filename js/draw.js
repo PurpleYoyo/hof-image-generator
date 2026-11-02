@@ -30,7 +30,7 @@ const generationTextHeights = {
     '2': { y: 280 },
     '3': { y: 280 },
     '4': { y: 340 },
-    '5': { y: 340 },
+    '5': { y: 50 },
 };
 
 const generationSpriteSizes = {
@@ -74,12 +74,12 @@ const spritePositions = {
         6: { x: 324, y: 128 },
     },
     '2': {
-        1: { x: -16, y: 96 },
-        2: { x: 48, y: 96 },
-        3: { x: 112, y: 96 },
-        4: { x: 240 , y: 96 },
-        5: { x: 304, y: 96 },
-        6: { x: 368, y: 96 },
+        1: { x: 0, y: 96 },
+        2: { x: 64, y: 96 },
+        3: { x: 128, y: 96 },
+        4: { x: 256 , y: 96 },
+        5: { x: 320, y: 96 },
+        6: { x: 384, y: 96 },
     },
     '3': {
         1: { x: 48, y: 16 },
@@ -373,7 +373,7 @@ function drawSprites(generation) {
         const invalidTextbox = document.getElementById('invalid-text');
         if (validateText(game, generation)) {
             console.log(game);
-            if (game !== undefined) {
+            if (game !== '') {
                 promises.push(drawText(game, generation));
             }
 
@@ -627,7 +627,8 @@ function drawText(text, generation) {
         Promise.all(characters).then((images) => {
             const totalWidth = getTextWidth(text, generation);
 
-            let x = parseInt((canvas.width - totalWidth) / 2);
+            const xShift = generation === '5' ? 50 : 0;
+            let x = parseInt((canvas.width - totalWidth) / 2) + xShift;
 
             for (const char of images) {
                 if (char === null) {
