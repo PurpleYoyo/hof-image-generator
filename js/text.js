@@ -52,6 +52,7 @@ export const validSpecialCharacters = {
         '/': { filename: 'rs' },
     },
     '4': {},
+    '5': {},
 };
 
 export const characterWidths = {
@@ -103,6 +104,7 @@ export const characterWidths = {
         '…': 12,
     },
     '4': {},
+    '5': {},
 };
 
 export const characterHeights = {
@@ -136,6 +138,7 @@ export const characterHeights = {
         '…': 4,
     },
     '4': {},
+    '5': {},
 };
 
 export const characterYShifts = {
@@ -166,6 +169,7 @@ export const characterYShifts = {
         '"': -14,
     },
     '4': {},
+    '5': {},
 };
 
 export const invalidMessages = {
@@ -173,6 +177,7 @@ export const invalidMessages = {
     '2': 'Game name may only include letters, number, and the following special characters:',
     '3': 'Game name may only include letters, number, and the following special characters:',
     '4': 'Game name may only include letters, number, and the following special characters:',
+    '5': 'Game name may only include letters, number, and the following special characters:',
 };
 
 export function getTextWidth(text, generation) {

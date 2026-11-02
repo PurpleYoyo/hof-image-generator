@@ -372,7 +372,8 @@ function drawSprites(generation) {
 
         const invalidTextbox = document.getElementById('invalid-text');
         if (validateText(game, generation)) {
-            if (game !== '') {
+            console.log(game);
+            if (game !== undefined) {
                 promises.push(drawText(game, generation));
             }
 
