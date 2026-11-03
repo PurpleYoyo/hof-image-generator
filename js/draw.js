@@ -1,7 +1,7 @@
 import { allPokemon, pokemonIntroductionGeneration, getBasePokemon, generation1Games, generation2Games } from './pokemon.js';
 import { buildSpriteDropdowns, buildPresetDropdowns, randomizeStartColors, buildGameSuggestions, buildPokemonSuggestions, initializeEventListeners, randomizePlaceholders, buildTrainerDropdown } from './load.js';
 import { getGeneration, getType, hideInputs, getColors, getInputs, getTrainerType } from './utils.js';
-import { characterWidths, characterHeights, characterYShifts, getTextWidth, validSpecialCharacters, invalidMessages, validateText, isNumeric } from './text.js';
+import { characterWidths, characterHeights, characterYShifts, getTextWidth, validSpecialCharacters, getInvalidMessage, validateText, isNumeric } from './text.js';
 
 const img = new Image();
 
@@ -26,7 +26,7 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
 const generationTextHeights = {
-    '1': { y: 272 },
+    '1': { y: 280 },
     '2': { y: 264 },
     '3': { y: 280 },
     '4': { y: 340 },
@@ -125,7 +125,7 @@ const recoloringFunctions = {
 
 const gemerationTrainerPositions = {
     '1': { x: 160, y: 80 },
-    '2': { x: 176, y: 104 },
+    '2': { x: 176, y: 96 },
     '3': { x: 160, y: 64 },
     '4': { x: 176, y: 128 },
     '5': {},
@@ -372,7 +372,6 @@ function drawSprites(generation) {
 
         const invalidTextbox = document.getElementById('invalid-text');
         if (validateText(game, generation)) {
-            console.log(game);
             if (game !== '') {
                 promises.push(drawText(game, generation));
             }
@@ -381,7 +380,7 @@ function drawSprites(generation) {
         }
         else {
             invalidTextbox.classList.remove('hidden');
-            invalidTextbox.textContent = invalidMessages[generation];
+            invalidTextbox.textContent = getInvalidMessage(generation);
         }
 
         Promise.all(promises).then(() => {

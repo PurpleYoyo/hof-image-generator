@@ -51,8 +51,38 @@ export const validSpecialCharacters = {
         '♂': { filename: 'ma' },
         '/': { filename: 'rs' },
     },
-    '4': {},
-    '5': {},
+    '4': {
+        '!': { filename: 'ep' },
+        ' ': { filename: 'sp' },
+        '.': { filename: 'pd' },
+        '\'': { filename: 'ap' },
+        ',': { filename: 'co' },
+        'é': { filename: 'ae' },
+        '?': { filename: 'qm' },
+        '"': { filename: 'qu' },
+        '-': { filename: 'hy' },
+        'Nº': { filename: 'no' },
+        '…': { filename: 'el' },
+        '♀': { filename: 'fe' },
+        '♂': { filename: 'ma' },
+        '/': { filename: 'rs' },
+    },
+    '5': {
+        '!': { filename: 'ep' },
+        ' ': { filename: 'sp' },
+        '.': { filename: 'pd' },
+        '\'': { filename: 'ap' },
+        ',': { filename: 'co' },
+        'é': { filename: 'ae' },
+        '?': { filename: 'qm' },
+        '"': { filename: 'qu' },
+        '-': { filename: 'hy' },
+        'Nº': { filename: 'no' },
+        '…': { filename: 'el' },
+        '♀': { filename: 'fe' },
+        '♂': { filename: 'ma' },
+        '/': { filename: 'rs' },
+    },
 };
 
 export const characterWidths = {
@@ -103,8 +133,12 @@ export const characterWidths = {
         'j': 10,
         '…': 12,
     },
-    '4': {},
-    '5': {},
+    '4': {
+        default: 12,
+    },
+    '5': {
+        default: 12,
+    },
 };
 
 export const characterHeights = {
@@ -137,8 +171,12 @@ export const characterHeights = {
         'j': 26,
         '…': 4,
     },
-    '4': {},
-    '5': {},
+    '4': {
+        default: 22,
+    },
+    '5': {
+        default: 22,
+    },
 };
 
 export const characterYShifts = {
@@ -170,14 +208,6 @@ export const characterYShifts = {
     },
     '4': {},
     '5': {},
-};
-
-export const invalidMessages = {
-    '1': 'Game name may only include letters, number, and the following special characters:',
-    '2': 'Game name may only include letters, number, and the following special characters:',
-    '3': 'Game name may only include letters, number, and the following special characters:',
-    '4': 'Game name may only include letters, number, and the following special characters:',
-    '5': 'Game name may only include letters, number, and the following special characters:',
 };
 
 export function getTextWidth(text, generation) {
@@ -216,4 +246,14 @@ function isAlphaNumeric(character) {
 
 export function isNumeric(character) {
     return /^[0-9]$/i.test(character);
+}
+
+export function getInvalidMessage(generation) {
+    let characters = [];
+
+    for (const c of Object.keys(validSpecialCharacters[generation])) {
+        characters.push(c);
+    }
+
+    return 'Game name may only include letters, number, and the following special characters:' + characters.join(', ');
 }

@@ -98,3 +98,12 @@ canvas {
 .tooltip {
     border-bottom: 1px dotted black;
 }
+
+#invalid-text {
+    border-radius: 12px;
+    background-color: #fca5a5;
+    border: 1px solid red;
+    padding: 2px;
+    display: inline-block;
+    width: 50%;
+}
