@@ -255,5 +255,5 @@ export function getInvalidMessage(generation) {
         characters.push(c);
     }
 
-    return 'Game name may only include letters, number, and the following special characters:' + characters.join(', ');
+    return 'Game name may only include letters, number, and the following special characters: ' + characters.join(', ');
 }
