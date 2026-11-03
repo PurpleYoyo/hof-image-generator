@@ -377,9 +377,11 @@ function drawSprites(generation) {
             }
 
             invalidTextbox.classList.add('hidden');
+            invalidTextbox.classList.remove('error');
         }
         else {
             invalidTextbox.classList.remove('hidden');
+            invalidTextbox.classList.add('error');
             invalidTextbox.textContent = getInvalidMessage(generation);
         }
 

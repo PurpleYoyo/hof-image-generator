@@ -99,7 +99,7 @@ canvas {
     border-bottom: 1px dotted black;
 }
 
-#invalid-text {
+.error {
     border-radius: 12px;
     background-color: #fca5a5;
     border: 1px solid red;
