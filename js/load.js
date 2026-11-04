@@ -6,81 +6,71 @@ const presetLinks = [
     'https://raw.githubusercontent.com/PurpleYoyo/hof-image-generator/refs/heads/main/smallchung.png',
 ];
 
-const generationPresets = {
-    1: {
-        Custom: {
-            'Yellow/Red/Blue/Green': {
-                value: 'yellow-red-blue-green',
-                color1: '#FFFFFF',
-            }
+const presets = {
+    Vanilla: {
+        'Yellow/Red/Blue/Green': {
+            value: 'yellow-red-blue-green',
+            color1: '#FFFFFF',
+            color2: '#FFFFFF',
+        },
+        'Gold/Silver/Crystal': {
+            value: 'gold-silver-crstal',
+            color1: '#F8F8F8',
+            color2: '#F8F8F8',
+        },
+        'Emerald': {
+            value: 'emerald',
+            color1: '#84EFC6',
+            color2: '#73DEB5',
+            borders: true,
+        },
+        'FireRed/LeafGreen': {
+            value: 'firered-leafgreen',
+            color1: '#B5C6EF',
+            color2: '#A5B5EF',
+            borders: true,
+        },
+        'Ruby/Sapphire': {
+            value: 'ruby-sapphire',
+            color1: '#FFD6E7',
+            color2: '#FFB5E7',
+            borders: true,
         },
     },
-    2: {
-        Custom: {
-            'Gold/Silver/Crystal': {
-                value: 'gold-silver-crstal',
-                color1: '#F8F8F8',
-            }
+    Romhacks: {
+        'Heart & Soul': {
+            value: 'heart-and-soul',
+            color1: '#731810',
+            color2: '#631010',
+            borders: true,
+        },
+        'Unbound': {
+            value: 'unbound',
+            color1: '#BC84E9',
+            color2: '#BC84E9',
+            borders: true,
+        },
+        'Soulgold': {
+            value: 'soulgold',
+            color1: '#191547',
+            color2: '#191547',
+            borders: false,
+        },
+        'Ghost Grey': {
+            value: 'ghost-grey',
+            color1: '#F8f8F8',
+            color2: '#F8f8F8',
+            borders: true,
         },
     },
-    3: {
-        Vanilla: {
-            'Emerald': {
-                value: 'emerald',
-                color1: '#84EFC6',
-                color2: '#73DEB5',
-                borders: true,
-            },
-            'FireRed/LeafGreen': {
-                value: 'firered-leafgreen',
-                color1: '#B5C6EF',
-                color2: '#A5B5EF',
-                borders: true,
-            },
-            'Ruby/Sapphire': {
-                value: 'ruby-sapphire',
-                color1: '#FFD6E7',
-                color2: '#FFB5E7',
-                borders: true,
-            },
-        },
-        Romhacks: {
-            'Heart & Soul': {
-                value: 'heart-and-soul',
-                color1: '#731810',
-                color2: '#631010',
-                borders: true,
-            },
-            'Unbound': {
-                value: 'unbound',
-                color1: '#BC84E9',
-                color2: '#BC84E9',
-                borders: true,
-            },
-            'Soulgold': {
-                value: 'soulgold',
-                color1: '#191547',
-                color2: '#191547',
-                borders: false,
-            },
-            'Ghost Grey': {
-                value: 'ghost-grey',
-                color1: '#F8f8F8',
-                color2: '#F8f8F8',
-                borders: true,
-            },
-        },
-        Custom: {
-            'Omega Ruby': {
-                value: 'omega-ruby',
-                color1: '#EF4D5D',
-                color2: '#990A0C',
-                borders: true,
-            },
+    Custom: {
+        'Omega Ruby': {
+            value: 'omega-ruby',
+            color1: '#EF4D5D',
+            color2: '#990A0C',
+            borders: true,
         },
     },
-    4: {},
-    5: {},
 };
 
 const sprites = {
@@ -373,31 +363,24 @@ export function buildSpriteDropdowns() {
 }
 
 export function buildPresetDropdowns() {
-    for (const i of generations) {
-        const dropdown = document.getElementById(`g${i}-presets`);
-        const presets = generationPresets[i];
+    const dropdown = document.getElementById('presets');
 
-        const none = document.createElement('option');
-        none.value = 'none-option';
-        none.text = 'None';
-        
-        dropdown.appendChild(none);
-
-        Object.keys(presets).forEach((group) => {
-            const optgroup = document.createElement('optgroup');
-            optgroup.label = group;
-
-            Object.keys(presets[group]).forEach((game) => {
-                const option = document.createElement('option');
-                option.value = `${presets[group][game].value}-option`;
-                option.text = game;
-
-                optgroup.appendChild(option);
-            });
-
-            dropdown.appendChild(optgroup);
+    const none = document.createElement('option');
+    none.value = 'none-option';
+    none.text = 'None';
+    
+    dropdown.appendChild(none);
+    Object.keys(presets).forEach((group) => {
+        const optgroup = document.createElement('optgroup');
+        optgroup.label = group;
+        Object.keys(presets[group]).forEach((game) => {
+            const option = document.createElement('option');
+            option.value = `${presets[group][game].value}-option`;
+            option.text = game;
+            optgroup.appendChild(option);
         });
-    }
+        dropdown.appendChild(optgroup);
+    });
 }
 
 export function randomizeStartColors() {

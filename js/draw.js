@@ -30,7 +30,7 @@ const generationTextHeights = {
     '2': { y: 264 },
     '3': { y: 280 },
     '4': { y: 344 },
-    '5': { y: 10 },
+    '5': { y: 5 },
 };
 
 const generationSpriteSizes = {
@@ -628,7 +628,7 @@ function drawText(text, generation) {
         Promise.all(characters).then((images) => {
             const totalWidth = getTextWidth(text, generation);
 
-            const xShift = generation === '5' ? 30 : 0;
+            const xShift = generation === '5' ? 5 : 0;
             let x = parseInt((canvas.width - totalWidth) / 2) + xShift;
 
             for (const char of images) {
