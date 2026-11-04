@@ -421,11 +421,13 @@ export function initializeEventListeners(start) {
 
     // Background
     for (const i of generations) {
-        document.getElementById('presets').value = 'none-option';
+        document.getElementById(`g${i}`).addEventListener('change', () => {
+            document.getElementById('presets').value = 'none-option';
             
-        resetInputs();
+            resetInputs();
 
-        start();
+            start();
+        });
     }
 
     // Colors
