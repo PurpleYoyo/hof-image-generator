@@ -459,31 +459,27 @@ export function initializeEventListeners(start) {
 	});
 
     // Presets
-    for (const i of generations) {
-        const dropdown = document.getElementById(`g${i}-presets`);
-	    dropdown.addEventListener('input', () => {
-            const value = dropdown.value.replace('-option', '');
-            if (value === 'none') {
-                return;
-            }
+    const dropdown = document.getElementById('presets');
+	dropdown.addEventListener('input', () => {
+        const value = dropdown.value.replace('-option', '');
+        if (value === 'none') {
+            return;
+        }
 
-            const presets = generationPresets[i];
+        Object.keys(presets).forEach((group) => {
+            Object.keys(presets[group]).forEach((game) => {
+                if (presets[group][game].value === value) {
+                    const preset = presets[group][game];
 
-            Object.keys(presets).forEach((group) => {
-                Object.keys(presets[group]).forEach((game) => {
-                    if (presets[group][game].value === value) {
-                        const preset = presets[group][game];
-
-                        document.getElementById('color1').value = preset.color1;
-                        document.getElementById('color2').value = preset.color2 ?? '#FFFFFF';
-                        document.getElementById('borders').checked = preset.borders ?? true;
-                    }
-                });
+                    document.getElementById('color1').value = preset.color1;
+                    document.getElementById('color2').value = preset.color2 ?? '#FFFFFF';
+                    document.getElementById('borders').checked = preset.borders ?? true;
+                }
             });
-
-            start();
         });
-    }
+
+        start();
+    });
 
     // Game
     document.getElementById('game-name').addEventListener('input', start);
