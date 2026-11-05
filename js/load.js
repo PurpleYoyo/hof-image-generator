@@ -422,8 +422,6 @@ export function initializeEventListeners(start) {
     // Background
     for (const i of generations) {
         document.getElementById(`g${i}`).addEventListener('change', () => {
-            document.getElementById('presets').value = 'none-option';
-            
             resetInputs();
 
             start();
@@ -437,9 +435,7 @@ export function initializeEventListeners(start) {
 
     // Borders
     document.getElementById('borders').addEventListener('input', () => { 
-        for (const i of generations) {
-            document.getElementById(`g${i}-presets`).value = 'none-option';
-        }
+        document.getElementById('presets').value = 'none-option';
 
         start();
     });
