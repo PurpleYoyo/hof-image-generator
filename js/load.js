@@ -62,6 +62,12 @@ const presets = {
             color2: '#F8f8F8',
             borders: true,
         },
+        'Ancestral X': {
+            value: 'ancestral-x',
+            color1: '#94B57E',
+            color2: '#607450',
+            borders: true,
+        },
     },
     Custom: {
         'Omega Ruby': {
