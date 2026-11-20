@@ -41,6 +41,7 @@ const generationInformation = {
         recoloring_function: recolorGen1Background,
         trainer_position: { x: 160, y: 80 },
         character_spacing: 1,
+        text_x_shift: 0,
     },
     '2': {
         text_height: 264,
@@ -57,6 +58,7 @@ const generationInformation = {
         recoloring_function: recolorGen2Background,
         trainer_position: { x: 176, y: 96 },
         character_spacing: 1,
+        text_x_shift: 0,
     },
     '3': {
         text_height: 280,
@@ -73,6 +75,7 @@ const generationInformation = {
         recoloring_function: recolorGen3Background,
         trainer_position: { x: 160, y: 64 },
         character_spacing: 0,
+        text_x_shift: 0,
     },
     '4': {
         text_height: 344,
@@ -89,6 +92,7 @@ const generationInformation = {
         recoloring_function: recolorGen4Background,
         trainer_position: { x: 176, y: 128 },
         character_spacing: 1,
+        text_x_shift: 0,
     },
     '5': {
         text_height: 5,
@@ -105,6 +109,7 @@ const generationInformation = {
         recoloring_function: recolorGen5Background,
         trainer_position: {},
         character_spacing: 0,
+        text_x_shift: 20,
     },
 };
 
@@ -628,8 +633,7 @@ function drawText(text, generation) {
         Promise.all(characters).then((images) => {
             const totalWidth = getTextWidth(text, generation);
 
-            const xShift = generation === '5' ? 5 : 0;
-            let x = parseInt((canvas.width - totalWidth) / 2) + xShift;
+            let x = parseInt((canvas.width - totalWidth) / 2) + generationInformation[generation].text_x_shift;
 
             for (const char of images) {
                 if (char === null) {
