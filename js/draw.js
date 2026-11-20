@@ -25,20 +25,82 @@ const default_colors = {
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
-const generationTextHeights = {
-    '1': { y: 280 },
-    '2': { y: 264 },
-    '3': { y: 280 },
-    '4': { y: 344 },
-    '5': { y: 5 },
-};
-
-const generationSpriteSizes = {
-    '1': 64,
-    '2': 64,
-    '3': 64,
-    '4': 80,
-    '5': 96,
+const generationInformation = {
+    '1': {
+        text_height: 280,
+        sprite_size: 64,
+        sprite_positions: {
+            1: { x: 40, y: 48 },
+            2: { x: 168, y: 48 },
+            3: { x: 296, y: 48 },
+            4: { x: 88, y: 144 },
+            5: { x: 216, y: 144 },
+            6: { x: 324, y: 144 },
+        },
+        drawing_order: [1, 2, 3, 4, 5, 6],
+        recoloring_function: recolorGen1Background,
+        trainer_position: { x: 160, y: 80 },
+    },
+    '2': {
+        text_height: 264,
+        sprite_size: 64,
+        sprite_positions: {
+            1: { x: 0, y: 104 },
+            2: { x: 64, y: 104 },
+            3: { x: 128, y: 104 },
+            4: { x: 256 , y: 104 },
+            5: { x: 320, y: 104 },
+            6: { x: 384, y: 104 },
+        },
+        drawing_order: [1, 2, 3, 6, 5, 4],
+        recoloring_function: recolorGen2Background,
+        trainer_position: { x: 176, y: 96 },
+    },
+    '3': {
+        text_height: 280,
+        sprite_size: 64,
+        sprite_positions: {
+            1: { x: 48, y: 16 },
+            2: { x: 176, y: 16 },
+            3: { x: 304, y: 16 },
+            4: { x: 16, y: 112 },
+            5: { x: 176, y: 112 },
+            6: { x: 336, y: 112 },
+        },
+        drawing_order: [1, 2, 3, 4, 5, 6],
+        recoloring_function: recolorGen3Background,
+        trainer_position: { x: 160, y: 64 },
+    },
+    '4': {
+        text_height: 344,
+        sprite_size: 80,
+        sprite_positions: {
+            1: { x: -16, y: 80 },
+            2: { x: 48, y: 96 },
+            3: { x: 112, y: 112 },
+            4: { x: 240 , y: 112 },
+            5: { x: 304, y: 96 },
+            6: { x: 368, y: 80 },
+        },
+        drawing_order: [1, 2, 3, 6, 5, 4],
+        recoloring_function: recolorGen4Background,
+        trainer_position: { x: 176, y: 128 },
+    },
+    '5': {
+        text_height: 5,
+        sprite_size: 96,
+        sprite_positions: {
+            1: { x: -14, y: 42 },
+            2: { x: 158, y: -2 },
+            3: { x: 334, y: 42 },
+            4: { x: -14 , y: 128 },
+            5: { x: 158, y: 178 },
+            6: { x: 324, y: 128 },
+        },
+        drawing_order: [1, 2, 3, 4, 5, 6],
+        recoloring_function: recolorGen5Background,
+        trainer_position: {},
+    },
 };
 
 const gameGeneration = {
@@ -62,73 +124,6 @@ const generationRomanNumerals = {
 	3: 'iii',
 	4: 'iv',
 	5: 'v',
-};
-
-const spritePositions = {
-    '1': {
-        1: { x: 40, y: 48 },
-        2: { x: 168, y: 48 },
-        3: { x: 296, y: 48 },
-        4: { x: 88, y: 144 },
-        5: { x: 216, y: 144 },
-        6: { x: 324, y: 144 },
-    },
-    '2': {
-        1: { x: 0, y: 104 },
-        2: { x: 64, y: 104 },
-        3: { x: 128, y: 104 },
-        4: { x: 256 , y: 104 },
-        5: { x: 320, y: 104 },
-        6: { x: 384, y: 104 },
-    },
-    '3': {
-        1: { x: 48, y: 16 },
-        2: { x: 176, y: 16 },
-        3: { x: 304, y: 16 },
-        4: { x: 16, y: 112 },
-        5: { x: 176, y: 112 },
-        6: { x: 336, y: 112 },
-    },
-    '4': {
-        1: { x: -16, y: 80 },
-        2: { x: 48, y: 96 },
-        3: { x: 112, y: 112 },
-        4: { x: 240 , y: 112 },
-        5: { x: 304, y: 96 },
-        6: { x: 368, y: 80 },
-    },
-    '5': {
-        1: { x: -14, y: 42 },
-        2: { x: 158, y: -2 },
-        3: { x: 334, y: 42 },
-        4: { x: -14 , y: 128 },
-        5: { x: 158, y: 178 },
-        6: { x: 324, y: 128 },
-    },
-};
-
-const drawingOrder = {
-    '1': [1, 2, 3, 4, 5, 6],
-    '2': [1, 2, 3, 6, 5, 4],
-    '3': [1, 2, 3, 4, 5, 6],
-    '4': [1, 2, 3, 6, 5, 4],
-    '5': [1, 2, 3, 4, 5, 6],
-};
-
-const recoloringFunctions = {
-    '1': recolorGen1Background,
-    '2': recolorGen2Background,
-    '3': recolorGen3Background,
-    '4': recolorGen4Background,
-    '5': recolorGen5Background,
-};
-
-const gemerationTrainerPositions = {
-    '1': { x: 160, y: 80 },
-    '2': { x: 176, y: 96 },
-    '3': { x: 160, y: 64 },
-    '4': { x: 176, y: 128 },
-    '5': {},
 };
 
 window.addEventListener('load', (event) => {
@@ -175,7 +170,7 @@ function recolorBackground(generation) {
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
         
-    recoloringFunctions[generation](data);
+    generationInformation[generation].recoloring_function(data);
 
     ctx.putImageData(imageData, 0, 0);
 
@@ -311,7 +306,7 @@ function loadImage(src) {
 
 function drawSprites(generation) {
     const images = [];
-    for (const i of drawingOrder[generation]) {
+    for (const i of generationInformation[generation].drawing_order) {
         const src = buildSpriteLink(i);
         if (src === null) {
             continue;
@@ -392,12 +387,12 @@ function drawSprites(generation) {
 }
 
 function placeSprite(image, index, generation) {
-    const relativeSpriteSize = generationSpriteSizes[generation] * 2;
+    const relativeSpriteSize = generationInformation[generation].sprite_size * 2;
 
     const inputs = getInputs(index);
 
-    let x = spritePositions[generation][index].x;
-    let y = spritePositions[generation][index].y;
+    let x = generationInformation[generation].sprite_positions[index].x;
+    let y = generationInformation[generation].sprite_positions[index].y;
     
     let dWidth = image.width * 2;
     let dHeight = image.height * 2;
@@ -521,7 +516,7 @@ function buildSpriteLink(index) {
 
 function drawTrainer(generation) {
     return new Promise((resolve, reject) => {
-        const position = gemerationTrainerPositions[generation];
+        const position = generationInformation[generation].trainer_position;
         const trainer = new Image();
 
         trainer.onload = () => {
@@ -642,7 +637,7 @@ function drawText(text, generation) {
                 const width = characterWidths[generation][character] ?? characterWidths[generation].default;
                 const height = characterHeights[generation][character] ?? characterHeights[generation].default;
 
-                const y = generationTextHeights[generation].y + (characterYShifts[generation][character] ?? 0) ;
+                const y = generationInformation[generation].text_height + (characterYShifts[generation][character] ?? 0) ;
 
                 ctx.drawImage(
                     image,
