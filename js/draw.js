@@ -40,6 +40,7 @@ const generationInformation = {
         drawing_order: [1, 2, 3, 4, 5, 6],
         recoloring_function: recolorGen1Background,
         trainer_position: { x: 160, y: 80 },
+        character_spacing: 1,
     },
     '2': {
         text_height: 264,
@@ -55,6 +56,7 @@ const generationInformation = {
         drawing_order: [1, 2, 3, 6, 5, 4],
         recoloring_function: recolorGen2Background,
         trainer_position: { x: 176, y: 96 },
+        character_spacing: 1,
     },
     '3': {
         text_height: 280,
@@ -70,6 +72,7 @@ const generationInformation = {
         drawing_order: [1, 2, 3, 4, 5, 6],
         recoloring_function: recolorGen3Background,
         trainer_position: { x: 160, y: 64 },
+        character_spacing: 0,
     },
     '4': {
         text_height: 344,
@@ -85,6 +88,7 @@ const generationInformation = {
         drawing_order: [1, 2, 3, 6, 5, 4],
         recoloring_function: recolorGen4Background,
         trainer_position: { x: 176, y: 128 },
+        character_spacing: 1,
     },
     '5': {
         text_height: 5,
@@ -100,6 +104,7 @@ const generationInformation = {
         drawing_order: [1, 2, 3, 4, 5, 6],
         recoloring_function: recolorGen5Background,
         trainer_position: {},
+        character_spacing: 0,
     },
 };
 
@@ -647,8 +652,7 @@ function drawText(text, generation) {
                     height
                 );
 
-                const spaceBetween = generation === '3' ? 0 : 1;
-                x += width + spaceBetween;
+                x += width + generationInformation[generation].character_spacing;
             }
 
             resolve();
