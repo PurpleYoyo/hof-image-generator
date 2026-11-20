@@ -129,7 +129,7 @@ export function getTextWidth(text, generation) {
 
     for (let i = 0; i < text.length; i++) {
         const character = text.charAt(i);
-        width += characterInformation[generation][character].width ?? characterInformation[generation].default.width;
+        width += characterInformation[generation][character]?.width ?? characterInformation[generation].default.width;
     }
 
     const spaceBetween = generation === '3' ? 0 : 1;
