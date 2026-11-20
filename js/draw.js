@@ -1,7 +1,7 @@
 import { allPokemon, pokemonIntroductionGeneration, getBasePokemon, generation1Games, generation2Games } from './pokemon.js';
 import { buildSpriteDropdowns, buildPresetDropdowns, randomizeStartColors, buildGameSuggestions, buildPokemonSuggestions, initializeEventListeners, randomizePlaceholders, buildTrainerDropdown } from './load.js';
 import { getGeneration, getType, hideInputs, getColors, getInputs, getTrainerType } from './utils.js';
-import { characterWidths, characterHeights, characterYShifts, getTextWidth, validSpecialCharacters, getInvalidMessage, validateText, isNumeric } from './text.js';
+import { characterInformation, getTextWidth, getInvalidMessage, validateText, isNumeric } from './text.js';
 
 const img = new Image();
 
@@ -600,8 +600,8 @@ function drawText(text, generation) {
 
             let src;
 
-            if (character in validSpecialCharacters[generation]) {
-                src = `images/characters/g${generation}/special/${validSpecialCharacters[generation][character].filename}.png`;
+            if (characterInformation[generation][character]?.filename ?? false) {
+                src = `images/characters/g${generation}/special/${characterInformation[generation][character].filename}.png`;
             }
             else if (isNumeric(character)) {
                 src = `images/characters/g${generation}/numbers/${character}.png`;
@@ -633,7 +633,7 @@ function drawText(text, generation) {
         Promise.all(characters).then((images) => {
             const totalWidth = getTextWidth(text, generation);
 
-            let x = parseInt((canvas.width - totalWidth) / 2) + generationInformation[generation].text_x_shift;
+            let x = Math.floor((canvas.width - totalWidth) / 2) + generationInformation[generation].text_x_shift;
 
             for (const char of images) {
                 if (char === null) {
@@ -643,10 +643,10 @@ function drawText(text, generation) {
                 const character = char.character;
                 const image = char.image;
 
-                const width = characterWidths[generation][character] ?? characterWidths[generation].default;
-                const height = characterHeights[generation][character] ?? characterHeights[generation].default;
+                const width = characterInformation[generation][character].width ?? characterInformation[generation].default.width;
+                const height = characterInformation[generation][character].height ?? characterInformation[generation].default.height;
 
-                const y = generationInformation[generation].text_height + (characterYShifts[generation][character] ?? 0) ;
+                const y = generationInformation[generation].text_height + (characterInformation[generation][character].y_shift ?? 0) ;
 
                 ctx.drawImage(
                     image,
