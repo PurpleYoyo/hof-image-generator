@@ -95,7 +95,7 @@ const generationInformation = {
         text_x_shift: 0,
     },
     '5': {
-        text_height: 5,
+        text_height: 4,
         sprite_size: 96,
         sprite_positions: {
             1: { x: -14, y: 42 },
@@ -109,7 +109,7 @@ const generationInformation = {
         recoloring_function: recolorGen5Background,
         trainer_position: {},
         character_spacing: 0,
-        text_x_shift: 20,
+        text_x_shift: 50,
     },
 };
 

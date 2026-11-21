@@ -91,6 +91,7 @@ export const characterInformation = {
     },
     '5': {
         default: { width: 12, height: 22 },
+        ' ': { width: 6, filename: 'sp' },
         ',': { width: 6, height: 10, filename: 'co' },
         '.': { width: 6, height: 6, filename: 'pd' },
         '⋅': { width: 6, height: 6, filename: 'do', y_shift: -10 },
