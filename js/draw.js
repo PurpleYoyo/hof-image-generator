@@ -42,6 +42,7 @@ const generationInformation = {
         trainer_position: { x: 160, y: 80 },
         character_spacing: 1,
         text_x_shift: 0,
+        text_alignment: 'center',
     },
     '2': {
         text_height: 264,
@@ -59,6 +60,7 @@ const generationInformation = {
         trainer_position: { x: 176, y: 96 },
         character_spacing: 1,
         text_x_shift: 0,
+        text_alignment: 'center',
     },
     '3': {
         text_height: 280,
@@ -76,6 +78,7 @@ const generationInformation = {
         trainer_position: { x: 160, y: 64 },
         character_spacing: 0,
         text_x_shift: 0,
+        text_alignment: 'center',
     },
     '4': {
         text_height: 344,
@@ -93,6 +96,7 @@ const generationInformation = {
         trainer_position: { x: 176, y: 128 },
         character_spacing: 1,
         text_x_shift: 0,
+        text_alignment: 'center',
     },
     '5': {
         text_height: 4,
@@ -109,7 +113,8 @@ const generationInformation = {
         recoloring_function: recolorGen5Background,
         trainer_position: {},
         character_spacing: 0,
-        text_x_shift: 50,
+        text_x_shift: -8,
+        text_alignment: 'right',
     },
 };
 
@@ -591,12 +596,27 @@ function buildTrainerLink() {
     }
 }
 
+function getTextOriginX(totalWidth, generation) {
+    switch (generationInformation[generation].text_alignment) {
+        default:
+        case 'center':
+            return Math.floor((canvas.width)- totalWidth / 2) + generationInformation[generation].text_x_shift;
+        case 'right':
+            return canvas.width - totalWidth + generationInformation[generation].text_x_shift;
+    }
+}
+
 function drawText(text, generation) {
     return new Promise((resolve) => {
         const characters = [];
 
+        const totalWidth = getTextWidth(text, generation);
+        let x = getTextOriginX(totalWidth, generation);
+
         for (let i = 0; i < text.length; i++) {
             const character = text.charAt(i);
+
+            const width = characterInformation[generation][character]?.width ?? characterInformation[generation].default.width;
 
             let src;
 
@@ -621,20 +641,19 @@ function drawText(text, generation) {
                 loadImage(src).then(image => {
                     return {
                         character: character,
-                        image: image
+                        image: image,
+                        x: x
                     };
                 }).catch(error => {
                     console.error(error);
                     return null;
                 })
             );
+
+            x += width + generationInformation[generation].character_spacing;
         }
 
         Promise.all(characters).then((images) => {
-            const totalWidth = getTextWidth(text, generation);
-
-            let x = Math.floor((canvas.width - totalWidth) / 2) + generationInformation[generation].text_x_shift;
-
             for (const char of images) {
                 if (char === null) {
                     continue;
@@ -650,13 +669,11 @@ function drawText(text, generation) {
 
                 ctx.drawImage(
                     image,
-                    x,
+                    char.x,
                     y,
                     width,
                     height
                 );
-
-                x += width + generationInformation[generation].character_spacing;
             }
 
             resolve();
