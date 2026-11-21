@@ -643,10 +643,10 @@ function drawText(text, generation) {
                 const character = char.character;
                 const image = char.image;
 
-                const width = characterInformation[generation][character].width ?? characterInformation[generation].default.width;
-                const height = characterInformation[generation][character].height ?? characterInformation[generation].default.height;
+                const width = characterInformation[generation][character]?.width ?? characterInformation[generation].default.width;
+                const height = characterInformation[generation][character]?.height ?? characterInformation[generation].default.height;
 
-                const y = generationInformation[generation].text_height + (characterInformation[generation][character].y_shift ?? 0) ;
+                const y = generationInformation[generation].text_height + (characterInformation[generation][character]?.y_shift ?? 0) ;
 
                 ctx.drawImage(
                     image,
