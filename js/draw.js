@@ -1,7 +1,7 @@
 import { allPokemon, pokemonIntroductionGeneration, getBasePokemon, generation1Games, generation2Games } from './pokemon.js';
 import { buildSpriteDropdowns, buildPresetDropdowns, randomizeStartColors, buildGameSuggestions, buildPokemonSuggestions, initializeEventListeners, randomizePlaceholders, buildTrainerDropdown } from './load.js';
 import { getGeneration, getType, hideInputs, getColors, getInputs, getTrainerType } from './utils.js';
-import { characterInformation, getTextWidth, getInvalidMessage, validateText, isNumeric } from './text.js';
+import { characterInformation, getTextWidth, getInvalidMessage, validateText, isNumeric, getTextOriginX } from './text.js';
 
 const img = new Image();
 
@@ -593,16 +593,6 @@ function buildTrainerLink() {
   	        }
 
             return null;
-    }
-}
-
-function getTextOriginX(totalWidth, generation) {
-    switch (generationInformation[generation].text_alignment) {
-        default:
-        case 'center':
-            return Math.floor((canvas.width - totalWidth) / 2) + generationInformation[generation].text_x_shift;
-        case 'right':
-            return canvas.width - totalWidth + generationInformation[generation].text_x_shift;
     }
 }
 

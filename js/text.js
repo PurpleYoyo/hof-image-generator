@@ -174,3 +174,15 @@ export function getInvalidMessage(generation) {
 
     return 'Game name may only include letters, number, and the following special characters: ' + characters.join(', ');
 }
+
+export function getTextOriginX(totalWidth, generation) {
+    switch (generationInformation[generation].text_alignment) {
+        default:
+        case 'center':
+            return Math.floor((canvas.width - totalWidth) / 2) + generationInformation[generation].text_x_shift;
+        case 'right':
+            return canvas.width - totalWidth + generationInformation[generation].text_x_shift;
+        case 'left':
+            return 0 + generationInformation[generation].text_x_shift;
+    }
+}
