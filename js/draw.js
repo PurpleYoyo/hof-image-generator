@@ -600,7 +600,7 @@ function getTextOriginX(totalWidth, generation) {
     switch (generationInformation[generation].text_alignment) {
         default:
         case 'center':
-            return Math.floor((canvas.width)- totalWidth / 2) + generationInformation[generation].text_x_shift;
+            return Math.floor((canvas.width - totalWidth) / 2) + generationInformation[generation].text_x_shift;
         case 'right':
             return canvas.width - totalWidth + generationInformation[generation].text_x_shift;
     }
@@ -617,6 +617,10 @@ function drawText(text, generation) {
             const character = text.charAt(i);
 
             const width = characterInformation[generation][character]?.width ?? characterInformation[generation].default.width;
+
+            if (i !== 0) {
+                x += width + generationInformation[generation].character_spacing;
+            }
 
             let src;
 
@@ -649,8 +653,6 @@ function drawText(text, generation) {
                     return null;
                 })
             );
-
-            x += width + generationInformation[generation].character_spacing;
         }
 
         Promise.all(characters).then((images) => {
