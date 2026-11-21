@@ -166,8 +166,10 @@ export function isNumeric(character) {
 export function getInvalidMessage(generation) {
     let characters = [];
 
-    for (const c of Object.keys(validSpecialCharacters[generation])) {
-        characters.push(c);
+    for (const c of Object.keys(characterInformation[generation])) {
+        if (!isAlphaNumeric(c)) {
+            characters.push(c);
+        }
     }
 
     return 'Game name may only include letters, number, and the following special characters: ' + characters.join(', ');
