@@ -610,17 +610,8 @@ function drawText(text, generation) {
     return new Promise((resolve) => {
         const characters = [];
 
-        const totalWidth = getTextWidth(text, generation);
-        let x = getTextOriginX(totalWidth, generation);
-
         for (let i = 0; i < text.length; i++) {
             const character = text.charAt(i);
-
-            const width = characterInformation[generation][character]?.width ?? characterInformation[generation].default.width;
-
-            if (i !== 0) {
-                x += width + generationInformation[generation].character_spacing;
-            }
 
             let src;
 
@@ -645,8 +636,7 @@ function drawText(text, generation) {
                 loadImage(src).then(image => {
                     return {
                         character: character,
-                        image: image,
-                        x: x
+                        image: image
                     };
                 }).catch(error => {
                     console.error(error);
@@ -656,6 +646,10 @@ function drawText(text, generation) {
         }
 
         Promise.all(characters).then((images) => {
+            const totalWidth = getTextWidth(text, generation);
+
+            let x = getTextOriginX(totalWidth, generation);
+
             for (const char of images) {
                 if (char === null) {
                     continue;
@@ -671,11 +665,13 @@ function drawText(text, generation) {
 
                 ctx.drawImage(
                     image,
-                    char.x,
+                    x,
                     y,
                     width,
                     height
                 );
+
+                x += width + generationInformation[generation].character_spacing;
             }
 
             resolve();
