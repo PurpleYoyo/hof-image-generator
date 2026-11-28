@@ -71,7 +71,7 @@ const presets = {
         'Gaia': {
             value: 'gaia',
             color1: '#E7AD5A',
-            color2: '#E7AD5A',
+            color2: '#E79C42',
             color3: '#656C79',
             color4: '#65656E',
             borders: true,
