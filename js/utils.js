@@ -319,11 +319,14 @@ export function getColors() {
     const color1 = document.getElementById('color1').value;
     const color2 = document.getElementById('color2').value;
 
+    const color3 = document.getElementById('color3').value;
+    const color4 = document.getElementById('color4').value;
+
     return {
         color1: hexToRGB(color1),
         color2: hexToRGB(color2),
-        color3: HSVtoRGB(darkenColor(RGBtoHSV(hexToRGB(color1)), true)),
-        color4: HSVtoRGB(darkenColor(RGBtoHSV(hexToRGB(color2)), false)),
+        color3: color3 === '#FFFFFF' ? HSVtoRGB(darkenColor(RGBtoHSV(hexToRGB(color1)), true)) : hexToRGB(color3),
+        color4: color4 === '#FFFFFF' ? HSVtoRGB(darkenColor(RGBtoHSV(hexToRGB(color2)), false)) : hexToRGB(color4),
     }
 }
 

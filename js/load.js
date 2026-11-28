@@ -68,6 +68,14 @@ const presets = {
             color2: '#607450',
             borders: true,
         },
+        'Gaia': {
+            value: 'gaia',
+            color1: '#E7AD5A',
+            color2: '#E7AD5A',
+            color3: '#656C79',
+            color4: '#65656E',
+            borders: true,
+        },
     },
     Custom: {
         'Omega Ruby': {
@@ -475,6 +483,8 @@ export function initializeEventListeners(start) {
 
                     document.getElementById('color1').value = preset.color1;
                     document.getElementById('color2').value = preset.color2 ?? '#FFFFFF';
+                    document.getElementById('color3').value = preset.color3 ?? '#FFFFFF';
+                    document.getElementById('color4').value = preset.color4 ?? '#FFFFFF';
                     document.getElementById('borders').checked = preset.borders ?? true;
                 }
             });
