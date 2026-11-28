@@ -444,7 +444,12 @@ export function initializeEventListeners(start) {
 
     // Colors
     for (let i = 1; i < 3; i++) {
-	    document.getElementById(`color${i}`).addEventListener('input', start);
+	    document.getElementById(`color${i}`).addEventListener('input', () => {
+            document.getElementById('color3').value = '#FFFFFF';
+            document.getElementById('color4').value = '#FFFFFF';
+
+            start();
+        });
 	}
 
     // Borders
